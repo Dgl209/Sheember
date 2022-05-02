@@ -1,9 +1,7 @@
 import './App.css';
 
 function App() {
-  return (
-      <h1>My app</h1>
-  )
+  return null;
 }
 
 export default App;
