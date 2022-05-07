@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-
-// user, basket, messages, submit an ad, ads
+import { ModalContext } from '../../../context';
 
 function Header() {
+  const { show } = useContext(ModalContext);
+
   return (
     <nav className="bg-[#221f1f] text-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-800">
       <div className="container flex flex-wrap justify-between items-center mx-auto">
@@ -11,7 +12,18 @@ function Header() {
           <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Sheember</span>
         </Link>
         <div className="w-4/12 flex justify-end items-center md:order-2">
-          <button type="button" className="px-4 py-2 rounded hover:bg-[rgba(255,255,255,0.1)]" id="user-menu-button">
+          <button
+            type="button"
+            onClick={() =>
+              show({
+                title: 'Login',
+                closable: true,
+                content: 'Login form',
+              })
+            }
+            className="px-4 py-2 rounded hover:bg-[rgba(255,255,255,0.1)]"
+            id="user-menu-button"
+          >
             <svg
               className="w-6 h-6"
               fill="none"
@@ -28,7 +40,12 @@ function Header() {
             </svg>
           </button>
 
-          <button type="button" className="px-4 py-2 rounded hover:bg-[rgba(255,255,255,0.1)]" id="cart-menu-button">
+          <button
+            type="button"
+            onClick={() => show({ title: 'Cart', closable: true, content: 'Cart list' })}
+            className="px-4 py-2 rounded hover:bg-[rgba(255,255,255,0.1)]"
+            id="cart-menu-button"
+          >
             <svg
               className="w-6 h-6"
               fill="none"
