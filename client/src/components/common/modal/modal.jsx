@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { ModalContext } from '../../../context';
+import { motion } from 'framer-motion';
 
 function Modal() {
   const { modal, hide } = useContext(ModalContext);
@@ -7,13 +8,22 @@ function Modal() {
   if (!modal.visible) return null;
 
   return (
-    <div
+    <motion.div
       id="defaultModal"
       tabIndex="-1"
       aria-hidden="true"
-      className="overflow-y-auto bg-[rgba(0,0,0,0.7)] overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full flex justify-center items-center"
+      className="overflow-y-auto bg-[rgba(0,0,0,.5)] overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full flex justify-center items-center"
     >
-      <div className="relative p-4 w-full max-w-[600px] h-full md:h-auto">
+      <motion.div
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        transition={{
+          type: 'spring',
+          stiffness: 260,
+          damping: 20,
+        }}
+        className="relative p-4 w-full max-w-[600px] h-full md:h-auto"
+      >
         <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
           {modal.title && (
             <div className="flex justify-between items-start p-4 rounded-t border-b dark:border-gray-600">
@@ -55,8 +65,8 @@ function Modal() {
             </div>
           )}
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }
 
