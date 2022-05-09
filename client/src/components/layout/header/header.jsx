@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ModalContext } from '../../../context';
+import { Login } from '../../../pages';
 
 function Header() {
   const { show } = useContext(ModalContext);
@@ -16,9 +17,9 @@ function Header() {
             type="button"
             onClick={() =>
               show({
-                title: 'Login',
+                title: 'Sign in',
                 closable: true,
-                content: 'Login form',
+                content: <Login />,
               })
             }
             className="px-4 py-2 rounded hover:bg-[rgba(255,255,255,0.1)]"
