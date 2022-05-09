@@ -2,7 +2,7 @@ import React, { useReducer } from 'react';
 import { ModalContext } from './modalContext';
 import PropTypes from 'prop-types';
 import { ModalReducer } from './modalReducer';
-import { HIDE_MODAL, SHOW_MODAL } from '../types';
+import { HIDE_MODAL, SET_CONTENT, SHOW_MODAL } from '../types';
 
 export const ModalState = ({ children }) => {
   const [state, dispatch] = useReducer(ModalReducer, { visible: false });
@@ -15,6 +15,14 @@ export const ModalState = ({ children }) => {
     });
   };
 
+  const setContent = (option) => {
+    const { title, closable, content, footerButtons, width } = option;
+    dispatch({
+      type: SET_CONTENT,
+      payload: { title, closable, content, footerButtons, width },
+    });
+  };
+
   const hide = () => dispatch({ type: HIDE_MODAL });
 
   return (
@@ -22,6 +30,7 @@ export const ModalState = ({ children }) => {
       value={{
         show,
         hide,
+        setContent,
         modal: state,
       }}
     >

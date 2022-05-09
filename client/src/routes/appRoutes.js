@@ -1,18 +1,10 @@
 import React from 'react';
-import { Home, Login, NotFound, Registration } from '../pages';
+import { Home, NotFound } from '../pages';
 
 const appRoutes = [
   {
     path: '/',
     element: <Home />,
-  },
-  {
-    path: '/registration',
-    element: <Registration />,
-  },
-  {
-    path: '/login',
-    element: <Login />,
   },
   {
     path: '*',
