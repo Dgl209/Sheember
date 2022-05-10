@@ -4,4 +4,5 @@ import Login from './login/login';
 import NotFound from './not-found/notFount';
 import Page from './page';
 
-export { Home, Registration, Login, NotFound, Page };
+export default Page;
+export { Home, Registration, Login, NotFound };
