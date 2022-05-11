@@ -77,24 +77,6 @@ function Registration() {
           }}
           error={errors.password?.message}
         />
-        <TextField
-          id="repeat-password"
-          register={register}
-          type="password"
-          label="Repeat password"
-          options={{
-            required: 'Repeat password is required',
-            pattern: {
-              value: /\d+/g,
-              message: 'Password must contain at least one number',
-            },
-            minLength: {
-              value: 6,
-              message: 'Password must be at least 6 characters long',
-            },
-          }}
-          error={errors.password?.message}
-        />
         <button
           type="submit"
           className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ModalContext } from '../../../context';
-import { Login } from '../../../pages';
+import { Cart, Login } from '../../../pages';
 
 function Header() {
   const { show } = useContext(ModalContext);
@@ -43,7 +43,7 @@ function Header() {
 
           <button
             type="button"
-            onClick={() => show({ title: 'Cart', closable: true, content: 'Cart list' })}
+            onClick={() => show({ title: 'Cart', closable: true, content: <Cart /> })}
             className="px-4 py-2 rounded hover:bg-[rgba(255,255,255,0.1)]"
             id="cart-menu-button"
           >

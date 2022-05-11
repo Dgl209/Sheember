@@ -9,21 +9,16 @@ function Modal() {
   if (!modal.visible) return null;
 
   return (
-    <motion.div
+    <div
       id="defaultModal"
       tabIndex="-1"
       aria-hidden="true"
-      className="bg-[rgba(0,0,0,.5)] overflow-x-hidden overflow-y-hidden fixed top-0 right-0 left-0 z-50 w-full md:inset-0 h-modal md:h-full flex justify-center items-center"
+      className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 w-full flex items-center justify-center md:inset-0 h-modal md:h-full bg-[rgba(0,0,0,.5)]"
     >
       <motion.div
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
-        transition={{
-          type: 'spring',
-          stiffness: 200,
-          damping: 20,
-        }}
-        className="relative p-4 w-full h-auto max-h-full"
+        className="relative p-4 w-full max-w-2xl h-full md:h-auto"
         style={{ maxWidth: modal.width || defaultWidth }}
       >
         <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -49,7 +44,7 @@ function Modal() {
             </div>
           )}
 
-          <div className="p-6 space-y-6 max-h-full overflow-y-auto">{modal.content}</div>
+          <div className="p-6 space-y-6">{modal.content}</div>
 
           {modal.footerButtons && (
             <div className="flex items-center justify-end px-4 py-2 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">
@@ -68,7 +63,7 @@ function Modal() {
           )}
         </div>
       </motion.div>
-    </motion.div>
+    </div>
   );
 }
 
