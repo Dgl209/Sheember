@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import { ModalContext } from '../../context';
+import { ModalContext } from '../../../context';
 import { Registration } from '../index';
 import { useForm } from 'react-hook-form';
-import { CheckboxField, TextField } from '../../components/common';
+import { CheckboxField, TextField } from '../../common';
 
 function Login() {
   const { setContent } = useContext(ModalContext);

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Home, NotFound } from '../pages';
+import { Main, NotFound } from '../pages';
 
 const appRoutes = [
   {
     path: '/',
-    element: <Home />,
+    element: <Main />,
   },
   {
     path: '*',
