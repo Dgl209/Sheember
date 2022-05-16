@@ -1,14 +1,18 @@
 import React from 'react';
-import { Home, NotFound } from '../pages';
+import { Main, NotFound, PostNewAd } from '../pages';
 
 const appRoutes = [
   {
     path: '/',
-    element: <Home />,
+    element: <Main />,
   },
   {
     path: '*',
     element: <NotFound />,
+  },
+  {
+    path: '/post-new-ad',
+    element: <PostNewAd />,
   },
 ];
 

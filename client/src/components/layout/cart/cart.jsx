@@ -3,7 +3,7 @@ import React from 'react';
 function Cart() {
   return (
     <div className="w-full h-full items-center justify-center">
-      <p>cart list</p>
+      <p>Cart is empty</p>
     </div>
   );
 }
