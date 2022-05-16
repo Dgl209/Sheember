@@ -24,10 +24,14 @@ function TextField({ register, label, type, id, options, error }) {
   );
 }
 
+TextField.defaultProps = {
+  type: 'text',
+};
+
 TextField.propTypes = {
   register: PropTypes.func.isRequired,
   label: PropTypes.string,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
   id: PropTypes.string.isRequired,
   options: PropTypes.object,
   error: PropTypes.string,

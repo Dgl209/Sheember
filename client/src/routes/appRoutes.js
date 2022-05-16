@@ -1,5 +1,5 @@
 import React from 'react';
-import { Main, NotFound } from '../pages';
+import { Main, NotFound, PostNewAd } from '../pages';
 
 const appRoutes = [
   {
@@ -9,6 +9,10 @@ const appRoutes = [
   {
     path: '*',
     element: <NotFound />,
+  },
+  {
+    path: '/post-new-ad',
+    element: <PostNewAd />,
   },
 ];
 

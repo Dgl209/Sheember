@@ -8,7 +8,7 @@ export const ModalState = ({ children }) => {
   const [state, dispatch] = useReducer(ModalReducer, { visible: false });
 
   const show = (options) => {
-    document.body.className = 'overflow-hidden';
+    document.body.classList.add('overflow-hidden');
     const { title, closable, content, footerButtons, width } = options;
     dispatch({
       type: SHOW_MODAL,
@@ -25,7 +25,7 @@ export const ModalState = ({ children }) => {
   };
 
   const hide = () => {
-    document.body.className = '';
+    document.body.classList.remove('overflow-hidden');
     dispatch({ type: HIDE_MODAL });
   };
 

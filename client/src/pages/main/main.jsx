@@ -11,7 +11,7 @@ function Main() {
 
   return (
     <div className="relative container mx-auto flex">
-      <div className="w-[31%] border-r-2 pt-6">
+      <div className="w-[31%] pt-6">
         <div className="fixed">
           <CategoriesList categories={categories} />
         </div>
@@ -28,7 +28,7 @@ function Main() {
             />
           </form>
         </div>
-        <div className="px-6">
+        <div>
           <GoodsList
             goods={new Array(20).fill(null).map((_, index) => {
               return {

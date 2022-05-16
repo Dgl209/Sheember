@@ -4,7 +4,7 @@ import { Goods } from '../index';
 
 function GoodsList({ goods }) {
   return (
-    <div className="w-full h-full grid grid-cols-5 place-items-center">
+    <div className="w-full h-full grid grid-cols-4 place-items-center">
       {goods.map((tile) => (
         <Goods key={tile.id} goods={tile} />
       ))}

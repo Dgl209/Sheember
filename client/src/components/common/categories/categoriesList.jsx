@@ -10,7 +10,7 @@ function CategoriesList({ categories }) {
           key={category.id}
           role="button"
           onClick={() => console.log(category.id)}
-          className="w-full pr-4 py-2 font-normal text-[14px] text-blue-700"
+          className="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600"
         >
           <div className="flex">
             <div className="w-10 flex justify-center">
