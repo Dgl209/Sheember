@@ -14,53 +14,53 @@ import {
 const categories = [
   {
     icon: faKey,
-    name: 'The property',
-    id: 0,
+    name: 'Real estate',
+    id: 'real-estate',
   },
   {
     icon: faCar,
     name: 'Auto',
-    id: 2,
+    id: 'auto',
   },
   {
     icon: faWrench,
     name: 'Spare parts for transport',
-    id: 3,
+    id: 'spare-parts',
   },
   {
     icon: faHammer,
-    name: 'House and garden',
-    id: 4,
+    name: 'Home and garden',
+    id: 'home-and-garden',
   },
   {
     icon: faMobileScreen,
     name: 'Electronics',
-    id: 5,
+    id: 'electronics',
   },
   {
     icon: faShirt,
     name: 'Clothes, shoes and jewelry',
-    id: 6,
+    id: 'clothes-shoes-jewelry',
   },
   {
     icon: faVolleyball,
-    name: 'Sport',
-    id: 7,
+    name: 'Sports and hobbies',
+    id: 'sport',
   },
   {
     icon: faDog,
     name: 'Animals',
-    id: 8,
+    id: 'animals',
   },
   {
     icon: faBabyCarriage,
     name: "Children's goods",
-    id: 9,
+    id: "children's",
   },
   {
     icon: faBusinessTime,
-    name: 'Goods for business',
-    id: 10,
+    name: 'Business and services',
+    id: 'business-and-services',
   },
 ];
 
