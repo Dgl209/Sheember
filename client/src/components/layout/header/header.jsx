@@ -9,10 +9,10 @@ function Header() {
 
   return (
     <div className="pb-[51px]">
-      <nav className="z-50 fixed right-0 left-0 bg-white border-gray-200 px-2 sm:px-4 py-2.5 border-b-2 dark:bg-[rgb(26,27,30)] dark:border-b-0">
+      <nav className="z-50 fixed right-0 left-0 bg-white border-gray-200 px-2 sm:px-4 py-2 border-b-2 dark:bg-[rgb(26,27,30)] dark:border-b-0">
         <div className="container flex flex-wrap justify-between items-center mx-auto">
           <Link to="/" className="flex items-center">
-            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Sheember</span>
+            <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Store</span>
           </Link>
           <button
             data-collapse-toggle="mobile-menu"
@@ -38,7 +38,7 @@ function Header() {
             </svg>
           </button>
           <div className="hidden w-full md:block md:w-auto" id="mobile-menu">
-            <ul className="flex flex-col mt-4 md:flex-row md:space-x-2 md:mt-0 md:text-sm md:font-medium">
+            <ul className="flex flex-col items-center mt-4 md:flex-row md:space-x-2 md:mt-0 md:text-sm md:font-medium">
               <li>
                 <button
                   type="button"
@@ -134,6 +134,16 @@ function Header() {
                     />
                   </svg>
                 </button>
+              </li>
+              <li>
+                <Link
+                  to="post-new-ad"
+                  className="flex items-center focus:outline-none text-white bg-purple-700
+                 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg
+                  text-sm px-3.5 py-1.5 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+                >
+                  Post new ad
+                </Link>
               </li>
             </ul>
           </div>

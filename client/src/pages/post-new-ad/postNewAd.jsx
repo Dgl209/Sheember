@@ -1,15 +1,39 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { SelectField, TextField } from '../../components/common';
 import { categories } from '../../utils/constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 import TextAreaField from '../../components/common/form/textAreaField';
+import { GoodsContext, ModalContext } from '../../context';
+import { useNavigate } from 'react-router-dom';
 
 function PostNewAd() {
   const { register, handleSubmit } = useForm();
+  const { goods, add } = useContext(GoodsContext);
+  const { show, hide } = useContext(ModalContext);
+  const navigate = useNavigate();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    add({ ...data, id: Date.now() });
+    show({
+      content: <p>Announcement published!</p>,
+      footerButtons: [
+        {
+          text: 'Confirm',
+          type: 'button',
+          handler: () => {
+            hide();
+            navigate('/', { replace: true });
+          },
+        },
+      ],
+    });
+  };
+
+  useEffect(() => {
+    localStorage.setItem('goods', JSON.stringify(goods));
+  }, [goods]);
 
   return (
     <div className="container mx-auto mb-10">
@@ -17,13 +41,14 @@ function PostNewAd() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="bg-slate-100 px-6 py-6 mb-6 rounded">
           <div className="w-full max-w-2xl">
-            <TextField id="goods-name" register={register} label="Goods name" options={{ required: true }} />
+            <TextField id="name" register={register} label="Goods name" options={{ required: true }} />
             <SelectField
               register={register}
               defaultOption="Choose category"
               id="category"
               options={categories}
               label="Categories"
+              validatorConfig={{ required: true }}
             />
           </div>
         </div>
@@ -41,7 +66,7 @@ function PostNewAd() {
         </div>
         <div className="bg-slate-100 px-6 py-10 mb-6 rounded">
           <div className="w-full max-w-2xl">
-            <TextAreaField register={register} id="description" label="Description" options={{ required: true }} />
+            <TextAreaField register={register} id="description" label="Description" />
           </div>
         </div>
         <div className="bg-slate-100 px-6 py-10 mb-6 rounded">

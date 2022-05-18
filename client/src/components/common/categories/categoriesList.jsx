@@ -4,17 +4,17 @@ import PropTypes from 'prop-types';
 
 function CategoriesList({ categories }) {
   return (
-    <ul className="w-full text-sm font-medium text-gray-900 bg-white dark:bg-gray-700 dark:text-white">
+    <ul className="w-full">
       {categories.map((category) => (
         <li
           key={category.id}
           role="button"
           onClick={() => console.log(category.id)}
-          className="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600"
+          className="text-[15px] text-[#333] hover:text-sky-500 hover:underline"
         >
           <div className="flex">
             <div className="w-10 flex justify-center">
-              <FontAwesomeIcon className="text-gray-400 text-[18px]" icon={category.icon} />
+              <FontAwesomeIcon className="text-purple-600 text-[18px]" icon={category.icon} />
             </div>
             {category.name}
           </div>

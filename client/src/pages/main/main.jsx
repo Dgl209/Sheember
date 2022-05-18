@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { CategoriesList, SearchField } from '../../components/common';
 import { categories } from '../../utils/constants';
 import { useForm } from 'react-hook-form';
 import { GoodsList } from '../../components/ui';
+import { GoodsContext } from '../../context';
 
 function Main() {
   const { register, handleSubmit } = useForm();
+  const { goods } = useContext(GoodsContext);
 
   const onSubmit = (data) => console.log(data);
 
   return (
     <div className="relative container mx-auto flex">
-      <div className="w-[31%] pt-6">
+      <div className="w-[24%] pt-6 border-r-2">
         <div className="fixed">
           <CategoriesList categories={categories} />
         </div>
@@ -29,13 +31,7 @@ function Main() {
           </form>
         </div>
         <div>
-          <GoodsList
-            goods={new Array(20).fill(null).map((_, index) => {
-              return {
-                id: index,
-              };
-            })}
-          />
+          <GoodsList goods={goods} />
         </div>
       </div>
     </div>
