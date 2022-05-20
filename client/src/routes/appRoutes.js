@@ -1,5 +1,5 @@
 import React from 'react';
-import { Main, NotFound, PostNewAd } from '../pages';
+import { Catalog, Main, NotFound, PostNewAd } from '../pages';
 
 const appRoutes = [
   {
@@ -13,6 +13,14 @@ const appRoutes = [
   {
     path: '/post-new-ad',
     element: <PostNewAd />,
+  },
+  {
+    path: '/:mainCategory',
+    element: <Catalog />,
+  },
+  {
+    path: '/:mainCategory/:category',
+    element: <Catalog />,
   },
 ];
 

@@ -1,3 +1,3 @@
-import categories from './categories';
+import categoriesConstants from './categories.constants';
 
-export { categories };
+export { categoriesConstants };

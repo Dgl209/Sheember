@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { SelectField, TextField } from '../../components/common';
-import { categories } from '../../utils/constants';
+import { categoriesConstants } from '../../utils/constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 import TextAreaField from '../../components/common/form/textAreaField';
@@ -46,7 +46,7 @@ function PostNewAd() {
               register={register}
               defaultOption="Choose category"
               id="category"
-              options={categories}
+              options={categoriesConstants}
               label="Categories"
               validatorConfig={{ required: true }}
             />
