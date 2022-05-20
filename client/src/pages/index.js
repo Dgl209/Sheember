@@ -1,7 +1,8 @@
 import Main from './main/main';
-import NotFound from './not-found/notFount';
+import NotFound from './notFound/notFount';
 import Page from './page';
-import PostNewAd from './post-new-ad/postNewAd';
+import PostNewAd from './postNewAd/postNewAd';
+import Catalog from './catalog/catalog';
 
 export default Page;
-export { Main, NotFound, PostNewAd };
+export { Main, NotFound, PostNewAd, Catalog };

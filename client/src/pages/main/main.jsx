@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
-import { CategoriesList, SearchField } from '../../components/common';
-import { categories } from '../../utils/constants';
+import { MainCategoriesList, SearchField } from '../../components/common';
+import { categoriesConstants } from '../../utils/constants';
 import { useForm } from 'react-hook-form';
 import { GoodsList } from '../../components/ui';
 import { GoodsContext } from '../../context';
@@ -15,7 +15,7 @@ function Main() {
     <div className="relative container mx-auto flex">
       <div className="w-[24%] pt-6 border-r-2">
         <div className="fixed">
-          <CategoriesList categories={categories} />
+          <MainCategoriesList categories={categoriesConstants} />
         </div>
       </div>
       <div className="w-full pt-6">

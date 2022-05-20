@@ -1,5 +1,5 @@
 import React from 'react';
-import Header, { Footer } from '../components/layout';
+import Header from '../components/layout';
 import { Outlet } from 'react-router-dom';
 import { Modal } from '../components/common';
 
@@ -9,7 +9,6 @@ function Page() {
       <Header />
       <Modal />
       <Outlet />
-      <Footer />
     </div>
   );
 }

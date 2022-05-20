@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Goods } from '../index';
 
 function GoodsList({ goods }) {
-  console.log('list: ', goods);
   return (
     <div className="w-full h-full grid grid-cols-4 place-items-center">
       {goods?.map((gds) => (

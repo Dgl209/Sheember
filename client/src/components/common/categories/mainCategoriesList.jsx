@@ -1,8 +1,9 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-function CategoriesList({ categories }) {
+function MainCategoriesList({ categories }) {
   return (
     <ul className="w-full">
       {categories.map((category) => (
@@ -12,20 +13,22 @@ function CategoriesList({ categories }) {
           onClick={() => console.log(category.id)}
           className="text-[15px] text-[#333] hover:text-sky-500 hover:underline"
         >
-          <div className="flex">
-            <div className="w-10 flex justify-center">
-              <FontAwesomeIcon className="text-purple-600 text-[18px]" icon={category.icon} />
+          <Link to={`/${category.id}`}>
+            <div className="flex">
+              <div className="w-10 flex justify-center">
+                <FontAwesomeIcon className="text-purple-600 text-[18px]" icon={category.icon} />
+              </div>
+              {category.name}
             </div>
-            {category.name}
-          </div>
+          </Link>
         </li>
       ))}
     </ul>
   );
 }
 
-CategoriesList.propTypes = {
+MainCategoriesList.propTypes = {
   categories: PropTypes.array.isRequired,
 };
 
-export default CategoriesList;
+export default MainCategoriesList;

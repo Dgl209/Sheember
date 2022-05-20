@@ -31,5 +31,7 @@ module.exports = {
     'comma-dangle': ['error', 'only-multiline'],
     semi: ['error', 'always'],
     'space-before-function-paren': ['error', { anonymous: 'always', named: 'never' }],
+    'multiline-ternary': 0,
+    'react/display-name': 'off',
   },
 };
