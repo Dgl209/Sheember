@@ -42,7 +42,7 @@ function Login() {
           <div>
             <button
               type="button"
-              className="text-sm text-blue-700 font-medium hover:text-purple-500 hover:border-b border-blue-500"
+              className="text-blue-600 text-sm hover:underline dark:text-blue-500"
               onClick={() => console.log('forgot password page')}
             >
               Forgot password
@@ -58,10 +58,10 @@ function Login() {
         </button>
       </form>
       <div className="flex items-center px-1">
-        <p className="text-gray-700">No registered? </p>
+        <p className="text-sm font-medium text-gray-900 dark:text-gray-300">No registered? </p>
         <button
           type="button"
-          className="text-blue-700 text-[16px] font-medium px-1 hover:text-blue-500"
+          className="text-blue-600 font-medium px-1 hover:underline dark:text-blue-500"
           onClick={() => setContent({ title: 'Sing up', closable: true, content: <Registration /> })}
         >
           Create account

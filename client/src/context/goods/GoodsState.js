@@ -9,10 +9,10 @@ export const GoodsState = ({ children }) => {
   const [state, dispatch] = useReducer(GoodsReducer, goods || []);
 
   const add = (goods) => {
-    const { id, name, category, description, price } = goods;
+    const { id, name, category, description, price, currency } = goods;
     dispatch({
       type: ADD_GOODS,
-      payload: { id, name, category, description, price },
+      payload: { id, name, category, description, price, currency },
     });
   };
 

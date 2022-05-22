@@ -13,7 +13,7 @@ function Main() {
 
   return (
     <div className="relative container mx-auto flex">
-      <div className="w-[24%] pt-6 border-r-2">
+      <div className="w-[26%] pt-6 border-r border-gray-200 dark:border-gray-600">
         <div className="fixed">
           <MainCategoriesList categories={categoriesConstants} />
         </div>
@@ -30,7 +30,7 @@ function Main() {
             />
           </form>
         </div>
-        <div>
+        <div className="px-2">
           <GoodsList goods={goods} />
         </div>
       </div>
