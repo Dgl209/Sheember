@@ -85,11 +85,11 @@ function Registration() {
           Register new account
         </button>
       </form>
-      <div className="flex">
-        <p className="text-gray-700">Already registered? </p>
+      <div className="flex items-center">
+        <p className="text-sm font-medium text-gray-900 dark:text-gray-300">Already registered? </p>
         <button
           type="button"
-          className="text-blue-700 font-medium px-1 hover:text-blue-500"
+          className="text-blue-600 font-medium px-1 hover:underline dark:text-blue-500"
           onClick={() => setContent({ title: 'Sing in', closable: true, content: <Login /> })}
         >
           Sing in

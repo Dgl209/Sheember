@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { SelectField, TextField } from '../../components/common';
-import { categoriesConstants } from '../../utils/constants';
+import { categoriesConstants, currenciesConstants } from '../../utils/constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 import TextAreaField from '../../components/common/form/textAreaField';
@@ -36,42 +36,67 @@ function PostNewAd() {
   }, [goods]);
 
   return (
-    <div className="container mx-auto mb-10">
+    <div className="container mx-auto mb-10 bg-gray-50 dark:bg-gray-900">
       <h1 className="my-6 text-4xl font-medium dark:text-white">Post new ad</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="bg-slate-100 px-6 py-6 mb-6 rounded">
+        <div className="bg-gray-200 px-6 py-6 mb-6 rounded dark:bg-gray-800">
           <div className="w-full max-w-2xl">
             <TextField id="name" register={register} label="Goods name" options={{ required: true }} />
             <SelectField
               register={register}
-              defaultOption="Choose category"
               id="category"
-              options={categoriesConstants}
+              items={categoriesConstants}
               label="Categories"
-              validatorConfig={{ required: true }}
+              options={{ required: true }}
             />
           </div>
         </div>
-        <div className="bg-slate-100 px-6 py-10 mb-6 rounded">
+        <div className="bg-gray-200 px-6 py-10 mb-6 rounded dark:bg-gray-800">
           <div className="w-full max-w-2xl">
             <h2 className="dark:text-white">Photo</h2>
             <div className="grid grid-cols-4">
               {new Array(16).fill(null).map((box, index) => (
-                <div key={index} className="w-40 h-32 m-2 flex items-center justify-center bg-gray-400">
+                <div
+                  key={index}
+                  className="w-40 h-32 m-2 flex items-center justify-center bg-gray-400 dark:bg-gray-700"
+                >
                   <FontAwesomeIcon icon={faImage} />
                 </div>
               ))}
             </div>
           </div>
         </div>
-        <div className="bg-slate-100 px-6 py-10 mb-6 rounded">
+        <div className="bg-gray-200 px-6 py-10 mb-6 rounded dark:bg-gray-800">
           <div className="w-full max-w-2xl">
             <TextAreaField register={register} id="description" label="Description" />
           </div>
         </div>
-        <div className="bg-slate-100 px-6 py-10 mb-6 rounded">
-          <div className="w-full max-w-2xl">
-            <TextField id="price" register={register} label="Price" />
+        <div className="bg-gray-200 px-6 py-10 mb-6 rounded dark:bg-gray-800">
+          <div className="w-full max-w-2xl flex items-center">
+            <div className="w-52 mr-2">
+              <TextField
+                id="price"
+                register={register}
+                label="Price"
+                options={{
+                  required: true,
+                  pattern: {
+                    value: /^(\d){1,13}$/g,
+                    message: 'The price is entered incorrectly',
+                  },
+                }}
+              />
+            </div>
+            <div className="w-28 mb-0.5">
+              <SelectField
+                register={register}
+                items={currenciesConstants}
+                id="currency"
+                options={{
+                  required: true,
+                }}
+              />
+            </div>
           </div>
         </div>
         <div className="w-full flex justify-end">

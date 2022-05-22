@@ -23,6 +23,9 @@ import {
   HeadphonesImg,
   KeyboardMiceImg,
   LaptopStandImg,
+  OfficeEquipmentImg,
+  SpeakerSystemImg,
+  MicrophoneImg,
 } from '../../assets';
 
 const categoriesConstants = [
@@ -134,6 +137,21 @@ const categoriesConstants = [
         image: LaptopStandImg,
         name: 'Electronics accessories',
         id: 'electronics-accessories',
+      },
+      {
+        image: OfficeEquipmentImg,
+        name: 'Office equipment',
+        id: 'office-equipment',
+      },
+      {
+        image: SpeakerSystemImg,
+        name: 'Speaker system',
+        id: 'speaker-system',
+      },
+      {
+        image: MicrophoneImg,
+        name: 'Microphones',
+        id: 'microphones',
       },
     ],
   },

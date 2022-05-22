@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import GamingChair from '../../../assets/tmp/gaming-chair.jfif';
 import { Link } from 'react-router-dom';
+import GoodsBackdrop from '../../../assets/tmp/truck.webp';
 
 function Goods({ goods }) {
   return (
-    <div className="w-[220px] h-[316px] relative border rounded mb-4 p-4">
-      <div className="absolute right-2 top-2">
+    <div className="w-[240px] h-[316px] relative border border-gray-200 rounded-lg mb-4 p-4 dark:bg-gray-800 dark:border-gray-700">
+      <div className="absolute bottom-4 right-2">
         <button type="button" onClick={() => console.log('added to wish list')}>
           <svg className="w-6 h-6" fill="none" stroke="#9333ea" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path
@@ -18,18 +18,20 @@ function Goods({ goods }) {
           </svg>
         </button>
       </div>
-      <div className="flex justify-center flex-col">
-        <div className="flex justify-center items-center mb-6">
+      <div className="flex justify-between flex-col h-full">
+        <div className="flex justify-center items-center h-[200px]">
           <Link to={`/${goods.id}`}>
-            <img className="h-[180px]" src={GamingChair} alt="" />
+            <img className="max-h-[200px]" src={GoodsBackdrop} alt="" />
           </Link>
         </div>
-        <Link to={`/${goods.id}`} className="text-[15px] text-[#333] hover:text-sky-500 hover:underline mb-2">
-          {goods.name}
-        </Link>
-        <div className="text-[24px]">
-          <span>{goods.price}</span>
-          <span>$</span>
+        <div>
+          <Link to={`/${goods.id}`} className="text-[15px] dark:text-white">
+            {goods.name}
+          </Link>
+          <div className="text-[24px] dark:text-white">
+            <span>{goods.price}</span>
+            <span className="ml-1">{goods.currency}</span>
+          </div>
         </div>
       </div>
     </div>
