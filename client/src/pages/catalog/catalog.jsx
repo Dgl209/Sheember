@@ -1,21 +1,34 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { categoriesConstants } from '../../utils/constants';
-import { SubsidiaryCategory } from '../../components/common';
+import { SubCategory } from '../../components/common';
+import { GoodsContext } from '../../context';
+import { Goods } from '../../components/ui';
 
 function Catalog() {
-  const { mainCategory, category } = useParams();
+  const { goods } = useContext(GoodsContext);
+  console.log(goods);
+  const { mainCategory, subCategory } = useParams();
   const selectedMainCategory = categoriesConstants.find((constant) => constant.id === mainCategory);
+
+  const filteredGoodsBySubCategories = goods.filter((gds) => gds.category === subCategory);
+
+  console.log('filtered', filteredGoodsBySubCategories);
+
   return (
     <div className="p-6">
-      {!category ? (
+      {!subCategory ? (
         <div className="w-full grid grid-cols-5 place-items-center">
           {selectedMainCategory.child.map((child) => (
-            <SubsidiaryCategory key={child.id} {...child} mainCategory={mainCategory} />
+            <SubCategory key={child.id} {...child} mainCategory={mainCategory} />
           ))}
         </div>
       ) : (
-        <h1>{category}</h1>
+        <div className="flex flex-cols-4">
+          {filteredGoodsBySubCategories.map((gds) => (
+            <Goods key={gds.id} goods={gds} />
+          ))}
+        </div>
       )}
     </div>
   );

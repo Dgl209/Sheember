@@ -4,6 +4,16 @@ import CheckboxField from './form/checkboxField';
 import MainCategoriesList from './categories/mainCategoriesList';
 import SearchField from './form/searchField';
 import SelectField from './form/selectField';
-import SubsidiaryCategory from './categories/subsidiaryCategory';
+import SubCategory from './categories/subCategory';
+import CategoriesDropDown from './categories/categoriesDropDown';
 
-export { Modal, TextField, CheckboxField, MainCategoriesList, SearchField, SelectField, SubsidiaryCategory };
+export {
+  Modal,
+  TextField,
+  CheckboxField,
+  MainCategoriesList,
+  SearchField,
+  SelectField,
+  SubCategory,
+  CategoriesDropDown,
+};

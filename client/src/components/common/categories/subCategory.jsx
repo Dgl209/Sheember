@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-function SubsidiaryCategory({ id, name, image, mainCategory }) {
+function SubCategory({ id, name, image, mainCategory }) {
   return (
     <div className="w-[240px] h-[280px] border border-gray-200 mb-3 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
       <div className="w-full h-[200px] flex items-center justify-center">
@@ -22,11 +22,11 @@ function SubsidiaryCategory({ id, name, image, mainCategory }) {
   );
 }
 
-SubsidiaryCategory.propTypes = {
+SubCategory.propTypes = {
   name: PropTypes.string.isRequired,
   image: PropTypes.string,
   id: PropTypes.string,
   mainCategory: PropTypes.string,
 };
 
-export default SubsidiaryCategory;
+export default SubCategory;

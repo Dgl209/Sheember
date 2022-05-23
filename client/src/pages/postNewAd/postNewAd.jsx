@@ -1,31 +1,50 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { SelectField, TextField } from '../../components/common';
+import { SelectField, TextField, CategoriesDropDown } from '../../components/common';
 import { categoriesConstants, currenciesConstants } from '../../utils/constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faImage } from '@fortawesome/free-solid-svg-icons';
+import { faImage, faQuestion, faAngleDown, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import TextAreaField from '../../components/common/form/textAreaField';
 import { GoodsContext, ModalContext } from '../../context';
 import { useNavigate } from 'react-router-dom';
 
 function PostNewAd() {
   const { register, handleSubmit } = useForm();
+  const [selectedMainCategory, setSelectedMainCategory] = useState([]);
+  const [selectedSubCategory, setSelectedSubCategory] = useState({});
   const { goods, add } = useContext(GoodsContext);
   const { show, hide } = useContext(ModalContext);
   const navigate = useNavigate();
+  const categoriesRef = useRef();
 
   const onSubmit = (data) => {
-    add({ ...data, id: Date.now() });
+    if (!Object.keys(selectedSubCategory).length) {
+      console.log(categoriesRef.current);
+      return;
+    }
+
     show({
-      content: <p>Announcement published!</p>,
+      closable: true,
+      content: (
+        <div className="px-2 py-10 text-center">
+          <FontAwesomeIcon className="w-12 h-12 mb-6 text-gray-400 dark:text-gray-50" icon={faQuestion} />
+          <h3 className="text-lg font-normal text-gray-900 dark:text-gray-50">
+            You are sure you want to publish this ad?
+          </h3>
+        </div>
+      ),
       footerButtons: [
         {
           text: 'Confirm',
-          type: 'button',
           handler: () => {
+            add({ ...data, id: Date.now(), category: selectedSubCategory.id });
             hide();
             navigate('/', { replace: true });
           },
+        },
+        {
+          text: 'Cancel',
+          handler: hide,
         },
       ],
     });
@@ -35,20 +54,63 @@ function PostNewAd() {
     localStorage.setItem('goods', JSON.stringify(goods));
   }, [goods]);
 
+  const handleMainCategory = (mainCategory) => {
+    setSelectedMainCategory(mainCategory);
+  };
+
+  const handleSubCategory = (subCategory) => {
+    hide();
+    setSelectedSubCategory(subCategory);
+  };
+
   return (
     <div className="container mx-auto mb-10 bg-gray-50 dark:bg-gray-900">
       <h1 className="my-6 text-4xl font-medium dark:text-white">Post new ad</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="bg-gray-200 px-6 py-6 mb-6 rounded dark:bg-gray-800">
           <div className="w-full max-w-2xl">
-            <TextField id="name" register={register} label="Goods name" options={{ required: true }} />
-            <SelectField
-              register={register}
-              id="category"
-              items={categoriesConstants}
-              label="Categories"
-              options={{ required: true }}
-            />
+            <TextField id="name" register={register} placeholder="Goods name..." options={{ required: true }} />
+
+            <div
+              ref={categoriesRef}
+              className="cursor-pointer mb-6 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg
+                focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-2.5 ml-0.3 dark:bg-gray-700 dark:border-gray-600
+                dark:placeholder-gray-400 dark:text-gray-50 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              onClick={() =>
+                show({
+                  title: 'Choose category',
+                  closable: true,
+                  content: (
+                    <CategoriesDropDown
+                      categories={categoriesConstants}
+                      onMainCategory={handleMainCategory}
+                      onSubCategory={handleSubCategory}
+                    />
+                  ),
+                  width: '700px',
+                })
+              }
+            >
+              <div className="flex justify-between">
+                {Object.keys(selectedSubCategory).length ? (
+                  <div className="flex">
+                    <img width={70} src={selectedSubCategory.image} alt="" />
+                    <div className="flex justify-center flex-col ml-2">
+                      <h3>{selectedSubCategory.name}</h3>
+                      <p className="font-normal text-gray-700 dark:text-gray-400">{selectedMainCategory.name}</p>
+                    </div>
+                  </div>
+                ) : (
+                  <p className="font-normal text-gray-700 dark:text-gray-400">Choose category...</p>
+                )}
+                <div className="flex items-center justify-center px-4">
+                  <FontAwesomeIcon
+                    className="h-5 text-gray-700 dark:text-gray-400"
+                    icon={Object.keys(selectedSubCategory).length ? faAngleRight : faAngleDown}
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div className="bg-gray-200 px-6 py-10 mb-6 rounded dark:bg-gray-800">
@@ -68,7 +130,12 @@ function PostNewAd() {
         </div>
         <div className="bg-gray-200 px-6 py-10 mb-6 rounded dark:bg-gray-800">
           <div className="w-full max-w-2xl">
-            <TextAreaField register={register} id="description" label="Description" />
+            <TextAreaField
+              register={register}
+              id="description"
+              placeholder="Leave a description..."
+              options={{ required: true }}
+            />
           </div>
         </div>
         <div className="bg-gray-200 px-6 py-10 mb-6 rounded dark:bg-gray-800">
