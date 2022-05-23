@@ -19,7 +19,7 @@ const appRoutes = [
     element: <Catalog />,
   },
   {
-    path: '/:mainCategory/:category',
+    path: '/:mainCategory/:subCategory',
     element: <Catalog />,
   },
 ];

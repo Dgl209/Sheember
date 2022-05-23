@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function TextField({ register, label, type, id, options, error }) {
+function TextField({ register, label, placeholder, type, id, options, error }) {
   const getInputClasses = () => {
     return (
       'shadow-sm bg-gray-50 border text-gray-900 text-sm rounded-lg' +
@@ -18,7 +18,13 @@ function TextField({ register, label, type, id, options, error }) {
       <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
         {label}
       </label>
-      <input type={type} id={id} className={getInputClasses()} placeholder="" {...register(id, { ...options })} />
+      <input
+        type={type}
+        id={id}
+        className={getInputClasses()}
+        placeholder={placeholder || ''}
+        {...register(id, { ...options })}
+      />
       {error && <p className="text-[#f84147] text-[12px] mt-1 pl-1">{error}</p>}
     </div>
   );
@@ -31,6 +37,7 @@ TextField.defaultProps = {
 TextField.propTypes = {
   register: PropTypes.func.isRequired,
   label: PropTypes.string,
+  placeholder: PropTypes.string,
   type: PropTypes.string,
   id: PropTypes.string.isRequired,
   options: PropTypes.object,
