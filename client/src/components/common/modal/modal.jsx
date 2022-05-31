@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
-import { ModalContext } from '../../../context';
+import React from 'react';
 import { motion } from 'framer-motion';
+import { useModal } from '../../../hooks';
 
 function Modal() {
-  const { modal, hide } = useContext(ModalContext);
+  const { modal, hide } = useModal();
   const defaultWidth = '600px';
 
   if (!modal.visible) return null;
@@ -44,7 +44,7 @@ function Modal() {
             </div>
           ) : null}
 
-          <div className="p-6 space-y-6 max-h-[70vh] overflow-y-auto">{modal.content}</div>
+          <div className="p-6 space-y-6 max-h-[74vh] overflow-y-auto">{modal.content}</div>
 
           {modal.footerButtons && (
             <div className="flex items-center justify-end px-4 py-3 space-x-2 rounded-b border-t border-gray-200 dark:border-gray-600">

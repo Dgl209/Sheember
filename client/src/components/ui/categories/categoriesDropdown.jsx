@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
-function CategoriesDropDown({ categories, onMainCategory, onSubCategory }) {
+function CategoriesDropdown({ categories, onMainCategory, onSubCategory }) {
   const [selected, setSelected] = useState({});
 
   useEffect(() => {
@@ -60,10 +60,10 @@ function CategoriesDropDown({ categories, onMainCategory, onSubCategory }) {
   );
 }
 
-CategoriesDropDown.propTypes = {
+CategoriesDropdown.propTypes = {
   categories: PropTypes.array.isRequired,
   onMainCategory: PropTypes.func.isRequired,
   onSubCategory: PropTypes.func.isRequired,
 };
 
-export default CategoriesDropDown;
+export default CategoriesDropdown;
