@@ -62,7 +62,13 @@ function Login() {
         <button
           type="button"
           className="text-blue-600 font-medium px-1 hover:underline dark:text-blue-500"
-          onClick={() => setContent({ title: 'Sing up', closable: true, content: <Registration /> })}
+          onClick={() =>
+            setContent({
+              title: 'Sing up',
+              closable: true,
+              content: <Registration />,
+            })
+          }
         >
           Create account
         </button>
