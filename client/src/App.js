@@ -2,12 +2,12 @@ import React from 'react';
 import './App.css';
 import { useRoutes } from 'react-router-dom';
 import routes from './routes';
-import { GoodsState, ModalState } from './context';
+import { AdsState, ModalState } from './context';
 
 function App() {
   return (
     <ModalState>
-      <GoodsState>{useRoutes(routes)}</GoodsState>
+      <AdsState>{useRoutes(routes)}</AdsState>
     </ModalState>
   );
 }

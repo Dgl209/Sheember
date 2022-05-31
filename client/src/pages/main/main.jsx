@@ -1,15 +1,15 @@
-import React, { useContext } from 'react';
-import { MainCategoriesList, SearchField } from '../../components/common';
+import React from 'react';
+import { SearchField } from '../../components/common';
 import { categoriesConstants } from '../../utils/constants';
 import { useForm } from 'react-hook-form';
-import { GoodsList } from '../../components/ui';
-import { GoodsContext } from '../../context';
+import { AdsList, MainCategoriesList } from '../../components/ui';
+import { useAds } from '../../hooks';
 
 function Main() {
   const { register, handleSubmit } = useForm();
-  const { goods } = useContext(GoodsContext);
+  const { ads } = useAds();
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => console.log('search: ', data);
 
   return (
     <div className="relative container mx-auto flex">
@@ -31,7 +31,7 @@ function Main() {
           </form>
         </div>
         <div className="px-2">
-          <GoodsList goods={goods} />
+          <AdsList ads={ads} />
         </div>
       </div>
     </div>

@@ -1,11 +1,13 @@
-import React, { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ModalContext } from '../../../context';
-import { Cart, Login } from '../index';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Login } from '../index';
+import { Cart } from '../../ui';
 import { ThemeToggle } from '../../../utils/helpers';
+import { useModal } from '../../../hooks';
 
 function Header() {
-  const { show } = useContext(ModalContext);
+  const { show } = useModal();
+  const navigate = useNavigate();
   const [isDark, setIsDark] = useState(localStorage.getItem('color-theme') === 'light');
 
   const handleToggleTheme = () => {
@@ -120,7 +122,7 @@ function Header() {
                   className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4
                    focus:ring-gray-200 font-medium rounded-lg text-sm px-2 py-1 dark:bg-gray-800 dark:text-white dark:border-gray-600
                     dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-                  onClick={() => console.log('wish list is open')}
+                  onClick={() => navigate('/cabinet/wishlist', { replace: true })}
                 >
                   <svg
                     className="w-5 h-5"

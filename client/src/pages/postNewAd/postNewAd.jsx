@@ -1,19 +1,20 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { SelectField, TextField, CategoriesDropDown } from '../../components/common';
+import { SelectField, TextField } from '../../components/common';
+import { CategoriesDropdown } from '../../components/ui';
 import { categoriesConstants, currenciesConstants } from '../../utils/constants';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage, faQuestion, faAngleDown, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import TextAreaField from '../../components/common/form/textAreaField';
-import { GoodsContext, ModalContext } from '../../context';
 import { useNavigate } from 'react-router-dom';
+import { useAds, useModal } from '../../hooks';
 
 function PostNewAd() {
   const { register, handleSubmit } = useForm();
   const [selectedMainCategory, setSelectedMainCategory] = useState([]);
   const [selectedSubCategory, setSelectedSubCategory] = useState({});
-  const { goods, add } = useContext(GoodsContext);
-  const { show, hide } = useContext(ModalContext);
+  const { ads, add } = useAds();
+  const { show, hide } = useModal();
   const navigate = useNavigate();
   const categoriesRef = useRef();
 
@@ -51,8 +52,8 @@ function PostNewAd() {
   };
 
   useEffect(() => {
-    localStorage.setItem('goods', JSON.stringify(goods));
-  }, [goods]);
+    localStorage.setItem('goods', JSON.stringify(ads));
+  }, [ads]);
 
   const handleMainCategory = (mainCategory) => {
     setSelectedMainCategory(mainCategory);
@@ -69,7 +70,7 @@ function PostNewAd() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="bg-gray-200 px-6 py-6 mb-6 rounded dark:bg-gray-800">
           <div className="w-full max-w-2xl">
-            <TextField id="name" register={register} placeholder="Goods name..." options={{ required: true }} />
+            <TextField id="name" register={register} placeholder="Ad name..." options={{ required: true }} />
 
             <div
               ref={categoriesRef}
@@ -81,7 +82,7 @@ function PostNewAd() {
                   title: 'Choose category',
                   closable: true,
                   content: (
-                    <CategoriesDropDown
+                    <CategoriesDropdown
                       categories={categoriesConstants}
                       onMainCategory={handleMainCategory}
                       onSubCategory={handleSubCategory}

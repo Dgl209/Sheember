@@ -13,7 +13,7 @@ function MainCategoriesList({ categories }) {
           onClick={() => console.log(category.id)}
           className="py-1.5 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white "
         >
-          <Link to={`/${category.id}`}>
+          <Link to={`/catalog/${category.id}`}>
             <div className="flex">
               <div className="w-10 flex justify-center">
                 <FontAwesomeIcon className="text-lg" icon={category.icon} />

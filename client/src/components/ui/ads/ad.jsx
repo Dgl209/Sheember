@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import GoodsBackdrop from '../../../assets/tmp/truck.webp';
 
-function Goods({ goods }) {
+function Ad({ goods }) {
   return (
     <div className="w-[240px] h-[316px] relative border border-gray-200 rounded-lg mb-4 p-4 dark:bg-gray-800 dark:border-gray-700">
       <div className="absolute bottom-4 right-2">
@@ -38,8 +38,8 @@ function Goods({ goods }) {
   );
 }
 
-Goods.propTypes = {
+Ad.propTypes = {
   goods: PropTypes.object.isRequired,
 };
 
-export default Goods;
+export default Ad;

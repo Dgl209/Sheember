@@ -1,11 +1,11 @@
-import { ADD_GOODS } from '../types';
+import { POST_AD } from '../types';
 
 const handlers = {
-  [ADD_GOODS]: (state, { payload }) => [...state, payload],
+  [POST_AD]: (state, { payload }) => [...state, payload],
   DEFAULT: (state) => state,
 };
 
-export const GoodsReducer = (state, action) => {
+export const AdsReducer = (state, action) => {
   const handle = handlers[action.type] || handlers.DEFAULT;
   return handle(state, action);
 };

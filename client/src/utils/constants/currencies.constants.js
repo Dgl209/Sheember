@@ -9,7 +9,7 @@ const currenciesConstants = [
   },
   {
     name: '€',
-    value: '€',
+    id: '€',
   },
 ];
 
