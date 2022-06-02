@@ -14,7 +14,7 @@ function SubCategory({ id, name, image }) {
       <div className="flex justify-center items-center h-[80px]">
         <Link
           to={`/catalog/${mainCategory}/${id}`}
-          className="text-lg font-medium mb-2 text-gray-900 hover:text-sky-500 hover:underline dark:text-white"
+          className="text-lg font-normal mb-2 text-gray-900 hover:text-sky-700 hover:underline dark:text-white"
         >
           {name}
         </Link>
