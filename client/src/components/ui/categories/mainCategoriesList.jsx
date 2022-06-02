@@ -10,13 +10,12 @@ function MainCategoriesList({ categories }) {
         <li
           key={category.id}
           role="button"
-          onClick={() => console.log(category.id)}
-          className="py-1.5 transition-colors duration-200 relative block hover:text-gray-900 text-gray-500 dark:text-gray-400 dark:hover:text-white "
+          className="py-1 font-normal transition-colors duration-200 relative block text-sky-700 hover:underline hover:text-blue-700 dark:text-sky-500 dark:hover:text-sky-300 "
         >
           <Link to={`/catalog/${category.id}`}>
             <div className="flex">
               <div className="w-10 flex justify-center">
-                <FontAwesomeIcon className="text-lg" icon={category.icon} />
+                <FontAwesomeIcon className="text-lg text-[#adb8c8] dark:text-[#adb8c8ce]" icon={category.icon} />
               </div>
               <div className="text-sm">{category.name}</div>
             </div>
