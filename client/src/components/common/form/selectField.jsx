@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function SelectField({ register, label, id, items, options }) {
-  console.log(items);
   return (
     <>
       <label htmlFor={id} className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">

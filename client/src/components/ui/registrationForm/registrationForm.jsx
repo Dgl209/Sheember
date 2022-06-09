@@ -1,8 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TextField } from '../common';
+import { TextField } from '../../common';
+import { useForm } from 'react-hook-form';
 
-function RegistrationForm({ register, handleSubmit, onSubmit, errors }) {
+function RegistrationForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => console.log('registration form: ', data);
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <TextField

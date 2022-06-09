@@ -1,21 +1,33 @@
-import React from 'react';
-import { SearchField } from '../../components/common';
-import { categoriesConstants } from '../../utils/constants';
+import React, { useEffect } from 'react';
+import { GroupList, SearchField, List } from '../../components/common';
 import { useForm } from 'react-hook-form';
-import { AdsList, MainCategoriesList } from '../../components/ui';
-import { useAds } from '../../hooks';
+import { Ad } from '../../components/ui';
+import { useAds, useMainCategories } from '../../hooks';
+import { useNavigate } from 'react-router-dom';
 
 function Main() {
+  const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const { ads } = useAds();
+  const AdsList = List(Ad);
+
+  const { loading, fetchMainCategories, mainCategories } = useMainCategories();
+
+  useEffect(() => {
+    fetchMainCategories();
+  }, []);
 
   const onSubmit = (data) => console.log('search: ', data);
 
+  const handleMainCategoriesList = ({ id }) => {
+    navigate(`/catalog/${id}`);
+  };
+
   return (
     <div className="relative container mx-auto flex">
-      <div className="w-[26%] pt-6 border-r border-gray-200 dark:border-gray-600">
-        <div className="fixed">
-          <MainCategoriesList categories={categoriesConstants} />
+      <div className="w-[26%]">
+        <div className="border-r border-gray-200 dark:border-gray-600 pt-6">
+          {!loading && <GroupList items={mainCategories} onClick={handleMainCategoriesList} />}
         </div>
       </div>
       <div className="w-full pt-6">
@@ -31,7 +43,7 @@ function Main() {
           </form>
         </div>
         <div className="px-2">
-          <AdsList ads={ads} />
+          <AdsList items={ads} columns="4" />
         </div>
       </div>
     </div>
