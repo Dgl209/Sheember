@@ -1,8 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CheckboxField, TextField } from '../common';
+import { CheckboxField, TextField } from '../../common';
+import { toast } from 'react-toastify';
+import { useForm } from 'react-hook-form';
 
-function LoginForm({ register, handleSubmit, onSubmit, errors }) {
+function LoginForm() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => console.log('login form: ', data);
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <TextField
@@ -31,7 +41,7 @@ function LoginForm({ register, handleSubmit, onSubmit, errors }) {
           <button
             type="button"
             className="text-blue-600 text-sm hover:underline dark:text-blue-500"
-            onClick={() => console.log('forgot password page')}
+            onClick={() => toast.info('forgot password!')}
           >
             Forgot password
           </button>

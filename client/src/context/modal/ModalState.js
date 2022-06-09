@@ -7,7 +7,7 @@ import { HIDE_MODAL, SET_CONTENT, SHOW_MODAL } from '../types';
 export const ModalState = ({ children }) => {
   const [state, dispatch] = useReducer(ModalReducer, { visible: false });
 
-  const show = (options) => {
+  const showModal = (options) => {
     document.body.classList.add('overflow-hidden');
     const { title, closable, content, footerButtons, width } = options;
     dispatch({
@@ -16,7 +16,7 @@ export const ModalState = ({ children }) => {
     });
   };
 
-  const setContent = (option) => {
+  const setModalContent = (option) => {
     const { title, closable, content, footerButtons, width } = option;
     dispatch({
       type: SET_CONTENT,
@@ -24,7 +24,7 @@ export const ModalState = ({ children }) => {
     });
   };
 
-  const hide = () => {
+  const hideModal = () => {
     document.body.classList.remove('overflow-hidden');
     dispatch({ type: HIDE_MODAL });
   };
@@ -32,9 +32,9 @@ export const ModalState = ({ children }) => {
   return (
     <ModalContext.Provider
       value={{
-        show,
-        hide,
-        setContent,
+        showModal,
+        hideModal,
+        setModalContent,
         modal: state,
       }}
     >

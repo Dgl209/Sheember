@@ -1,5 +1,5 @@
 import React from 'react';
-import { Catalog, Main, NotFound, PostNewAd, UserCabinet } from '../pages';
+import { Catalog, Main, MockData, NotFound, PostNewAd, ResultPage, UserCabinet } from '../pages';
 
 const appRoutes = [
   {
@@ -25,6 +25,14 @@ const appRoutes = [
   {
     path: '/cabinet/:item',
     element: <UserCabinet />,
+  },
+  {
+    path: '/mockdata',
+    element: <MockData />,
+  },
+  {
+    path: 'result',
+    element: <ResultPage />,
   },
 ];
 

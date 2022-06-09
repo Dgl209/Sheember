@@ -1,27 +1,27 @@
 import Ad from './ads/ad';
-import AdsList from './ads/adsList';
-import MainCategoriesList from '../ui/categories/mainCategoriesList';
 import SubCategory from '../ui/categories/subCategory';
 import CategoriesDropdown from '../ui/categories/categoriesDropdown';
-import SubCategoriesList from './categories/subCategoriesList';
-import LoginForm from './loginForm';
-import RegistrationForm from './registrationForm';
-import Orders from './orders/orders';
-import Wishlist from './wishList/wishList';
-import PersonalData from './personalData/personalData';
+import LoginForm from './loginForm/loginForm';
+import RegistrationForm from './registrationForm/registrationForm';
+import Orders from './userCabinet/orders/orders';
+import PublishedOrders from './userCabinet/publishedOrders/publishedOrders';
+import Wishlist from './userCabinet/wishList/wishList';
+import PersonalData from './userCabinet/personalData/personalData';
 import Cart from './cart/cart';
+import HeaderNav from './headerNav/headerNav';
+import PostNewAdForm from './postNewAdForm/postNewAdForm';
 
 export {
   Ad,
-  AdsList,
-  MainCategoriesList,
   SubCategory,
   CategoriesDropdown,
-  SubCategoriesList,
   LoginForm,
   RegistrationForm,
   Orders,
+  PublishedOrders,
   Wishlist,
   PersonalData,
   Cart,
+  HeaderNav,
+  PostNewAdForm,
 };

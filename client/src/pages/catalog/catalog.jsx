@@ -1,22 +1,28 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { categoriesConstants } from '../../utils/constants';
-import { AdsList, SubCategoriesList } from '../../components/ui';
-import { useAds } from '../../hooks';
+import { Ad, SubCategory } from '../../components/ui';
+import { useSubCategories } from '../../hooks';
+import { List } from '../../components/common';
 
 function Catalog() {
-  const { ads } = useAds();
   const { mainCategory, subCategory } = useParams();
-  const selectedMainCategory = categoriesConstants.find((constant) => constant.id === mainCategory);
+  const { loading, subCategories, fetchSubCategories } = useSubCategories();
+  const selectedSubCategories = subCategories.filter((x) => x.parent_id === mainCategory);
+  const SubCategoriesList = List(SubCategory);
+  const AdsList = List(Ad);
 
-  const filteredAdsBySubCategory = ads.filter((ad) => ad.category === subCategory);
+  useEffect(() => {
+    if (!subCategory) {
+      fetchSubCategories();
+    }
+  }, []);
 
   return (
     <div className="p-6">
       {!subCategory ? (
-        <SubCategoriesList items={selectedMainCategory.child} />
+        !loading && <SubCategoriesList items={selectedSubCategories} columns="5" />
       ) : (
-        <AdsList ads={filteredAdsBySubCategory} />
+        <AdsList items={[]} columns="4" />
       )}
     </div>
   );

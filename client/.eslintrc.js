@@ -33,5 +33,6 @@ module.exports = {
     'space-before-function-paren': ['error', { anonymous: 'always', named: 'never' }],
     'multiline-ternary': 0,
     'react/display-name': 'off',
+    indent: 'off',
   },
 };
