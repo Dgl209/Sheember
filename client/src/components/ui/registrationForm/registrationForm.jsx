@@ -2,15 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TextField } from '../../common';
 import { useForm } from 'react-hook-form';
+import { useAuth, useModal } from '../../../hooks';
+import { toast } from 'react-toastify';
 
 function RegistrationForm() {
+  const { signUp } = useAuth();
+  const { hideModal } = useModal();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log('registration form: ', data);
+  const onSubmit = async (data) => {
+    try {
+      await signUp(data);
+      hideModal();
+    } catch (error) {
+      toast.error(error.email);
+    }
+  };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <TextField

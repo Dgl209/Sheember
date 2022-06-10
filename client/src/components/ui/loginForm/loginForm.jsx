@@ -3,15 +3,25 @@ import PropTypes from 'prop-types';
 import { CheckboxField, TextField } from '../../common';
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
+import { useAuth, useModal } from '../../../hooks';
 
 function LoginForm() {
+  const { signIn } = useAuth();
+  const { hideModal } = useModal();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => console.log('login form: ', data);
+  const onSubmit = async (data) => {
+    try {
+      await signIn(data);
+      hideModal();
+    } catch (error) {
+      toast.error(error);
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
