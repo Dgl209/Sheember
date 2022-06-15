@@ -48,7 +48,7 @@ export const SubCategoriesState = ({ children }) => {
         fetchSubCategories,
         showLoader,
         subCategories: state.categories,
-        loading: state.loading,
+        subcategoriesloading: state.loading,
       }}
     >
       {children}

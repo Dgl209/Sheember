@@ -1,6 +1,6 @@
 import React from 'react';
 
-function PostButton() {
+function PostSubmitBtn() {
   return (
     <button
       type="submit"
@@ -13,4 +13,4 @@ function PostButton() {
   );
 }
 
-export default PostButton;
+export default PostSubmitBtn;

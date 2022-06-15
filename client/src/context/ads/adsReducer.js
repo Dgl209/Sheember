@@ -1,7 +1,8 @@
-import { POST_AD } from '../types';
+import { GET_ADS, SHOW_LOADER } from '../types';
 
 const handlers = {
-  [POST_AD]: (state, { payload }) => [...state, payload],
+  [SHOW_LOADER]: (state) => ({ ...state, loading: true }),
+  [GET_ADS]: (state, { payload }) => ({ ...state, ads: payload, loading: false }),
   DEFAULT: (state) => state,
 };
 

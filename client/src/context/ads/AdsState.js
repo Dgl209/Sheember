@@ -1,48 +1,62 @@
-import React, { useReducer, useState, useEffect } from 'react';
+import React, { useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { AdsReducer } from './adsReducer';
 import { AdsContext } from './adsContext';
-import { POST_AD } from '../types';
+import { GET_ADS, SET_ERROR, SHOW_LOADER } from '../types';
 import adsService from '../../services/ads.services';
 import { toast } from 'react-toastify';
 
 export const AdsState = ({ children }) => {
-  const [state, dispatch] = useReducer(AdsReducer);
-  const [error, setError] = useState(null);
+  const initialState = {
+    ads: [],
+    loading: false,
+    error: null,
+  };
+  const [state, dispatch] = useReducer(AdsReducer, initialState);
 
-  const createAd = async (data) => {
-    const { id, name, category, description, price, currency } = data;
+  const showLoader = () => dispatch({ type: SHOW_LOADER });
 
+  const createAd = async (data, path) => {
     try {
-      const { content } = adsService.create(data);
-      return content;
+      adsService.create(data, path);
     } catch (error) {
       errorCatcher(error);
     }
+  };
 
-    dispatch({
-      type: POST_AD,
-      payload: { id, name, category, description, price, currency },
-    });
+  const getAds = async (path) => {
+    showLoader();
+    try {
+      const { content } = await adsService.get(path);
+      console.log('ads content: ', content);
+      dispatch({
+        type: GET_ADS,
+        payload: content,
+      });
+    } catch (error) {
+      errorCatcher(error);
+    }
   };
 
   useEffect(() => {
-    if (error !== 0) {
-      toast.error(error);
-      setError(null);
+    if (state.error !== 0) {
+      toast.error(state.error);
+      dispatch({ type: SET_ERROR, payload: null });
     }
   }, []);
 
   const errorCatcher = (error) => {
-    const { message } = error.response.data;
-    setError(message);
+    const { message } = error;
+    dispatch({ type: SET_ERROR, payload: message });
   };
 
   return (
     <AdsContext.Provider
       value={{
         createAd,
-        ads: state,
+        getAds,
+        ads: state.ads,
+        adsLoading: state.loading,
       }}
     >
       {children}

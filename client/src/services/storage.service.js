@@ -1,4 +1,4 @@
-import { getStorage, getDownloadURL, ref } from 'firebase/storage';
+import { getStorage, getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import firebaseService from './firebase.service';
 import { toast } from 'react-toastify';
 
@@ -15,8 +15,23 @@ const downloadImage = async (path) => {
   }
 };
 
+const uploadImagesArray = async (fileArray, pathId) => {
+  try {
+    return await fileArray.map(async (file, index) => {
+      const fileRef = ref(firebaseStorage, `/adImages/${pathId}/${index}`);
+      await uploadBytes(fileRef, file[0]);
+      return await getDownloadURL(fileRef);
+    });
+  } catch (error) {
+    console.log('storage error: ', error);
+    const { message } = error;
+    toast.error(message);
+  }
+};
+
 const storageService = {
   downloadImage,
+  uploadImagesArray,
 };
 
 export default storageService;
