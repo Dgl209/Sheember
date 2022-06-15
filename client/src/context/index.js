@@ -8,3 +8,5 @@ export * from './subCategories/subCategoriesContext';
 export * from './subCategories/SubCategoriesState';
 export * from './cabinetItems/CabinetItemsState';
 export * from './cabinetItems/cabinetItemsContext';
+export * from './auth/authContext';
+export * from './auth/AuthState';

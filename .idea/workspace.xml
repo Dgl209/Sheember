@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="26ec52ec-bfb5-4a5f-bdd6-03913762dcbe" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/categories/categoriesDropDown.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/categories/categoriesDropdown.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/categories/mainCategoriesList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/categories/mainCategoriesList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/categories/subCategory.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/categories/subCategory.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/form/selectField.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/form/selectField.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/modal/modal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/modal/modal.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/layout/cart/cart.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/cart/cart.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/layout/header/header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/header/header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/layout/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/layout/login/login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/login/login.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/layout/registration/registration.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/registration/registration.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/goods/goods.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/ads/ad.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/goods/goodsList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/ads/adsList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/context/goods/GoodsState.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/context/ads/AdsState.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/context/goods/goodsContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/context/ads/adsContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/context/goods/goodsReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/context/ads/adsReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/context/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/context/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/context/modal/ModalState.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/context/modal/ModalState.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/context/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/context/types.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/catalog/catalog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/catalog/catalog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/main/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/main/main.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/postNewAd/postNewAd.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/postNewAd/postNewAd.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/routes/appRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/routes/appRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/utils/constants/currencies.constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/utils/constants/currencies.constants.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="28b5YuH3IqeAIuMznRtJ2BURlFQ" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="D:\store\client\node_modules\prettier" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.prettier" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\store\client\src\components\ui" />
+      <recent name="D:\store\client\src\components\common\categories" />
+      <recent name="D:\sheember\client\src\components\common" />
+      <recent name="D:\sheember\client\src\utils\constants" />
+      <recent name="D:\sheember\client\src\components\layout" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="26ec52ec-bfb5-4a5f-bdd6-03913762dcbe" name="Changes" comment="" />
+      <created>1651472495141</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1651472495141</updated>
+      <workItem from="1651472497951" duration="3873000" />
+      <workItem from="1651491941288" duration="347000" />
+      <workItem from="1651492485522" duration="3132000" />
+      <workItem from="1651663100222" duration="9458000" />
+      <workItem from="1651685948874" duration="10160000" />
+      <workItem from="1651844680325" duration="8580000" />
+      <workItem from="1651928733808" duration="9378000" />
+      <workItem from="1652001690153" duration="21092000" />
+      <workItem from="1652082574969" duration="5699000" />
+      <workItem from="1652096406157" duration="5000000" />
+      <workItem from="1652116089152" duration="748000" />
+      <workItem from="1652160894468" duration="9875000" />
+      <workItem from="1652274650434" duration="5042000" />
+      <workItem from="1652283762957" duration="620000" />
+      <workItem from="1652288937046" duration="8454000" />
+      <workItem from="1652433558111" duration="13367000" />
+      <workItem from="1652465457095" duration="4305000" />
+      <workItem from="1652516012220" duration="13897000" />
+      <workItem from="1652536623444" duration="231000" />
+      <workItem from="1652683025185" duration="9216000" />
+      <workItem from="1652693110147" duration="1930000" />
+      <workItem from="1652706894299" duration="1024000" />
+      <workItem from="1652707944549" duration="7751000" />
+      <workItem from="1652765344498" duration="13356000" />
+      <workItem from="1652874800200" duration="3274000" />
+      <workItem from="1652905410232" duration="5337000" />
+      <workItem from="1652912022734" duration="33000" />
+      <workItem from="1652945436174" duration="8785000" />
+      <workItem from="1653036252222" duration="15259000" />
+      <workItem from="1653075436059" duration="3532000" />
+      <workItem from="1653121694323" duration="10974000" />
+      <workItem from="1653216223722" duration="9699000" />
+      <workItem from="1653235392536" duration="11248000" />
+      <workItem from="1653291512935" duration="4888000" />
+      <workItem from="1653306475865" duration="4275000" />
+      <workItem from="1653321075555" duration="7733000" />
+      <workItem from="1653975634299" duration="7743000" />
+      <workItem from="1653992010275" duration="280000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>
