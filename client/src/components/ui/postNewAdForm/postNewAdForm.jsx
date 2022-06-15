@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { Card, SelectField, TextField } from '../../common';
+import { useForm, useFieldArray } from 'react-hook-form';
+import { Card, TextField, TextAreaField } from '../../common';
 import CategoriesDropdown from '../categories/categoriesDropdown';
-import { currenciesConstants } from '../../../utils/constants';
-import TextAreaField from '../../common/form/textAreaField';
 import { useAds, useMainCategories, useModal, useSubCategories } from '../../../hooks';
 import { storageService } from '../../../services';
 import { useNavigate } from 'react-router-dom';
-import { CategoryField, ImageField } from './';
-import PostButton from './postButton/postButton';
+import { CategoryField, AdImagesField, PostSubmitBtn, PostBtnGroup } from './';
 
 function PostNewAdForm() {
-  const { register, handleSubmit } = useForm();
+  const { register, control, handleSubmit, reset, getValues, watch } = useForm();
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'adImages',
+  });
   const [selectedMainCategory, setSelectedMainCategory] = useState({});
   const [selectedSubCategory, setSelectedSubCategory] = useState({});
+  const [isSelling, setIsSelling] = useState(true);
   const { mainCategories, fetchMainCategories } = useMainCategories();
   const { subCategories, fetchSubCategories } = useSubCategories();
   const [imageUrl, setImageUrl] = useState(null);
@@ -36,8 +38,9 @@ function PostNewAdForm() {
     }
   }, [selectedSubCategory]);
 
-  const onSubmit = (data) => {
-    console.log('data: ', data);
+  const onSubmit = async (data) => {
+    console.log('post new ad data: ', data);
+
     if (!Object.keys(selectedSubCategory).length) {
       return;
     }
@@ -52,6 +55,14 @@ function PostNewAdForm() {
   const handleSubCategory = (subCategory) => {
     hideModal();
     setSelectedSubCategory(subCategory);
+  };
+
+  const handleIsSelling = (bool) => {
+    reset({
+      price: '',
+      'desired-product': '',
+    });
+    setIsSelling(bool);
   };
 
   const confirmationModal = (data) =>
@@ -81,8 +92,11 @@ function PostNewAdForm() {
       footerButtons: [
         {
           text: 'Confirm',
-          handler: () => {
-            createAd({ ...data, id: Date.now(), category: selectedSubCategory.id });
+          handler: async () => {
+            const adId = Date.now();
+            const adImages = await storageService.uploadImagesArray(data.adImages, adId);
+            const adImagesUrl = await Promise.all(adImages);
+            createAd({ ...data, adImagesUrl, category: selectedSubCategory.id, id: adId }, selectedSubCategory.id);
             hideModal();
             navigate('/result', { replace: true });
           },
@@ -122,7 +136,14 @@ function PostNewAdForm() {
           />
         </Card>
         <Card>
-          <ImageField register={register} />
+          <AdImagesField
+            register={register}
+            fields={fields}
+            append={append}
+            remove={remove}
+            getValues={getValues}
+            watch={watch}
+          />
         </Card>
         <Card>
           <TextAreaField
@@ -133,29 +154,31 @@ function PostNewAdForm() {
           />
         </Card>
         <Card>
-          <TextField
-            id="price"
-            register={register}
-            label="Price"
-            options={{
-              required: true,
-              pattern: {
-                value: /^(\d){1,13}$/g,
-                message: 'The price is entered incorrectly',
-              },
-            }}
-          />
-          <SelectField
-            register={register}
-            items={currenciesConstants}
-            id="currency"
-            options={{
-              required: true,
-            }}
-          />
+          <PostBtnGroup isSelling={isSelling} handleIsSelling={handleIsSelling} />
+          {isSelling ? (
+            <TextField
+              id="price"
+              register={register}
+              placeholder="Price..."
+              options={{
+                required: true,
+                pattern: {
+                  value: /^(\d){1,13}$/g,
+                  message: 'The price is entered incorrectly',
+                },
+              }}
+            />
+          ) : (
+            <TextAreaField
+              register={register}
+              id="desired-product"
+              placeholder="Leave a description of the product you want..."
+              options={{ required: true }}
+            />
+          )}
         </Card>
         <div className="w-full flex justify-end">
-          <PostButton />
+          <PostSubmitBtn />
         </div>
       </form>
     </>
