@@ -7,8 +7,12 @@ const adsService = {
     const { data } = await httpService.get(adsEndpoint);
     return data;
   },
-  create: async (content) => {
-    const { data } = await httpService.post(adsEndpoint, content);
+  get: async (path) => {
+    const { data } = await httpService.get(adsEndpoint + path);
+    return data;
+  },
+  create: async (content, path) => {
+    const { data } = await httpService.post(adsEndpoint + path, content);
     return data;
   },
 };

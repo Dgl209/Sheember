@@ -2,16 +2,15 @@ import React, { useEffect } from 'react';
 import { GroupList, SearchField, List } from '../../components/common';
 import { useForm } from 'react-hook-form';
 import { Ad } from '../../components/ui';
-import { useAds, useMainCategories } from '../../hooks';
+import { useMainCategories } from '../../hooks';
 import { useNavigate } from 'react-router-dom';
 
 function Main() {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
-  const { ads } = useAds();
   const AdsList = List(Ad);
 
-  const { loading, fetchMainCategories, mainCategories } = useMainCategories();
+  const { mainCategoriesLoading, fetchMainCategories, mainCategories } = useMainCategories();
 
   useEffect(() => {
     fetchMainCategories();
@@ -27,7 +26,7 @@ function Main() {
     <div className="relative container mx-auto flex">
       <div className="w-[26%]">
         <div className="border-r border-gray-200 dark:border-gray-600 pt-6">
-          {!loading && <GroupList items={mainCategories} onClick={handleMainCategoriesList} />}
+          {!mainCategoriesLoading && <GroupList items={mainCategories} onClick={handleMainCategoriesList} />}
         </div>
       </div>
       <div className="w-full pt-6">
@@ -43,7 +42,7 @@ function Main() {
           </form>
         </div>
         <div className="px-2">
-          <AdsList items={ads} columns="4" />
+          <AdsList items={[]} columns="4" />
         </div>
       </div>
     </div>

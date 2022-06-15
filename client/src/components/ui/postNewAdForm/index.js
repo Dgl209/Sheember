@@ -1,5 +1,6 @@
-import ImageField from './imageField/imageField';
+import AdImagesField from './adImagesField/adIamgesField';
 import CategoryField from './categoryField/categoryField';
-import PostButton from './postButton/postButton';
+import PostSubmitBtn from './postSubmitBtn/postSubmitBtn';
+import PostBtnGroup from './postBtnGroup/postBtnGroup';
 
-export { ImageField, CategoryField, PostButton };
+export { AdImagesField, CategoryField, PostSubmitBtn, PostBtnGroup };

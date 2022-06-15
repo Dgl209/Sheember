@@ -4,9 +4,12 @@ import PropTypes from 'prop-types';
 const List = (Component) => {
   const wrapper = ({ items, columns }) => {
     return (
-      <div className={`w-full h-full grid grid-cols-${columns || '4'} place-items-center`}>
+      <div
+        className="w-full h-full grid place-items-center"
+        style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
+      >
         {items?.map((item) => {
-          return <Component key={item.id} {...item} />;
+          return <Component key={item.id} item={item} />;
         })}
       </div>
     );
