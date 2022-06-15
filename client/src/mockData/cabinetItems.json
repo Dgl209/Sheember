@@ -1,10 +1,5 @@
 [
   {
-    "id": "personal-data",
-    "name": "User Name",
-    "icon": "faUser"
-  },
-  {
     "id": "orders",
     "name": "Orders",
     "icon": "faListCheck"

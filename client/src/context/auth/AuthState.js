@@ -4,50 +4,50 @@ import { AuthContext } from './authContext';
 import { AuthReducer } from './authReducer';
 import { SET_CURRENT_USER, SET_ERROR } from '../types';
 import axios from 'axios';
-import { userService, setTokens } from '../../services';
+import { userService, setTokens, localStorageService } from '../../services';
 import { toast } from 'react-toastify';
 
-const httpAuth = axios.create();
+export const httpAuth = axios.create({
+  baseURL: 'https://identitytoolkit.googleapis.com/v1/',
+  params: {
+    key: process.env.REACT_APP_FIREBASE_KEY,
+  },
+});
+
+const errorHandler = {
+  INVALID_EMAIL: 'Invalid email',
+  INVALID_PASSWORD: 'Invalid password',
+  EMAIL_NOT_FOUND: 'Email not found',
+  EMAIL_EXISTS: 'Email is already registered',
+};
 
 export const AuthState = ({ children }) => {
   const initialState = {
-    currentUser: {},
+    currentUser: undefined,
     error: null,
   };
   const [state, dispatch] = useReducer(AuthReducer, initialState);
 
   const signIn = async ({ email, password }) => {
-    const key = 'AIzaSyAgbFgJwA3RSCBL0yGt4GL5NOd1CIFaMY0';
-    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${key}`;
     try {
-      const { data } = await httpAuth.post(url, { email, password, returnSecureToken: true });
+      const { data } = await httpAuth.post('accounts:signInWithPassword', { email, password, returnSecureToken: true });
       console.log('sing in: ', data);
       setTokens(data);
+      getUserData();
     } catch (error) {
       errorCatcher(error);
       const { code, message } = error.response.data.error;
       console.log('code: ', code, 'message: ', message);
       if (code === 400) {
-        if (message === 'INVALID_EMAIL') {
-          const errorMessage = 'Invalid email';
-          throw errorMessage;
-        } else if (message === 'EMAIL_NOT_FOUND') {
-          const errorMessage = 'Email not found';
-          throw errorMessage;
-        } else if (message === 'INVALID_PASSWORD') {
-          const errorMessage = 'Invalid password';
-          throw errorMessage;
-        }
+        const err = errorHandler[message];
+        throw err;
       }
     }
   };
 
   const signUp = async ({ email, password, ...rest }) => {
-    const key = 'AIzaSyAgbFgJwA3RSCBL0yGt4GL5NOd1CIFaMY0';
-    const url = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${key}`;
-
     try {
-      const { data } = await httpAuth.post(url, { email, password, returnSecureToken: true });
+      const { data } = await httpAuth.post('accounts:signUp', { email, password, returnSecureToken: true });
       console.log('sing up: ', data);
       setTokens(data);
       await createUser({ id: data.localId, email, ...rest });
@@ -56,19 +56,28 @@ export const AuthState = ({ children }) => {
       const { code, message } = error.response.data.error;
       console.log(code, message);
       if (code === 400) {
-        if (message === 'EMAIL_EXISTS') {
-          const errorObject = {
-            email: 'Пользователь с таким Email уже существует',
-          };
-          throw errorObject;
-        }
+        const err = errorHandler[message];
+        throw err;
       }
     }
   };
 
   const createUser = async (data) => {
     try {
-      const { content } = userService.create(data);
+      const { content } = await userService.create(data);
+      console.log('create user content: ', content);
+      dispatch({
+        type: SET_CURRENT_USER,
+        payload: content,
+      });
+    } catch (error) {
+      errorCatcher(error);
+    }
+  };
+
+  const getUserData = async () => {
+    try {
+      const { content } = await userService.getCurrentUser();
       dispatch({
         type: SET_CURRENT_USER,
         payload: content,
@@ -79,11 +88,17 @@ export const AuthState = ({ children }) => {
   };
 
   useEffect(() => {
-    if (state.error !== 0) {
+    if (localStorageService.getAccessToken()) {
+      getUserData();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (state.error !== null) {
       toast.error(state.error);
       dispatch({ type: SET_ERROR, payload: null });
     }
-  }, []);
+  }, [state.error]);
 
   const errorCatcher = (error) => {
     const { message } = error;

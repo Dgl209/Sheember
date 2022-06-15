@@ -19,7 +19,7 @@ function RegistrationForm() {
       await signUp(data);
       hideModal();
     } catch (error) {
-      toast.error(error.email);
+      toast.error(error);
     }
   };
   return (
