@@ -3,8 +3,10 @@ import PropTypes from 'prop-types';
 import { AdsReducer } from './adsReducer';
 import { AdsContext } from './adsContext';
 import { GET_ADS, SET_ERROR, SHOW_LOADER } from '../types';
-import adsService from '../../services/ads.services';
+import { storageService, adsService } from '../../services';
 import { toast } from 'react-toastify';
+import { nanoid } from 'nanoid';
+import { useAuth } from '../../hooks';
 
 export const AdsState = ({ children }) => {
   const initialState = {
@@ -13,22 +15,25 @@ export const AdsState = ({ children }) => {
     error: null,
   };
   const [state, dispatch] = useReducer(AdsReducer, initialState);
+  const { currentUser } = useAuth();
 
   const showLoader = () => dispatch({ type: SHOW_LOADER });
 
-  const createAd = async (data, path) => {
+  const createAd = async (data) => {
     try {
-      adsService.create(data, path);
+      const id = nanoid();
+      const adImages = await storageService.uploadImagesArray(data.adImages, id);
+      const adImagesUrl = await Promise.all(adImages);
+      adsService.create({ ...data, publisher: currentUser.id, adImagesUrl, id, created_at: Date.now() });
     } catch (error) {
       errorCatcher(error);
     }
   };
 
-  const getAds = async (path) => {
+  const getAds = async (orderBy, value) => {
     showLoader();
     try {
-      const { content } = await adsService.get(path);
-      console.log('ads content: ', content);
+      const { content } = await adsService.get(orderBy, value);
       dispatch({
         type: GET_ADS,
         payload: content,

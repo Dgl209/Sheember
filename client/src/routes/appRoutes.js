@@ -1,4 +1,5 @@
 import React from 'react';
+import { PrivateRoute } from '../hoc';
 import { Catalog, Main, MockData, NotFound, PostNewAd, ResultPage, UserCabinet } from '../pages';
 
 const appRoutes = [
@@ -12,7 +13,11 @@ const appRoutes = [
   },
   {
     path: '/post-new-ad',
-    element: <PostNewAd />,
+    element: (
+      <PrivateRoute>
+        <PostNewAd />
+      </PrivateRoute>
+    ),
   },
   {
     path: '/catalog/:mainCategory',
@@ -24,7 +29,11 @@ const appRoutes = [
   },
   {
     path: '/cabinet/:item',
-    element: <UserCabinet />,
+    element: (
+      <PrivateRoute>
+        <UserCabinet />
+      </PrivateRoute>
+    ),
   },
   {
     path: '/mockdata',

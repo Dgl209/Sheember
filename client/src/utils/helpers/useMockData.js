@@ -40,15 +40,15 @@ const useMockData = () => {
   async function initialize() {
     try {
       for (const mainCategory of mainCategoriesJSON) {
-        await httpService.put('mainCategories/' + mainCategory.id, mainCategory);
+        await httpService.put('constants/mainCategories/' + mainCategory.id, mainCategory);
         incrementCount();
       }
       for (const subCategory of subCategoriesJSON) {
-        await httpService.put('subCategories/' + subCategory.id, subCategory);
+        await httpService.put('constants/subCategories/' + subCategory.id, subCategory);
         incrementCount();
       }
       for (const cabinetItem of cabinetItemsJSON) {
-        await httpService.put('cabinetItems/' + cabinetItem.id, cabinetItem);
+        await httpService.put('constants/cabinetItems/' + cabinetItem.id, cabinetItem);
       }
     } catch (error) {
       setError(error);

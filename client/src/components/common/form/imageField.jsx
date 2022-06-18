@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { CameraIcon } from '@heroicons/react/outline';
+import { CameraIcon, TrashIcon } from '@heroicons/react/outline';
 
-function ImageField({ register, id, index, remove, uploadedFile }) {
+function ImageField({ register, id, index, remove, uploadedFile, inputRef }) {
   const [imageUrl, setImageUrl] = useState(null);
+  const [removeVisible, setRemoveVisible] = useState(false);
 
-  if (Object.keys(uploadedFile).length) {
+  if (uploadedFile && Object.keys(uploadedFile).length) {
     const fileReader = new FileReader();
     fileReader.readAsDataURL(uploadedFile[0]);
     fileReader.onload = () => setImageUrl(() => fileReader.result);
@@ -13,7 +14,7 @@ function ImageField({ register, id, index, remove, uploadedFile }) {
 
   return (
     <div className="flex justify-center items-center w-full">
-      <label htmlFor={id} className="w-full mr-2 mb-2">
+      <label htmlFor={id} className="w-full mr-2 mb-2" ref={inputRef}>
         {!imageUrl ? (
           <div
             className="flex flex-col justify-center items-center w-full h-32
@@ -24,8 +25,19 @@ function ImageField({ register, id, index, remove, uploadedFile }) {
             <CameraIcon className="w-10 h-10 text-gray-400" />
           </div>
         ) : (
-          <div className="w-full h-32 hover:opacity-5">
-            <img onClick={() => remove(index)} className="w-full h-full rounded-sm" src={imageUrl} />
+          <div className="w-full h-32 cursor-pointer">
+            {removeVisible && (
+              <div className="absolute w-40 h-32  flex items-center">
+                <TrashIcon className="w-10 h-10 text-gray-600 dark:text-gray-400 ml-[60px]" />
+              </div>
+            )}
+            <img
+              onMouseOver={() => setRemoveVisible(true)}
+              onMouseOut={() => setRemoveVisible(false)}
+              onClick={() => remove(index)}
+              className="w-full h-full rounded-sm hover:opacity-20"
+              src={imageUrl}
+            />
           </div>
         )}
         {!imageUrl && <input {...register(id)} id={id} type="file" className="hidden" />}
@@ -40,6 +52,7 @@ ImageField.propTypes = {
   uploadedFile: PropTypes.object.isRequired,
   index: PropTypes.number.isRequired,
   remove: PropTypes.func.isRequired,
+  inputRef: PropTypes.object,
 };
 
 export default ImageField;

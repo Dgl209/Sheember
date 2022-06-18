@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { GroupList } from '../../components/common';
 import { PersonalData, Orders, Wishlist, PublishedOrders } from '../../components/ui';
-import { useAuth, useCabinetitems } from '../../hooks';
+import { useAuth, useConstants } from '../../hooks';
 
 /*
     1. personal-data - data about user
@@ -22,8 +22,8 @@ const items = {
 function UserCabinet() {
   const navigate = useNavigate();
   const { item } = useParams();
-  const { fetchCabinetItems, cabinetItems } = useCabinetitems();
   const { currentUser } = useAuth();
+  const { cabinetItems, fetchCabinetItems } = useConstants();
 
   const handleCabinetItems = ({ id }) => {
     navigate(`/cabinet/${id}`);

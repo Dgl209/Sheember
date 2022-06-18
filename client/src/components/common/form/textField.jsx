@@ -22,7 +22,7 @@ function TextField({ register, label, placeholder, type, id, options, error }) {
 
   return (
     <div className="mb-6">
-      <label htmlFor={id} className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+      <label htmlFor={id} className="block mb-2 ml-1 text-xl font-medium text-gray-900 dark:text-gray-300">
         {label}
       </label>
       <div className="relative w-full">

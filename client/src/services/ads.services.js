@@ -7,12 +7,17 @@ const adsService = {
     const { data } = await httpService.get(adsEndpoint);
     return data;
   },
-  get: async (path) => {
-    const { data } = await httpService.get(adsEndpoint + path);
+  get: async (orderBy, value) => {
+    const { data } = await httpService.get(adsEndpoint, {
+      params: {
+        orderBy: orderBy,
+        equalTo: `"${value}"`,
+      },
+    });
     return data;
   },
-  create: async (content, path) => {
-    const { data } = await httpService.post(adsEndpoint + path, content);
+  create: async (content) => {
+    const { data } = await httpService.post(adsEndpoint, content);
     return data;
   },
 };

@@ -17,15 +17,17 @@ const downloadImage = async (path) => {
 
 const uploadImagesArray = async (fileArray, pathId) => {
   try {
-    return await fileArray.map(async (file, index) => {
+    if (!fileArray) {
+      const errorMessage = 'Failed to load image, please try again later';
+      throw errorMessage;
+    }
+    return await fileArray?.map(async (file, index) => {
       const fileRef = ref(firebaseStorage, `/adImages/${pathId}/${index}`);
       await uploadBytes(fileRef, file[0]);
       return await getDownloadURL(fileRef);
     });
   } catch (error) {
-    console.log('storage error: ', error);
-    const { message } = error;
-    toast.error(message);
+    toast.error(error);
   }
 };
 

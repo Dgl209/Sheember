@@ -4,8 +4,10 @@ import { CheckboxField, TextField } from '../../common';
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import { useAuth, useModal } from '../../../hooks';
+import { useNavigate } from 'react-router-dom';
 
-function LoginForm() {
+function LoginForm({ from }) {
+  const navigate = useNavigate();
   const { signIn } = useAuth();
   const { hideModal } = useModal();
   const {
@@ -18,6 +20,10 @@ function LoginForm() {
     try {
       await signIn(data);
       hideModal();
+      console.log('from: ', from);
+      if (from?.pathname) {
+        navigate(from.pathname);
+      }
     } catch (error) {
       toast.error(error);
     }
@@ -69,10 +75,7 @@ function LoginForm() {
 }
 
 LoginForm.propTypes = {
-  register: PropTypes.func,
-  handleSubmit: PropTypes.func,
-  onSubmit: PropTypes.func,
-  errors: PropTypes.object,
+  from: PropTypes.object,
 };
 
 export default LoginForm;

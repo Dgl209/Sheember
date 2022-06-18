@@ -5,34 +5,104 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="26ec52ec-bfb5-4a5f-bdd6-03913762dcbe" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.eslintrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/.eslintrc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.prettierrc.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/.prettierrc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/postcss.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/postcss.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/client/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/common/categories/categoriesDropDown.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/categories/categoriesDropdown.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/common/categories/mainCategoriesList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/categories/mainCategoriesList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/common/categories/subCategory.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/categories/subCategory.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/assets/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/assets/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/card/card.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/card/card.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/form/checkboxField.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/form/checkboxField.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/form/imageField.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/form/imageField.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/common/form/selectField.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/form/selectField.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/form/textAreaField.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/form/textAreaField.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/form/textField.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/form/textField.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/groupList/groupItem/groupItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/groupList/groupItem/groupItem.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/groupList/groupList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/groupList/groupList.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/common/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/list/list.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/list/list.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/common/modal/modal.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/modal/modal.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/layout/cart/cart.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/cart/cart.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/layout/header/header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/header/header.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/layout/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/layout/login/login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/login/login.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/layout/registration/registration.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/registration/registration.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/goods/goods.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/ads/ad.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/goods/goodsList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/ads/adsList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/ads/ad.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/ads/ad.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/cart/cart.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/cart/cart.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/categories/categoriesDropdown.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/categories/categoriesDropdown.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/categories/subCategory.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/categories/subCategory.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/headerNav/headerNav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/headerNav/headerNav.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/headerNav/navButton/navButton.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/headerNav/navButton/navButton.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/headerNav/postAdLink/postAdLink.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/headerNav/postAdLink/postAdLink.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/components/ui/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/context/goods/GoodsState.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/context/ads/AdsState.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/context/goods/goodsContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/context/ads/adsContext.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/context/goods/goodsReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/context/ads/adsReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/loginForm/loginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/loginForm/loginForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/postNewAdForm/adImagesField/adIamgesField.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/postNewAdForm/adImagesField/adIamgesField.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/postNewAdForm/categoryField/categoryField.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/postNewAdForm/categoryField/categoryField.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/postNewAdForm/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/postNewAdForm/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/postNewAdForm/postBtnGroup/postBtnGroup.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/postNewAdForm/postBtnGroup/postBtnGroup.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/postNewAdForm/postNewAdForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/postNewAdForm/postNewAdForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/postNewAdForm/postSubmitBtn/postSubmitBtn.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/postNewAdForm/postSubmitBtn/postSubmitBtn.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/registrationForm/registrationForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/registrationForm/registrationForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/userCabinet/orders/orders.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/userCabinet/orders/orders.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/userCabinet/personalData/personalData.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/userCabinet/personalData/personalData.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/userCabinet/publishedOrders/publishedOrders.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/userCabinet/publishedOrders/publishedOrders.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/userCabinet/wishList/wishList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/userCabinet/wishList/wishList.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/context/ads/AdsState.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/context/ads/AdsState.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/context/ads/adsReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/context/ads/adsReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/context/auth/AuthState.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/context/auth/AuthState.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/context/auth/authContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/context/auth/authContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/context/auth/authReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/context/auth/authReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/context/cabinetItems/CabinetItemsState.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/context/cabinetItems/cabinetItemsContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/context/cabinetItems/cabinetItemsReducer.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/context/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/context/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/context/mainCategories/MainCategoriesState.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/context/mainCategories/mainCategoriesContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/context/mainCategories/mainCategoriesReducer.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/context/modal/ModalState.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/context/modal/ModalState.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/context/modal/modalContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/context/modal/modalContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/context/subCategories/SubCategoriesState.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/context/subCategories/subCategoriesContext.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/context/subCategories/subCategoriesReducer.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/context/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/context/types.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/hooks/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hoc/.gitkeep" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/useAuth.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hooks/useAuth.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/useCabinetItems.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/useMainCategories.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hooks/useSubCategories.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/mockData/cabinetItems.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/mockData/cabinetItems.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/mockData/mainCategories.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/mockData/mainCategories.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/mockData/subCategories.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/mockData/subCategories.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/pages/catalog/catalog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/catalog/catalog.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/pages/main/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/main/main.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/mockData/mockData.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/mockData/mockData.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/notFound/notFount.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/notFound/notFount.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/page.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/page.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/pages/postNewAd/postNewAd.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/postNewAd/postNewAd.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/result/result.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/result/result.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/userCabinet/userCabinet.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/userCabinet/userCabinet.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/routes/appRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/routes/appRoutes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/utils/constants/currencies.constants.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/utils/constants/currencies.constants.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/routes/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/routes/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/services/ads.services.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/services/ads.services.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/services/cabinetItems.service.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/services/firebase.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/services/firebase.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/services/http.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/services/http.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/services/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/services/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/services/localStorage.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/services/localStorage.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/services/mainCategories.service.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/services/storage.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/services/storage.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/services/subCategories.service.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/services/user.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/services/user.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/utils/helpers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/utils/helpers/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/utils/helpers/themeToggle.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/utils/helpers/themeToggle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/utils/helpers/useMockData.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/utils/helpers/useMockData.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,6 +126,11 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/client/src/App.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/client/src/context/auth/authReducer.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/client/src/components/ui/postNewAdForm/postNewAdForm.jsx" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -137,6 +212,7 @@
       <workItem from="1653321075555" duration="7733000" />
       <workItem from="1653975634299" duration="7743000" />
       <workItem from="1653992010275" duration="280000" />
+      <workItem from="1655554246689" duration="797000" />
     </task>
     <servers />
   </component>

@@ -2,10 +2,11 @@ import React, { useReducer, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { AuthContext } from './authContext';
 import { AuthReducer } from './authReducer';
-import { SET_CURRENT_USER, SET_ERROR } from '../types';
+import { HIDE_LOADER, REMOVE_USER, SET_CURRENT_USER, SET_ERROR } from '../types';
 import axios from 'axios';
 import { userService, setTokens, localStorageService } from '../../services';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 export const httpAuth = axios.create({
   baseURL: 'https://identitytoolkit.googleapis.com/v1/',
@@ -24,16 +25,20 @@ const errorHandler = {
 export const AuthState = ({ children }) => {
   const initialState = {
     currentUser: undefined,
+    loading: true,
     error: null,
   };
   const [state, dispatch] = useReducer(AuthReducer, initialState);
+  const navigate = useNavigate();
+
+  const hideLoader = () => dispatch({ type: HIDE_LOADER });
 
   const signIn = async ({ email, password }) => {
     try {
       const { data } = await httpAuth.post('accounts:signInWithPassword', { email, password, returnSecureToken: true });
       console.log('sing in: ', data);
       setTokens(data);
-      getUserData();
+      await getUserData();
     } catch (error) {
       errorCatcher(error);
       const { code, message } = error.response.data.error;
@@ -84,12 +89,21 @@ export const AuthState = ({ children }) => {
       });
     } catch (error) {
       errorCatcher(error);
+    } finally {
+      hideLoader();
     }
+  };
+  const logOut = () => {
+    localStorageService.removeAuthData();
+    dispatch({ type: REMOVE_USER });
+    navigate('/', { replace: true });
   };
 
   useEffect(() => {
     if (localStorageService.getAccessToken()) {
       getUserData();
+    } else {
+      hideLoader();
     }
   }, []);
 
@@ -110,10 +124,11 @@ export const AuthState = ({ children }) => {
       value={{
         signIn,
         signUp,
+        logOut,
         currentUser: state.currentUser,
       }}
     >
-      {children}
+      {!state.loading && children}
     </AuthContext.Provider>
   );
 };

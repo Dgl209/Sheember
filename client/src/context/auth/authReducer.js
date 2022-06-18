@@ -1,7 +1,9 @@
-import { SET_CURRENT_USER } from '../types';
+import { HIDE_LOADER, REMOVE_USER, SET_CURRENT_USER } from '../types';
 
 const handlers = {
-  [SET_CURRENT_USER]: (state, { payload }) => ({ state, currentUser: payload }),
+  [SET_CURRENT_USER]: (state, { payload }) => ({ ...state, currentUser: payload }),
+  [HIDE_LOADER]: (state) => ({ ...state, loading: false }),
+  [REMOVE_USER]: (state) => ({ ...state, currentUser: null }),
   DEFAULT: (state) => state,
 };
 

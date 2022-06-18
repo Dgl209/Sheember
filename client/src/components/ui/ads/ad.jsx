@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 function Ad({ item }) {
-  console.log('item adImagesUrl: ', item.adImagesUrl);
   return (
     <div className="w-[240px] h-[316px] relative border border-gray-200 rounded-lg mb-4 p-4 dark:bg-gray-800 dark:border-gray-700">
       <div className="absolute bottom-4 right-2">
@@ -21,7 +20,7 @@ function Ad({ item }) {
       <div className="flex justify-between flex-col h-full">
         <div className="flex justify-center items-center h-[200px]">
           <Link to={`/${item.id}`}>
-            <img className="max-h-[200px]" src={item.adImagesUrl[0]} alt="" />
+            {item.adImagesUrl && <img className="max-h-[200px]" src={item.adImagesUrl[0]} alt="" />}
           </Link>
         </div>
         <div>
@@ -29,8 +28,7 @@ function Ad({ item }) {
             {item.name}
           </Link>
           <div className="text-[24px] dark:text-white">
-            <span>{item.price}</span>
-            <span className="ml-1">{item.currency}</span>
+            <span>{item.price || item.description}</span>
           </div>
         </div>
       </div>

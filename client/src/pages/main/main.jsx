@@ -2,15 +2,15 @@ import React, { useEffect } from 'react';
 import { GroupList, SearchField, List } from '../../components/common';
 import { useForm } from 'react-hook-form';
 import { Ad } from '../../components/ui';
-import { useMainCategories } from '../../hooks';
 import { useNavigate } from 'react-router-dom';
+import { useConstants } from '../../hooks';
 
 function Main() {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const AdsList = List(Ad);
 
-  const { mainCategoriesLoading, fetchMainCategories, mainCategories } = useMainCategories();
+  const { mainCategories, fetchMainCategories, constantsLoading } = useConstants();
 
   useEffect(() => {
     fetchMainCategories();
@@ -19,14 +19,14 @@ function Main() {
   const onSubmit = (data) => console.log('search: ', data);
 
   const handleMainCategoriesList = ({ id }) => {
-    navigate(`/catalog/${id}`);
+    navigate(`/catalog/${id}`, { replace: true });
   };
 
   return (
     <div className="relative container mx-auto flex">
       <div className="w-[26%]">
         <div className="border-r border-gray-200 dark:border-gray-600 pt-6">
-          {!mainCategoriesLoading && <GroupList items={mainCategories} onClick={handleMainCategoriesList} />}
+          {!constantsLoading && <GroupList items={mainCategories} onClick={handleMainCategoriesList} />}
         </div>
       </div>
       <div className="w-full pt-6">
