@@ -4,8 +4,10 @@ import { TextField } from '../../common';
 import { useForm } from 'react-hook-form';
 import { useAuth, useModal } from '../../../hooks';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
-function RegistrationForm() {
+function RegistrationForm({ from }) {
+  const navigate = useNavigate();
   const { signUp } = useAuth();
   const { hideModal } = useModal();
   const {
@@ -18,6 +20,9 @@ function RegistrationForm() {
     try {
       await signUp(data);
       hideModal();
+      if (from?.pathname) {
+        navigate(from.pathname);
+      }
     } catch (error) {
       toast.error(error);
     }
@@ -96,10 +101,7 @@ function RegistrationForm() {
 }
 
 RegistrationForm.propTypes = {
-  register: PropTypes.func,
-  handleSubmit: PropTypes.func,
-  onSubmit: PropTypes.func,
-  errors: PropTypes.object,
+  from: PropTypes.object,
 };
 
 export default RegistrationForm;

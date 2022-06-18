@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { Card, TextField, TextAreaField } from '../../common';
 import CategoriesDropdown from '../categories/categoriesDropdown';
-import { useAds, useMainCategories, useModal, useSubCategories } from '../../../hooks';
+import ConfirmationModalContent from './confirmationModalContent/confirmationModalContent';
+import { useAds, useConstants, useModal } from '../../../hooks';
 import { storageService } from '../../../services';
 import { useNavigate } from 'react-router-dom';
 import { CategoryField, AdImagesField, PostSubmitBtn, PostBtnGroup } from './';
+import { toast } from 'react-toastify';
 
 function PostNewAdForm() {
-  const { register, control, handleSubmit, reset, getValues, watch } = useForm();
+  const { register, control, handleSubmit, resetField, getValues, watch } = useForm();
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'adImages',
@@ -16,8 +18,7 @@ function PostNewAdForm() {
   const [selectedMainCategory, setSelectedMainCategory] = useState({});
   const [selectedSubCategory, setSelectedSubCategory] = useState({});
   const [isSelling, setIsSelling] = useState(true);
-  const { mainCategories, fetchMainCategories } = useMainCategories();
-  const { subCategories, fetchSubCategories } = useSubCategories();
+  const { mainCategories, fetchMainCategories, subCategories, fetchSubCategories } = useConstants();
   const [imageUrl, setImageUrl] = useState(null);
   const { showModal, hideModal } = useModal();
   const navigate = useNavigate();
@@ -39,10 +40,12 @@ function PostNewAdForm() {
   }, [selectedSubCategory]);
 
   const onSubmit = async (data) => {
-    console.log('post new ad data: ', data);
-
     if (!Object.keys(selectedSubCategory).length) {
-      return;
+      return toast.error('Choose category');
+    }
+
+    if (!Object.keys(data.adImages[0]).length) {
+      return toast.error('Upload a photo');
     }
 
     confirmationModal(data);
@@ -58,48 +61,27 @@ function PostNewAdForm() {
   };
 
   const handleIsSelling = (bool) => {
-    reset({
-      price: '',
-      'desired-product': '',
-    });
+    bool ? resetField('price') : resetField('desired-product');
     setIsSelling(bool);
+  };
+
+  const handleConfirmationModal = async (data) => {
+    hideModal();
+    navigate('/result', { replace: true });
+    createAd({
+      ...data,
+      category: selectedSubCategory.id,
+    });
   };
 
   const confirmationModal = (data) =>
     showModal({
       closable: true,
-      content: (
-        <div className="p-6 text-center">
-          <svg
-            className="mx-auto mb-4 w-14 h-14 text-gray-400 dark:text-gray-200"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-            ></path>
-          </svg>
-          <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-            Are you sure you want to publish this ad?
-          </h3>
-        </div>
-      ),
+      content: <ConfirmationModalContent />,
       footerButtons: [
         {
           text: 'Confirm',
-          handler: async () => {
-            const adId = Date.now();
-            const adImages = await storageService.uploadImagesArray(data.adImages, adId);
-            const adImagesUrl = await Promise.all(adImages);
-            createAd({ ...data, adImagesUrl, category: selectedSubCategory.id, id: adId }, selectedSubCategory.id);
-            hideModal();
-            navigate('/result', { replace: true });
-          },
+          handler: () => handleConfirmationModal(data),
         },
         {
           text: 'Cancel',
@@ -127,12 +109,13 @@ function PostNewAdForm() {
     <>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Card>
-          <TextField id="name" register={register} placeholder="Ad name..." options={{ required: true }} />
+          <TextField id="name" register={register} label="Name" placeholder="Ad name..." options={{ required: true }} />
           <CategoryField
             selectedSubCategory={selectedSubCategory}
             selectedMainCategory={selectedMainCategory}
             imageUrl={imageUrl}
             categoriesModal={categoriesModal}
+            label="Category"
           />
         </Card>
         <Card>
@@ -151,23 +134,26 @@ function PostNewAdForm() {
             id="description"
             placeholder="Leave a description..."
             options={{ required: true }}
+            label="Description"
           />
         </Card>
         <Card>
           <PostBtnGroup isSelling={isSelling} handleIsSelling={handleIsSelling} />
           {isSelling ? (
-            <TextField
-              id="price"
-              register={register}
-              placeholder="Price..."
-              options={{
-                required: true,
-                pattern: {
-                  value: /^(\d){1,13}$/g,
-                  message: 'The price is entered incorrectly',
-                },
-              }}
-            />
+            <div className="w-1/3">
+              <TextField
+                id="price"
+                register={register}
+                placeholder="Price..."
+                options={{
+                  required: true,
+                  pattern: {
+                    value: /^(\d){1,13}$/g,
+                    message: 'The price is entered incorrectly',
+                  },
+                }}
+              />
+            </div>
           ) : (
             <TextAreaField
               register={register}

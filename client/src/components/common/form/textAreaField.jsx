@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 function TextAreaField({ register, label, id, placeholder, options, rows }) {
   return (
     <>
-      <label htmlFor="message" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-400">
+      <label htmlFor={id} className="block mb-2 ml-1 text-xl font-medium text-gray-900 dark:text-gray-300">
         {label}
       </label>
       <textarea
