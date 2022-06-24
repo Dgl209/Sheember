@@ -1,4 +1,5 @@
 import React from 'react';
+import { AdDetails } from '../components/ui';
 import { PrivateRoute } from '../hoc';
 import { Catalog, Main, MockData, NotFound, PostNewAd, ResultPage, UserCabinet } from '../pages';
 
@@ -10,6 +11,10 @@ const appRoutes = [
   {
     path: '*',
     element: <NotFound />,
+  },
+  {
+    path: '/:adId',
+    element: <AdDetails />,
   },
   {
     path: '/post-new-ad',
