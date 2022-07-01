@@ -10,6 +10,7 @@ import PersonalData from './userCabinet/personalData/personalData';
 import Cart from './cart/cart';
 import HeaderNav from './headerNav/headerNav';
 import PostNewAdForm from './postNewAdForm/postNewAdForm';
+import AdDetails from './ads/adDetails/adDetails';
 
 export {
   Ad,
@@ -24,4 +25,5 @@ export {
   Cart,
   HeaderNav,
   PostNewAdForm,
+  AdDetails,
 };
