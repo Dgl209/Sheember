@@ -1,34 +1,45 @@
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { Ad, SubCategory } from '../../components/ui';
-import { useAds, useConstants } from '../../hooks';
+import { Ad, Subcategory } from '../../components/ui';
 import { List } from '../../components/common';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadAds } from '../../store/ads/ads.actions';
+import { getAds } from '../../store/ads/ads.selectors';
+import { getSubcategoriesList, getSubcategoriesLoadingStatus } from '../../store/subcategories/subcategories.selectors';
+import { loadSubcategoriesByParentId } from '../../store/subcategories/subcategories.actions';
+import { AdsLoader } from '../../hoc';
 
 function Catalog() {
   const { mainCategory, subCategory } = useParams();
-  const { subCategories, constantsLoading, fetchSubCategories } = useConstants();
-  const { adsLoading, getAds, ads } = useAds();
-  const selectedSubCategories = subCategories.filter((x) => x.parent_id === mainCategory);
-  const SubCategoriesList = List(SubCategory);
+  const dispatch = useDispatch();
+  const ads = useSelector(getAds());
+  const subcategories = useSelector(getSubcategoriesList());
+  const subcategoriesLoading = useSelector(getSubcategoriesLoadingStatus());
+
+  const SubCategoriesList = List(Subcategory);
   const AdsList = List(Ad);
 
   useEffect(() => {
     if (!subCategory) {
-      fetchSubCategories();
+      dispatch(loadSubcategoriesByParentId(mainCategory));
     }
   }, []);
 
   useEffect(() => {
     if (subCategory) {
-      getAds('"category"', subCategory);
+      dispatch(loadAds('category', subCategory));
     }
   }, [subCategory]);
 
   return (
     <div className="p-6">
-      {!subCategory
-        ? !constantsLoading && <SubCategoriesList items={selectedSubCategories} columns="5" />
-        : !adsLoading && <AdsList items={ads} columns="4" />}
+      {!subCategory ? (
+        !subcategoriesLoading && <SubCategoriesList items={subcategories} columns="5" />
+      ) : (
+        <AdsLoader>
+          <AdsList items={ads} columns="4" />
+        </AdsLoader>
+      )}
     </div>
   );
 }

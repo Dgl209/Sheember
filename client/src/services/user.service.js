@@ -10,11 +10,14 @@ const userService = {
   },
   create: async (payload) => {
     const { data } = await httpService.put(userEndpoint + payload.id, payload);
-    console.log('data: ', data);
     return data;
   },
   getCurrentUser: async () => {
     const { data } = await httpService.get(userEndpoint + getUserId());
+    return data;
+  },
+  getUserById: async (id) => {
+    const { data } = await httpService.get(userEndpoint + id);
     return data;
   },
 };

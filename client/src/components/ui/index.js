@@ -1,5 +1,5 @@
 import Ad from './ads/ad';
-import SubCategory from '../ui/categories/subCategory';
+import Subcategory from './categories/subcategory';
 import CategoriesDropdown from '../ui/categories/categoriesDropdown';
 import LoginForm from './loginForm/loginForm';
 import RegistrationForm from './registrationForm/registrationForm';
@@ -9,12 +9,12 @@ import Wishlist from './userCabinet/wishList/wishList';
 import PersonalData from './userCabinet/personalData/personalData';
 import Cart from './cart/cart';
 import HeaderNav from './headerNav/headerNav';
-import PostNewAdForm from './postNewAdForm/postNewAdForm';
 import AdDetails from './ads/adDetails/adDetails';
+import PostAdForm from './postNewAdForm/postAdForm';
 
 export {
   Ad,
-  SubCategory,
+  Subcategory,
   CategoriesDropdown,
   LoginForm,
   RegistrationForm,
@@ -24,6 +24,6 @@ export {
   PersonalData,
   Cart,
   HeaderNav,
-  PostNewAdForm,
   AdDetails,
+  PostAdForm,
 };

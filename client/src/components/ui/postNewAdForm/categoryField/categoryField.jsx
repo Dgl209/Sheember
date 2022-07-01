@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleRight, faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
-function CategoryField({ selectedSubCategory, selectedMainCategory, imageUrl, categoriesModal, label }) {
+function CategoryField({ selectedSubCategory, selectedMainCategory, categoriesModal, label }) {
   return (
     <div className="mb-6">
       <p className="block mb-2 ml-1 text-xl font-medium text-gray-900 dark:text-gray-300">{label}</p>
@@ -16,7 +16,7 @@ dark:placeholder-gray-400 dark:text-gray-50 dark:focus:ring-blue-500 dark:focus:
         <div className="flex justify-between">
           {Object.keys(selectedSubCategory).length ? (
             <div className="flex">
-              <img width={70} src={imageUrl} alt="" />
+              <img width={70} src={selectedSubCategory.image} alt="" />
               <div className="flex justify-center flex-col ml-2">
                 <h3>{selectedSubCategory.name}</h3>
                 <p className="font-normal text-gray-700 dark:text-gray-400">{selectedMainCategory.name}</p>

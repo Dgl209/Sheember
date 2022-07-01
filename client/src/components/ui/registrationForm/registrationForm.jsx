@@ -2,13 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { TextField } from '../../common';
 import { useForm } from 'react-hook-form';
-import { useAuth, useModal } from '../../../hooks';
-import { toast } from 'react-toastify';
+import { useModal } from '../../../hooks';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { signUp } from '../../../store/auth/auth.actions';
 
 function RegistrationForm({ from }) {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { signUp } = useAuth();
   const { hideModal } = useModal();
   const {
     register,
@@ -17,14 +18,10 @@ function RegistrationForm({ from }) {
   } = useForm();
 
   const onSubmit = async (data) => {
-    try {
-      await signUp(data);
-      hideModal();
-      if (from?.pathname) {
-        navigate(from.pathname);
-      }
-    } catch (error) {
-      toast.error(error);
+    dispatch(signUp(data));
+    hideModal();
+    if (from?.pathname) {
+      navigate(from.pathname);
     }
   };
   return (

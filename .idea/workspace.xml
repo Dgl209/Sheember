@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="0a58112a-324d-447e-83a9-81ce98415bab" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/components/layout/spinner/spinner.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/hoc/accountUploader/accountUploader.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/hoc/adsLoader/adsLoader.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/hoc/errorHandler/errorHandler.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/pages/result/resultPages/failPage.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/pages/result/resultPages/successPage.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/routes/cabinet.routes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/services/auth.service.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/account/account.actions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/account/account.reducer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/account/account.selectors.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/account/account.slice.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/ads/ads.actions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/ads/ads.reducer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/ads/ads.selectors.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/ads/ads.slice.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/auth/auth.actions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/auth/auth.reducer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/auth/auth.selectors.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/auth/auth.slice.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/categories/categories.actions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/categories/categories.reducer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/categories/categories.selectors.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/categories/categories.slice.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/errors/errors.actions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/errors/errors.reducer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/errors/errors.selectors.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/errors/errors.slice.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/rootReducer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/subcategories/subcategories.actions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/subcategories/subcategories.reducer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/subcategories/subcategories.selectors.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/store/subcategories/subcategories.slice.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/utils/helpers/generateError.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/client/src/utils/helpers/history.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/card/card.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/card/card.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/form/imageField.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/form/imageField.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/common/groupList/groupItem/groupItem.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/groupList/groupItem/groupItem.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/layout/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/layout/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/categories/subCategory.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/categories/subcategory.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/headerNav/headerNav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/headerNav/headerNav.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/loginForm/loginForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/loginForm/loginForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/postNewAdForm/categoryField/categoryField.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/postNewAdForm/categoryField/categoryField.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/postNewAdForm/postNewAdForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/postNewAdForm/postAdForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/registrationForm/registrationForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/registrationForm/registrationForm.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/userCabinet/personalData/personalData.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/userCabinet/personalData/personalData.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/components/ui/userCabinet/publishedOrders/publishedOrders.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/userCabinet/publishedOrders/publishedOrders.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/context/auth/AuthState.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/context/auth/AuthState.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hoc/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hoc/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/hoc/privateRoute/privateRoute.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/hoc/privateRoute/privateRoute.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/catalog/catalog.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/catalog/catalog.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/main/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/main/main.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/mockData/mockData.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/mockData/mockData.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/postNewAd/postNewAd.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/postAd/postAd.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/result/result.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/result/result.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/userCabinet/userCabinet.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/userCabinet/userCabinet.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/routes/appRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/routes/appRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/services/ads.services.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/services/ads.services.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/services/constants.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/services/constants.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/services/http.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/services/http.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/services/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/services/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/services/storage.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/services/storage.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/services/user.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/services/user.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/utils/helpers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/utils/helpers/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/utils/helpers/useMockData.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/utils/helpers/useMockData.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="PackageJsonUpdateNotifier">
+    <dismissed value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="ProjectId" id="2AzMVgcrItIOsGzazSd1PqVyfp6" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/code/store&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;prettierjs.PrettierConfiguration.Package&quot;: &quot;D:\\code\\store\\client\\node_modules\\prettier&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.javascript.prettier&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0a58112a-324d-447e-83a9-81ce98415bab" name="Changes" comment="" />
+      <created>1656007987522</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1656007987522</updated>
+      <workItem from="1656007989487" duration="349000" />
+      <workItem from="1656014739312" duration="5280000" />
+      <workItem from="1656076259813" duration="83000" />
+      <workItem from="1656076349010" duration="13775000" />
+      <workItem from="1656151624857" duration="8731000" />
+      <workItem from="1656248429670" duration="7750000" />
+      <workItem from="1656326688350" duration="14228000" />
+      <workItem from="1656362866801" duration="2006000" />
+      <workItem from="1656399249283" duration="21000" />
+      <workItem from="1656501749017" duration="355000" />
+      <workItem from="1656518208238" duration="12140000" />
+      <workItem from="1656585833886" duration="9787000" />
+      <workItem from="1656667166400" duration="14168000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
+  </component>
+</project>

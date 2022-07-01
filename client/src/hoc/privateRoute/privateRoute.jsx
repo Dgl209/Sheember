@@ -1,22 +1,24 @@
 import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { useAuth, useModal } from '../../hooks';
+import { useModal } from '../../hooks';
 import { Registration } from '../../components/layout';
+import { useSelector } from 'react-redux';
+import { getLoggedInStatus } from '../../store/auth/auth.selectors';
 
 function PrivateRoute({ children }) {
-  const { currentUser } = useAuth();
+  const isLoggedIn = useSelector(getLoggedInStatus());
   const { showModal } = useModal();
   const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
-    if (!currentUser) {
+    if (!isLoggedIn) {
       showModal({ closable: true, title: 'Sign up', content: <Registration from={location} /> });
     }
   }, []);
 
-  return currentUser ? children : navigate('/');
+  return isLoggedIn ? children : navigate('/');
 }
 
 export default PrivateRoute;

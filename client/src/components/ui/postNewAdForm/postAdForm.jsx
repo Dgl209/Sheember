@@ -3,13 +3,18 @@ import { useForm, useFieldArray } from 'react-hook-form';
 import { Card, TextField, TextAreaField } from '../../common';
 import CategoriesDropdown from '../categories/categoriesDropdown';
 import ConfirmationModalContent from './confirmationModalContent/confirmationModalContent';
-import { useAds, useConstants, useModal } from '../../../hooks';
-import { storageService } from '../../../services';
-import { useNavigate } from 'react-router-dom';
+import { useModal } from '../../../hooks';
 import { CategoryField, AdImagesField, PostSubmitBtn, PostBtnGroup } from './';
 import { toast } from 'react-toastify';
+import { useDispatch, useSelector } from 'react-redux';
+import { createAd } from '../../../store/ads/ads.actions';
+import { getCategoriesList } from '../../../store/categories/categories.selectors';
+import { getSubcategoriesList } from '../../../store/subcategories/subcategories.selectors';
+import { loadCategories } from '../../../store/categories/categories.actions';
+import { loadSubcategories } from '../../../store/subcategories/subcategories.actions';
+import { customHistory } from '../../../utils/helpers';
 
-function PostNewAdForm() {
+function PostAdForm() {
   const { register, control, handleSubmit, resetField, getValues, watch } = useForm();
   const { fields, append, remove } = useFieldArray({
     control,
@@ -18,26 +23,19 @@ function PostNewAdForm() {
   const [selectedMainCategory, setSelectedMainCategory] = useState({});
   const [selectedSubCategory, setSelectedSubCategory] = useState({});
   const [isSelling, setIsSelling] = useState(true);
-  const { mainCategories, fetchMainCategories, subCategories, fetchSubCategories } = useConstants();
-  const [imageUrl, setImageUrl] = useState(null);
+  const dispatch = useDispatch();
+  const categories = useSelector(getCategoriesList());
+  const subcategories = useSelector(getSubcategoriesList());
   const { showModal, hideModal } = useModal();
-  const navigate = useNavigate();
-  const { createAd } = useAds();
 
   useEffect(() => {
-    if (!mainCategories.length) {
-      fetchMainCategories();
+    if (!categories.length) {
+      dispatch(loadCategories());
     }
-    if (!subCategories.length) {
-      fetchSubCategories();
+    if (!subcategories.length) {
+      dispatch(loadSubcategories(selectedMainCategory.id));
     }
   }, []);
-
-  useEffect(() => {
-    if (Object.keys(selectedSubCategory).length) {
-      storageService.downloadImage(`/subCategories/${selectedSubCategory.image}`).then((url) => setImageUrl(url));
-    }
-  }, [selectedSubCategory]);
 
   const onSubmit = async (data) => {
     if (!Object.keys(selectedSubCategory).length) {
@@ -65,15 +63,6 @@ function PostNewAdForm() {
     setIsSelling(bool);
   };
 
-  const handleConfirmationModal = async (data) => {
-    hideModal();
-    navigate('/result', { replace: true });
-    createAd({
-      ...data,
-      category: selectedSubCategory.id,
-    });
-  };
-
   const confirmationModal = (data) =>
     showModal({
       closable: true,
@@ -90,14 +79,24 @@ function PostNewAdForm() {
       ],
     });
 
+  const handleConfirmationModal = async (data) => {
+    hideModal();
+    customHistory.push('/result', { private: true });
+    const newData = {
+      ...data,
+      category: selectedSubCategory.id,
+    };
+    dispatch(createAd(newData));
+  };
+
   const categoriesModal = () =>
     showModal({
       title: 'Choose category',
       closable: true,
       content: (
         <CategoriesDropdown
-          mainCategories={mainCategories}
-          subCategories={subCategories}
+          mainCategories={categories}
+          subCategories={subcategories}
           onMainCategory={handleMainCategory}
           onSubCategory={handleSubCategory}
         />
@@ -113,7 +112,6 @@ function PostNewAdForm() {
           <CategoryField
             selectedSubCategory={selectedSubCategory}
             selectedMainCategory={selectedMainCategory}
-            imageUrl={imageUrl}
             categoriesModal={categoriesModal}
             label="Category"
           />
@@ -171,4 +169,4 @@ function PostNewAdForm() {
   );
 }
 
-export default PostNewAdForm;
+export default PostAdForm;

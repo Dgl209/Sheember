@@ -3,13 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { Login } from '../../layout';
 import { Cart } from '../../ui';
 import { ThemeToggle } from '../../../utils/helpers';
-import { useAuth, useModal } from '../../../hooks';
+import { useModal } from '../../../hooks';
 import NavButton from './navButton/navButton';
 import PostAdLink from './postAdLink/postAdLink';
 import { SunIcon, MoonIcon, UserIcon, HeartIcon, ShoppingCartIcon } from '@heroicons/react/outline';
+import { useSelector } from 'react-redux';
+import { getLoggedInStatus } from '../../../store/auth/auth.selectors';
 
 function HeaderNav() {
-  const { currentUser } = useAuth();
+  const isLoggedIn = useSelector(getLoggedInStatus());
   const { showModal } = useModal();
   const navigate = useNavigate();
   const [isDark, setIsDark] = useState(localStorage.getItem('color-theme') === 'light');
@@ -24,7 +26,7 @@ function HeaderNav() {
   };
 
   const handleUserIcon = () => {
-    if (!currentUser) {
+    if (!isLoggedIn) {
       return showModal({ title: 'Sing in', closable: true, content: <Login /> });
     }
     navigate('cabinet/personal-data');
@@ -42,7 +44,7 @@ function HeaderNav() {
           <UserIcon className="w-5 h-5" />
         </NavButton>
       </li>
-      {currentUser && (
+      {isLoggedIn && (
         <>
           <li>
             <NavButton onClick={() => navigate('/cabinet/wishlist')}>
