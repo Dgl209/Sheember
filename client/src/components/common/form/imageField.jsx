@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { CameraIcon, TrashIcon } from '@heroicons/react/outline';
 
-function ImageField({ register, id, index, remove, uploadedFile, inputRef }) {
+function ImageField({ register, id, index, remove, uploadedFile, inputRef, description }) {
   const [imageUrl, setImageUrl] = useState(null);
   const [removeVisible, setRemoveVisible] = useState(false);
 
@@ -23,6 +23,7 @@ function ImageField({ register, id, index, remove, uploadedFile, inputRef }) {
           dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
           >
             <CameraIcon className="w-10 h-10 text-gray-400" />
+            {description && <p className="dark:text-white">{description}</p>}
           </div>
         ) : (
           <div className="w-full h-32 cursor-pointer">
@@ -49,10 +50,11 @@ function ImageField({ register, id, index, remove, uploadedFile, inputRef }) {
 ImageField.propTypes = {
   register: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
-  uploadedFile: PropTypes.object.isRequired,
-  index: PropTypes.number.isRequired,
-  remove: PropTypes.func.isRequired,
+  uploadedFile: PropTypes.object,
+  index: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  remove: PropTypes.func,
   inputRef: PropTypes.object,
+  description: PropTypes.string,
 };
 
 export default ImageField;

@@ -2,14 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { BrowserRouter } from 'react-router-dom';
+import { unstable_HistoryRouter as HistoryRouter } from 'react-router-dom';
 import 'flowbite';
+import { Provider } from 'react-redux';
+import store from './store';
+import { customHistory } from './utils/helpers';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <HistoryRouter history={customHistory}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </HistoryRouter>
   </React.StrictMode>
 );

@@ -3,17 +3,20 @@ import { GroupList, SearchField, List } from '../../components/common';
 import { useForm } from 'react-hook-form';
 import { Ad } from '../../components/ui';
 import { useNavigate } from 'react-router-dom';
-import { useConstants } from '../../hooks';
+import { useDispatch, useSelector } from 'react-redux';
+import { getCategoriesList, getCategoriesLoadingStatus } from '../../store/categories/categories.selectors';
+import { loadCategories } from '../../store/categories/categories.actions';
 
 function Main() {
   const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const AdsList = List(Ad);
-
-  const { mainCategories, fetchMainCategories, constantsLoading } = useConstants();
+  const dispatch = useDispatch();
+  const categories = useSelector(getCategoriesList());
+  const categoriesLoading = useSelector(getCategoriesLoadingStatus());
 
   useEffect(() => {
-    fetchMainCategories();
+    dispatch(loadCategories());
   }, []);
 
   const onSubmit = (data) => console.log('search: ', data);
@@ -26,7 +29,7 @@ function Main() {
     <div className="relative container mx-auto flex">
       <div className="w-[26%]">
         <div className="border-r border-gray-200 dark:border-gray-600 pt-6">
-          {!constantsLoading && <GroupList items={mainCategories} onClick={handleMainCategoriesList} />}
+          {!categoriesLoading && <GroupList items={categories} onClick={handleMainCategoriesList} />}
         </div>
       </div>
       <div className="w-full pt-6">

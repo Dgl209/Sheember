@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { GroupList } from '../../components/common';
-import { PersonalData, Orders, Wishlist, PublishedOrders } from '../../components/ui';
-import { useAuth, useConstants } from '../../hooks';
+import React from 'react';
+import { useNavigate, Outlet } from 'react-router-dom';
+import { Cart } from '../../components/ui';
+import { useModal } from '../../hooks';
+import GroupItem from '../../components/common/groupList/groupItem/groupItem';
+import { useSelector } from 'react-redux';
+import { getAccountData } from '../../store/account/account.selectors';
 
 /*
     1. personal-data - data about user
@@ -12,39 +14,39 @@ import { useAuth, useConstants } from '../../hooks';
     5. cart
 */
 
-const items = {
-  'personal-data': <PersonalData />,
-  orders: <Orders />,
-  wishlist: <Wishlist />,
-  'published-orders': <PublishedOrders />,
-};
-
 function UserCabinet() {
   const navigate = useNavigate();
-  const { item } = useParams();
-  const { currentUser } = useAuth();
-  const { cabinetItems, fetchCabinetItems } = useConstants();
+  const currentUser = useSelector(getAccountData());
+  const { showModal } = useModal();
 
   const handleCabinetItems = ({ id }) => {
     navigate(`/cabinet/${id}`);
   };
 
-  useEffect(() => {
-    fetchCabinetItems();
-  }, []);
+  const cartModal = () => showModal({ title: 'Cart', closable: true, content: <Cart /> });
 
   return (
     <div className="container mx-auto flex">
       <div className="w-[26%] pt-6 border-r border-gray-200 dark:border-gray-600">
-        <div className="mb-1 border-b border-gray-200 dark:border-gray-600">
-          <GroupList
-            items={[{ icon: 'faUser', id: 'personal-data', name: `${currentUser.name} ${currentUser.surname}` }]}
+        <ul className="w-full pr-2 text-gray-900 dark:text-white">
+          <div className="mb-1 border-b border-gray-200 dark:border-gray-600">
+            <GroupItem
+              item={{ icon: 'faUser', id: 'personal-data', name: `${currentUser.name} ${currentUser.surname}` }}
+              onClick={handleCabinetItems}
+            />
+          </div>
+          <GroupItem item={{ icon: 'faListCheck', id: 'orders', name: 'Orders' }} onClick={handleCabinetItems} />
+          <GroupItem
+            item={{ icon: 'faCircleCheck', id: 'published-orders', name: 'Published orders' }}
             onClick={handleCabinetItems}
           />
-        </div>
-        <GroupList items={cabinetItems} onClick={handleCabinetItems} />
+          <GroupItem item={{ icon: 'faHeart', id: 'wishlist', name: 'Wish list' }} onClick={handleCabinetItems} />
+          <GroupItem item={{ icon: 'faCartShopping', id: 'cart', name: 'Cart' }} onClick={cartModal} />
+        </ul>
       </div>
-      <div className="w-full flex justify-center pt-6">{items[item]}</div>
+      <div className="w-full flex justify-center pt-6">
+        <Outlet />
+      </div>
     </div>
   );
 }

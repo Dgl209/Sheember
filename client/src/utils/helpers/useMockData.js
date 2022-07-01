@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import mainCategoriesJSON from '../../mockData/mainCategories.json';
-import subCategoriesJSON from '../../mockData/subCategories.json';
-import cabinetItemsJSON from '../..//mockData/cabinetItems.json';
+import categoriesJSON from '../../mockData/mainCategories.json';
+import subcategoriesJSON from '../../mockData/subCategories.json';
 import httpService from '../../services/http.service';
+import { storageService } from '../../services';
 
 const useMockData = () => {
   const statusConsts = {
@@ -15,8 +15,7 @@ const useMockData = () => {
   const [status, setStatus] = useState(statusConsts.idle);
   const [progress, setProgress] = useState(0);
   const [count, setCount] = useState(0);
-  const summaryCount = mainCategoriesJSON.length + subCategoriesJSON.length;
-  console.log(cabinetItemsJSON.length);
+  const summaryCount = categoriesJSON.length + subcategoriesJSON.length;
   const incrementCount = () => {
     setCount((prevState) => prevState + 1);
   };
@@ -39,23 +38,36 @@ const useMockData = () => {
 
   async function initialize() {
     try {
-      for (const mainCategory of mainCategoriesJSON) {
-        await httpService.put('constants/mainCategories/' + mainCategory.id, mainCategory);
+      for (const category of categoriesJSON) {
+        await httpService.put('constants/categories/' + category.id, category);
         incrementCount();
       }
-      for (const subCategory of subCategoriesJSON) {
-        await httpService.put('constants/subCategories/' + subCategory.id, subCategory);
+      for (const subcategory of subcategoriesJSON) {
+        await httpService.put('constants/subcategories/' + subcategory.id, subcategory);
         incrementCount();
-      }
-      for (const cabinetItem of cabinetItemsJSON) {
-        await httpService.put('constants/cabinetItems/' + cabinetItem.id, cabinetItem);
       }
     } catch (error) {
       setError(error);
       setStatus(statusConsts.error);
     }
   }
-  return { error, initialize, progress, status };
+
+  async function uploadSubcategoriesImages(data, subcategories) {
+    try {
+      const imagesResponse = await storageService.uploadSubcategoriesImages(data);
+      const imagesData = await Promise.all(imagesResponse);
+      for (const imageData of imagesData) {
+        const currentCategory = subcategories.find((x) => x.id === imageData.name);
+        await httpService.put('constants/subcategories/' + imageData.name, {
+          ...currentCategory,
+          image: imageData.url,
+        });
+      }
+    } catch (error) {
+      setError(error);
+    }
+  }
+  return { error, initialize, uploadSubcategoriesImages, progress, status };
 };
 
 export default useMockData;

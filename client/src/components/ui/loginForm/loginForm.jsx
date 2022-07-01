@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import { CheckboxField, TextField } from '../../common';
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
-import { useAuth, useModal } from '../../../hooks';
+import { useModal } from '../../../hooks';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { singIn } from '../../../store/auth/auth.actions';
 
 function LoginForm({ from }) {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { signIn } = useAuth();
   const { hideModal } = useModal();
   const {
     register,
@@ -17,15 +19,10 @@ function LoginForm({ from }) {
   } = useForm();
 
   const onSubmit = async (data) => {
-    try {
-      await signIn(data);
-      hideModal();
-      console.log('from: ', from);
-      if (from?.pathname) {
-        navigate(from.pathname);
-      }
-    } catch (error) {
-      toast.error(error);
+    dispatch(singIn(data));
+    hideModal();
+    if (from?.pathname) {
+      navigate(from.pathname);
     }
   };
 

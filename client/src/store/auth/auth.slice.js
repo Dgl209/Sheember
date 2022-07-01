@@ -3,13 +3,18 @@ import { localStorageService } from '../../services';
 
 const authSlice = createSlice({
   name: 'auth',
-  initialState: { currentUser: null },
+  initialState: {
+    accountId: localStorageService.getUserId() || null,
+    isLoggedIn: !!localStorageService.getAccessToken() || null,
+  },
   reducers: {
-    settedUser: (state, { payload }) => {
-      state.currentUser = payload;
+    succeed: (state, action) => {
+      state.accountId = action.payload;
+      state.isLoggedIn = true;
     },
     loggedOut: (state) => {
-      state.currentUser = null;
+      state.accountId = null;
+      state.isLoggedIn = false;
     },
   },
 });

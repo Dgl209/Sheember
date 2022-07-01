@@ -8,6 +8,7 @@ import localStorageService, {
   getAccessToken,
   getRefreshToken,
   getTokenExpiresDate,
+  removeAuthData,
 } from './localStorage.service';
 
 export {
@@ -21,4 +22,5 @@ export {
   getAccessToken,
   getRefreshToken,
   getTokenExpiresDate,
+  removeAuthData,
 };

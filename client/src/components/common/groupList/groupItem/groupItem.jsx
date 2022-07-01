@@ -10,7 +10,7 @@ function GroupItem({ item, onClick, onMouseOver }) {
       onClick={() => (onClick ? onClick(item) : null)}
       onMouseOver={() => (onMouseOver ? onMouseOver(item) : null)}
       role="button"
-      className="relative mb-1 inline-flex items-center justify-between rounded w-full max-w-[255px] px-5 py-3 text-sm font-medium
+      className="relative mb-1 inline-flex items-center justify-between rounded w-full px-5 py-3 text-sm font-medium
     hover:bg-gray-200 hover:text-blue-700 focus:bg-gray-200 focus:ring-blue-700 focus:text-blue-700
     dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500
     dark:focus:text-white dark:focus:bg-gray-600"
