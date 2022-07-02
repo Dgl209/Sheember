@@ -21,6 +21,17 @@ const loadAds = (orderBy, value) => async (dispatch) => {
   }
 };
 
+const loadAdById = (id) => async (dispatch) => {
+  dispatch(requested());
+  try {
+    const { content } = await adsServices.getById(id);
+    dispatch(received(content));
+  } catch (error) {
+    dispatch(failed());
+    dispatch(handleError(error));
+  }
+};
+
 const createAd = (data) => async (dispatch, getState) => {
   dispatch(creationRequested());
   const currentUserId = getState().auth.accountId;
@@ -45,4 +56,4 @@ const createAd = (data) => async (dispatch, getState) => {
   }
 };
 
-export { loadAds, createAd };
+export { loadAds, loadAdById, createAd };

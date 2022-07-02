@@ -38,12 +38,17 @@ function PostAdForm() {
   }, []);
 
   const onSubmit = async (data) => {
+    console.log('onSubmit: ', data.adImages.length);
     if (!Object.keys(selectedSubCategory).length) {
       return toast.error('Choose category');
     }
 
     if (!Object.keys(data.adImages[0]).length) {
       return toast.error('Upload a photo');
+    }
+
+    if (data.adImages.length < 3) {
+      return toast.error('At least 3 images must be uploaded');
     }
 
     confirmationModal(data);

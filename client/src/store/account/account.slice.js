@@ -17,7 +17,7 @@ const accountSlice = createSlice({
     failed: (state) => {
       state.loading = false;
     },
-    creationRequested: (state, action) => {
+    creationRequested: (state) => {
       state.loading = true;
     },
     created: (state, action) => {
@@ -29,6 +29,9 @@ const accountSlice = createSlice({
     },
     accountRemoved: (state) => {
       state.entity = null;
+    },
+    updated: (state, aciton) => {
+      state.entity = aciton.payload;
     },
   },
 });

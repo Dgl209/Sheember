@@ -1,9 +1,11 @@
 import accountSlice from './account.slice';
 import { userService } from '../../services';
 import { handleError } from '../errors/errors.actions';
+import { createAction } from '@reduxjs/toolkit';
 
 const { requested, received, failed, created, accountRemoved, creationRequested, creationFailed } =
   accountSlice.actions;
+const updateFailed = createAction('account/updateFailed');
 
 const createAccount = (payload) => async (dispatch) => {
   dispatch(creationRequested());
@@ -29,6 +31,16 @@ const loadAccountById = (id) => async (dispatch) => {
 
 const removeAccountData = () => (dispatch) => {
   dispatch(accountRemoved());
+};
+
+const updateAccount = (payload) => async (dispatch) => {
+  try {
+    const { content } = await userService.update(payload);
+    return content;
+  } catch (error) {
+    dispatch(updateFailed());
+    dispatch(handleError(error));
+  }
 };
 
 export { createAccount, loadAccountById, removeAccountData };
