@@ -18,6 +18,15 @@ const adsService = {
     });
     return data;
   },
+  getById: async (id) => {
+    const { data } = await httpService.get(adsEndpoint, {
+      params: {
+        orderBy: orderByTypes.id,
+        equalTo: `"${id}"`,
+      },
+    });
+    return data;
+  },
   create: async (content) => {
     const { data } = await httpService.post(adsEndpoint, content);
     return data;

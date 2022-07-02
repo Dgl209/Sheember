@@ -9,7 +9,7 @@ import Wishlist from './userCabinet/wishList/wishList';
 import PersonalData from './userCabinet/personalData/personalData';
 import Cart from './cart/cart';
 import HeaderNav from './headerNav/headerNav';
-import AdDetails from './ads/adDetails/adDetails';
+import AdDetails from './ads/adDetails';
 import PostAdForm from './postNewAdForm/postAdForm';
 
 export {

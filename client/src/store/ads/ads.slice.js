@@ -5,6 +5,7 @@ const adsSlice = createSlice({
   initialState: { entities: null, loading: false },
   reducers: {
     requested: (state) => {
+      state.entities = [];
       state.loading = true;
     },
     received: (state, action) => {
