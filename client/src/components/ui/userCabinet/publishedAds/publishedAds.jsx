@@ -7,7 +7,7 @@ import { getAds } from '../../../../store/ads/ads.selectors';
 import { getAccountId } from '../../../../store/auth/auth.selectors';
 import { AdsLoader } from '../../../../hoc';
 
-function PublishedOrders() {
+function PublishedAds() {
   const currentUserId = useSelector(getAccountId());
   const dispatch = useDispatch();
   const ads = useSelector(getAds());
@@ -24,4 +24,4 @@ function PublishedOrders() {
   );
 }
 
-export default PublishedOrders;
+export default PublishedAds;

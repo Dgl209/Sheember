@@ -1,5 +1,5 @@
 import React from 'react';
-import { Orders, PersonalData, PublishedOrders, Wishlist } from '../components/ui';
+import { Orders, PersonalData, PublishedAds, Wishlist } from '../components/ui';
 
 const cabinetRoutes = [
   {
@@ -15,8 +15,8 @@ const cabinetRoutes = [
     element: <Wishlist />,
   },
   {
-    path: '/cabinet/published-orders',
-    element: <PublishedOrders />,
+    path: '/cabinet/published-ads',
+    element: <PublishedAds />,
   },
 ];
 

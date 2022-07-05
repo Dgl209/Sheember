@@ -3,9 +3,11 @@ import { userService } from '../../services';
 import { handleError } from '../errors/errors.actions';
 import { createAction } from '@reduxjs/toolkit';
 
-const { requested, received, failed, created, accountRemoved, creationRequested, creationFailed } =
+const { requested, received, failed, created, updated, accountRemoved, creationRequested, creationFailed } =
   accountSlice.actions;
-const updateFailed = createAction('account/updateFailed');
+
+const updateWishlistRequested = createAction('account/updateWishlistRequested');
+const updateWishlistFailed = createAction('account/updateWishlistFailed');
 
 const createAccount = (payload) => async (dispatch) => {
   dispatch(creationRequested());
@@ -33,14 +35,35 @@ const removeAccountData = () => (dispatch) => {
   dispatch(accountRemoved());
 };
 
-const updateAccount = (payload) => async (dispatch) => {
+const updateWishlist = (payload) => async (dispatch, getState) => {
+  dispatch(updateWishlistRequested());
+  const accountData = getState().account.entity;
   try {
-    const { content } = await userService.update(payload);
-    return content;
+    let newData;
+    if (accountData.wishlist && accountData.wishlist.includes(payload)) {
+      const filteredWishlist = accountData.wishlist.filter((x) => x !== payload);
+      newData = {
+        ...accountData,
+        wishlist: filteredWishlist,
+      };
+    } else if (accountData.wishlist) {
+      newData = {
+        ...accountData,
+        wishlist: [...accountData.wishlist, payload],
+      };
+    } else {
+      newData = {
+        ...accountData,
+        wishlist: [payload],
+      };
+    }
+
+    const { content } = await userService.update(newData);
+    dispatch(updated(content));
   } catch (error) {
-    dispatch(updateFailed());
+    dispatch(updateWishlistFailed());
     dispatch(handleError(error));
   }
 };
 
-export { createAccount, loadAccountById, removeAccountData };
+export { createAccount, loadAccountById, removeAccountData, updateWishlist };

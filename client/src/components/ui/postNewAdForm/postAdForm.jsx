@@ -38,7 +38,6 @@ function PostAdForm() {
   }, []);
 
   const onSubmit = async (data) => {
-    console.log('onSubmit: ', data.adImages.length);
     if (!Object.keys(selectedSubCategory).length) {
       return toast.error('Choose category');
     }
