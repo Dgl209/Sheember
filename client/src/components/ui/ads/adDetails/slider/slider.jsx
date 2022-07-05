@@ -58,7 +58,7 @@ function Slider({ items }) {
   return (
     <>
       <div id="default-carousel" className="relative" data-carousel="slide">
-        <div className="overflow-hidden relative h-[40rem] rounded-lg">
+        <div className="overflow-hidden relative h-[40rem] 2xl:h-[35rem] xl:h-[30rem] lg:h-[25rem] md:h-[20rem] sm:h-[20rem] rounded-lg">
           {items?.map((item, index) => (
             <div
               key={index}

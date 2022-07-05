@@ -22,7 +22,7 @@ function Main() {
   const onSubmit = (data) => console.log('search: ', data);
 
   const handleMainCategoriesList = ({ id }) => {
-    navigate(`/catalog/${id}`, { replace: true });
+    navigate(`/catalog/${id}`);
   };
 
   return (

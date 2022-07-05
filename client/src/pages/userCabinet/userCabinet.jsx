@@ -37,7 +37,7 @@ function UserCabinet() {
           </div>
           <GroupItem item={{ icon: 'faListCheck', id: 'orders', name: 'Orders' }} onClick={handleCabinetItems} />
           <GroupItem
-            item={{ icon: 'faCircleCheck', id: 'published-orders', name: 'Published orders' }}
+            item={{ icon: 'faCircleCheck', id: 'published-ads', name: 'Published ads' }}
             onClick={handleCabinetItems}
           />
           <GroupItem item={{ icon: 'faHeart', id: 'wishlist', name: 'Wish list' }} onClick={handleCabinetItems} />

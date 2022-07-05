@@ -53,7 +53,7 @@ function ResultPage() {
           </Link>
         )}
         {!isSuccess && (
-          <Link to="/post-new-ad">
+          <Link to="/">
             <button
               type="button"
               className="text-gray-900 text-lg bg-white border border-gray-300 focus:outline-none hover:bg-gray-100

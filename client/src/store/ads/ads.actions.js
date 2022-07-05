@@ -38,7 +38,9 @@ const createAd = (data) => async (dispatch, getState) => {
   try {
     const id = nanoid();
     const adImages = await storageService.uploadAdImagesArray(data.adImages, id);
+    console.log('ad images: ', adImages);
     const adImagesUrl = await Promise.all(adImages);
+    console.log('ad images url: ', adImagesUrl);
     const newData = {
       ...data,
       adImagesUrl,
@@ -50,6 +52,7 @@ const createAd = (data) => async (dispatch, getState) => {
     dispatch(created());
     customHistory.push('/result/success', { message: 'Published successfully' });
   } catch (error) {
+    console.log('create error : ', error);
     dispatch(creationFailed());
     dispatch(handleError(error));
     customHistory.push('/result/fail', { message: 'Publication error' });
