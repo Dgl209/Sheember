@@ -4,13 +4,12 @@ import { CheckboxField, TextField } from '../../common';
 import { toast } from 'react-toastify';
 import { useForm } from 'react-hook-form';
 import { useModal } from '../../../hooks';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { singIn } from '../../../store/auth/auth.actions';
+import { customHistory } from '../../../utils/helpers';
 
 function LoginForm({ from }) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { hideModal } = useModal();
   const {
     register,
@@ -18,12 +17,15 @@ function LoginForm({ from }) {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data) => {
-    dispatch(singIn(data));
+  const handleHideModal = () => {
     hideModal();
     if (from?.pathname) {
-      navigate(from.pathname);
+      customHistory.push(from.pathname);
     }
+  };
+
+  const onSubmit = async (data) => {
+    dispatch(singIn({ ...data, handleHideModal }));
   };
 
   return (

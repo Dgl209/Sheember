@@ -6,6 +6,7 @@ import { loadAds } from '../../../../store/ads/ads.actions';
 import { getAds } from '../../../../store/ads/ads.selectors';
 import { getAccountId } from '../../../../store/auth/auth.selectors';
 import { AdsLoader } from '../../../../hoc';
+import EmptyPage from '../../../../pages/empty/empty';
 
 function PublishedAds() {
   const currentUserId = useSelector(getAccountId());
@@ -19,7 +20,13 @@ function PublishedAds() {
 
   return (
     <AdsLoader>
-      <AdsList items={ads} columns="4" />
+      {ads?.length ? (
+        <AdsList items={ads} columns="4" />
+      ) : (
+        <div className="w-full h-full flex flex-col justify-center items-center space-y-2">
+          <EmptyPage title="You have not published any ad" btnTitle="Publish" path="/post-new-ad" />
+        </div>
+      )}
     </AdsLoader>
   );
 }

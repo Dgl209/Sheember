@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
-import { ModalContext } from '../../../context';
+import React from 'react';
 import { Login } from '../index';
 import { RegistrationForm } from '../../ui';
+import { useModal } from '../../../hooks';
 
 function Registration({ ...rest }) {
-  const { setModalContent } = useContext(ModalContext);
+  const { setModalContent } = useModal();
 
   return (
     <>

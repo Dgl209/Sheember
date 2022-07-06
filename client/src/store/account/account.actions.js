@@ -8,6 +8,8 @@ const { requested, received, failed, created, updated, accountRemoved, creationR
 
 const updateWishlistRequested = createAction('account/updateWishlistRequested');
 const updateWishlistFailed = createAction('account/updateWishlistFailed');
+const updateCartRequested = createAction('account/updateCartRequested');
+const updateCartFailed = createAction('account/updateCartFailed');
 
 const createAccount = (payload) => async (dispatch) => {
   dispatch(creationRequested());
@@ -66,4 +68,34 @@ const updateWishlist = (payload) => async (dispatch, getState) => {
   }
 };
 
-export { createAccount, loadAccountById, removeAccountData, updateWishlist };
+const updateCart = (payload) => async (dispatch, getState) => {
+  dispatch(updateCartRequested());
+  const accountData = getState().account.entity;
+  try {
+    let newData;
+    if (accountData.cart && accountData.cart.includes(payload)) {
+      const filteredCart = accountData.cart.filter((x) => x !== payload);
+      newData = {
+        ...accountData,
+        cart: filteredCart,
+      };
+    } else if (accountData.cart) {
+      newData = {
+        ...accountData,
+        cart: [...accountData.cart, payload],
+      };
+    } else {
+      newData = {
+        ...accountData,
+        cart: [payload],
+      };
+    }
+    const { content } = await userService.update(newData);
+    dispatch(updated(content));
+  } catch (error) {
+    dispatch(updateCartFailed());
+    dispatch(handleError(error));
+  }
+};
+
+export { createAccount, loadAccountById, removeAccountData, updateWishlist, updateCart };

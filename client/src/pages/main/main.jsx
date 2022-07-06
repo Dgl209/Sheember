@@ -2,13 +2,12 @@ import React, { useEffect } from 'react';
 import { GroupList, SearchField, List } from '../../components/common';
 import { useForm } from 'react-hook-form';
 import { Ad } from '../../components/ui';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategoriesList, getCategoriesLoadingStatus } from '../../store/categories/categories.selectors';
 import { loadCategories } from '../../store/categories/categories.actions';
+import { customHistory } from '../../utils/helpers';
 
 function Main() {
-  const navigate = useNavigate();
   const { register, handleSubmit } = useForm();
   const AdsList = List(Ad);
   const dispatch = useDispatch();
@@ -22,7 +21,7 @@ function Main() {
   const onSubmit = (data) => console.log('search: ', data);
 
   const handleMainCategoriesList = ({ id }) => {
-    navigate(`/catalog/${id}`);
+    customHistory.push(`/catalog/${id}`);
   };
 
   return (

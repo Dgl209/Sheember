@@ -9,11 +9,12 @@ import { TextAreaField, Card } from '../../../common';
 import { getDateHelper } from '../../../../utils/helpers';
 import { userService } from '../../../../services';
 import { useForm } from 'react-hook-form';
-import { updateWishlist } from '../../../../store/account/account.actions';
+import { updateCart, updateWishlist } from '../../../../store/account/account.actions';
 import { getAccountData } from '../../../../store/account/account.selectors';
 import { toast } from 'react-toastify';
 import CartBtn from '../cartBtn/cartBtn';
 import WishlistBtn from '../wishlistBtn/wishlistBtn';
+import { getLoggedInStatus } from '../../../../store/auth/auth.selectors';
 
 function AdDetails() {
   const { adId } = useParams();
@@ -23,15 +24,30 @@ function AdDetails() {
   const [user, setUser] = useState();
   const { register, handleSubmit } = useForm();
   const accountData = useSelector(getAccountData());
-  const [inWishlist, setInWishlist] = useState(accountData.wishlist?.includes(adId));
+  const isLoggedIn = useSelector(getLoggedInStatus());
+  const [inWishlist, setInWishlist] = useState(accountData?.wishlist?.includes(adId));
+  const [inCart, setInCart] = useState(accountData?.cart?.includes(adId));
 
   useEffect(() => {
     dispatch(loadAdById(adId));
   }, []);
 
   function handleWishlist() {
-    dispatch(updateWishlist(adId));
-    setInWishlist((prev) => !prev);
+    if (isLoggedIn) {
+      dispatch(updateWishlist(adId));
+      setInWishlist((prev) => !prev);
+    } else {
+      toast.error('Register or log in to use the wish list');
+    }
+  }
+
+  function handleCart() {
+    if (isLoggedIn) {
+      dispatch(updateCart(adId));
+      setInCart((prev) => !prev);
+    } else {
+      toast.error('Regiter or log in to use cart');
+    }
   }
 
   function onSubmit(data) {
@@ -74,22 +90,27 @@ function AdDetails() {
                     handleClick={handleWishlist}
                     inWishlist={inWishlist}
                   />
-                  <CartBtn className="flex items-center px-4 py-2 mb-2" iconClassName="w-5 h-5 mr-2">
-                    Add to cart
+                  <CartBtn
+                    className="flex items-center px-4 py-2 mb-2"
+                    iconClassName="w-5 h-5 mr-2"
+                    inCart={inCart}
+                    handleClick={handleCart}
+                  >
+                    {inCart ? 'Remove from cart' : 'Add to cart'}
                   </CartBtn>
                 </div>
               </div>
             </div>
           </Card>
           <Card>
-            <h3 className="text-2xl mb-4 font-semibold text-gray-900 dark:text-white">Comments</h3>
+            <h3 className="text-xl mb-4 font-semibold text-gray-900 dark:text-white">Comments</h3>
             <form onSubmit={handleSubmit(onSubmit)}>
               <TextAreaField register={register} id="comment" placeholder="Leave a comment" rows="3" />
               <button
                 type="submit"
                 className="text-gray-900 bg-white border border-gray-300 focus:outline-none
                 hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg
-                text-bold px-5 py-2.5 mr-2 mb-2 mt-4 dark:bg-gray-800 dark:text-white dark:border-gray-600
+                text-bold text-sm px-4 py-2 mr-2 mb-2 mt-4 dark:bg-gray-800 dark:text-white dark:border-gray-600
                 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
               >
                 Send

@@ -7,22 +7,34 @@ import { getDateHelper } from '../../../utils/helpers';
 import { toast } from 'react-toastify';
 import { userService } from '../../../services';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateWishlist } from '../../../store/account/account.actions';
+import { updateCart, updateWishlist } from '../../../store/account/account.actions';
 import { getAccountData } from '../../../store/account/account.selectors';
+import { getLoggedInStatus } from '../../../store/auth/auth.selectors';
 
 function Ad({ item }) {
   const [user, setUser] = useState();
   const accountData = useSelector(getAccountData());
-  const [inWishlist, setInWishlist] = useState(accountData.wishlist?.includes(item.id));
+  const isLoggedIn = useSelector(getLoggedInStatus());
+  const [inWishlist, setInWishlist] = useState(accountData?.wishlist?.includes(item.id));
+  const [inCart, setInCart] = useState(accountData?.cart?.includes(item.id));
   const dispatch = useDispatch(true);
 
   const handleCart = () => {
-    console.log('added to cart - ', item.name);
+    if (isLoggedIn) {
+      dispatch(updateCart(item.id));
+      setInCart((prev) => !prev);
+    } else {
+      toast.error('Register or log in to use the cart');
+    }
   };
 
   const handleWishList = () => {
-    dispatch(updateWishlist(item.id));
-    setInWishlist((prev) => !prev);
+    if (isLoggedIn) {
+      dispatch(updateWishlist(item.id));
+      setInWishlist((prev) => !prev);
+    } else {
+      toast.error('Register or log in to use the wish list');
+    }
   };
 
   useEffect(() => {
@@ -62,7 +74,12 @@ function Ad({ item }) {
                   inWishlist={inWishlist}
                   handleClick={handleWishList}
                 />
-                <CartBtn className="px-[9px] py-[5px]" iconClassName="w-4 h-4" handleClick={handleCart} />
+                <CartBtn
+                  className="px-[9px] py-[5px]"
+                  iconClassName="w-4 h-4"
+                  inCart={inCart}
+                  handleClick={handleCart}
+                />
               </div>
             </div>
           </div>

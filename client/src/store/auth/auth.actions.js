@@ -4,13 +4,14 @@ import { setTokens, removeAuthData } from '../../services';
 import { createAccount, loadAccountById, removeAccountData } from '../account/account.actions';
 import { createAction } from '@reduxjs/toolkit';
 import { handleError } from '../errors/errors.actions';
+import { customHistory } from '../../utils/helpers';
 
 const { succeed, loggedOut } = authSlice.actions;
 const requested = createAction('auth/requested');
 const failed = createAction('auth/failed');
 
 const signUp =
-  ({ email, password, ...rest }) =>
+  ({ email, password, handleHideModal, ...rest }) =>
   async (dispatch) => {
     dispatch(requested());
     try {
@@ -18,6 +19,7 @@ const signUp =
       setTokens(data);
       dispatch(succeed(data.localId));
       dispatch(createAccount({ id: data.localId, email, ...rest }));
+      handleHideModal();
     } catch (error) {
       dispatch(failed());
       dispatch(handleError(error));
@@ -25,7 +27,7 @@ const signUp =
   };
 
 const singIn =
-  ({ email, password }) =>
+  ({ email, password, handleHideModal }) =>
   async (dispatch) => {
     dispatch(requested());
     try {
@@ -33,6 +35,7 @@ const singIn =
       setTokens(data);
       dispatch(succeed(data.localId));
       dispatch(loadAccountById(data.localId));
+      handleHideModal();
     } catch (error) {
       dispatch(failed());
       dispatch(handleError(error));
@@ -40,6 +43,7 @@ const singIn =
   };
 
 const logOut = () => (dispatch) => {
+  customHistory.push('/');
   removeAuthData();
   dispatch(loggedOut());
   dispatch(removeAccountData());
