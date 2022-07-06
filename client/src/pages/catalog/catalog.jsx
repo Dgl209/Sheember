@@ -8,6 +8,7 @@ import { getAds } from '../../store/ads/ads.selectors';
 import { getSubcategoriesList, getSubcategoriesLoadingStatus } from '../../store/subcategories/subcategories.selectors';
 import { loadSubcategoriesByParentId } from '../../store/subcategories/subcategories.actions';
 import { AdsLoader } from '../../hoc';
+import EmptyPage from '../empty/empty';
 
 function Catalog() {
   const { mainCategory, subCategory } = useParams();
@@ -37,7 +38,13 @@ function Catalog() {
         !subcategoriesLoading && <SubCategoriesList items={subcategories} columns="5" />
       ) : (
         <AdsLoader>
-          <AdsList items={ads} columns="4" />
+          {ads?.length ? (
+            <AdsList items={ads} columns="4" />
+          ) : (
+            <div className="w-full h-[80vh] flex flex-col items-center justify-center space-y-2">
+              <EmptyPage title="There are no ads in this category" btnTitle="Main page" path="/" />
+            </div>
+          )}
         </AdsLoader>
       )}
     </div>

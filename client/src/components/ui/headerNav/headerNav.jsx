@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Login } from '../../layout';
 import { Cart } from '../../ui';
-import { ThemeToggle } from '../../../utils/helpers';
+import { customHistory, ThemeToggle } from '../../../utils/helpers';
 import { useModal } from '../../../hooks';
 import NavButton from './navButton/navButton';
 import PostAdLink from './postAdLink/postAdLink';
@@ -13,7 +12,6 @@ import { getLoggedInStatus } from '../../../store/auth/auth.selectors';
 function HeaderNav() {
   const isLoggedIn = useSelector(getLoggedInStatus());
   const { showModal } = useModal();
-  const navigate = useNavigate();
   const [isDark, setIsDark] = useState(localStorage.getItem('color-theme') === 'light');
 
   const handleToggleTheme = () => {
@@ -29,7 +27,7 @@ function HeaderNav() {
     if (!isLoggedIn) {
       return showModal({ title: 'Sing in', closable: true, content: <Login /> });
     }
-    navigate('cabinet/personal-data');
+    customHistory.push('cabinet/personal-data');
   };
 
   return (
@@ -47,7 +45,7 @@ function HeaderNav() {
       {isLoggedIn && (
         <>
           <li>
-            <NavButton onClick={() => navigate('/cabinet/wishlist')}>
+            <NavButton onClick={() => customHistory.push('/cabinet/wishlist')}>
               <HeartIcon className="w-5 h-5" />
             </NavButton>
           </li>

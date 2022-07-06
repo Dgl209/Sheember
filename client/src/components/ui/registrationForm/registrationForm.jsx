@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import { TextField } from '../../common';
 import { useForm } from 'react-hook-form';
 import { useModal } from '../../../hooks';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { signUp } from '../../../store/auth/auth.actions';
+import { customHistory } from '../../../utils/helpers';
 
 function RegistrationForm({ from }) {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const { hideModal } = useModal();
   const {
     register,
@@ -17,12 +16,15 @@ function RegistrationForm({ from }) {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data) => {
-    dispatch(signUp(data));
+  const handleHideModal = () => {
     hideModal();
     if (from?.pathname) {
-      navigate(from.pathname);
+      customHistory.push(from.pathname);
     }
+  };
+
+  const onSubmit = async (data) => {
+    dispatch(signUp({ ...data, handleHideModal }));
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

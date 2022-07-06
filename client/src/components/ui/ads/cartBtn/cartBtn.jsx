@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ShoppingCartIcon } from '@heroicons/react/outline';
+import { ShoppingCartIcon as ShoppingCartIconOutline } from '@heroicons/react/outline';
+import { ShoppingCartIcon as ShoppingCartIconSolid } from '@heroicons/react/solid';
 
-function CartBtn({ children, className: classes, iconClassName, handleClick }) {
+function CartBtn({ children, className: classes, iconClassName, inCart, handleClick }) {
   return (
     <button
       onClick={handleClick}
@@ -13,7 +14,11 @@ function CartBtn({ children, className: classes, iconClassName, handleClick }) {
         (classes || '')
       }
     >
-      <ShoppingCartIcon className={iconClassName} />
+      {inCart ? (
+        <ShoppingCartIconSolid className={iconClassName} />
+      ) : (
+        <ShoppingCartIconOutline className={iconClassName} />
+      )}
       {children}
     </button>
   );
@@ -21,6 +26,7 @@ function CartBtn({ children, className: classes, iconClassName, handleClick }) {
 
 CartBtn.propTypes = {
   children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]),
+  inCart: PropTypes.bool,
   handleClick: PropTypes.func,
   className: PropTypes.string,
   iconClassName: PropTypes.string,
