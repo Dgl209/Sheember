@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import WishlistBtn from './wishlistBtn/wishlistBtn';
-import CartBtn from './cartBtn/cartBtn';
+import { WishlistBtn, CartBtn } from '../../common';
 import { getDateHelper } from '../../../utils/helpers';
 import { toast } from 'react-toastify';
 import { userService } from '../../../services';

@@ -3,6 +3,7 @@ import adsService from './ads.services';
 import firebaseService from './firebase.service';
 import storageService from './storage.service';
 import userService from './user.service';
+import commentsService from './comments.service';
 import localStorageService, {
   setTokens,
   getAccessToken,
@@ -23,4 +24,5 @@ export {
   getRefreshToken,
   getTokenExpiresDate,
   removeAuthData,
+  commentsService,
 };

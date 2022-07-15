@@ -4,7 +4,7 @@ import { handleError } from '../errors/errors.actions';
 import { nanoid } from 'nanoid';
 import { storageService } from '../../services';
 import { createAction } from '@reduxjs/toolkit';
-import { customHistory } from '../../utils/helpers';
+import { customHistory, sortHelper } from '../../utils/helpers';
 
 const { requested, received, failed, created } = adsSlice.actions;
 const creationRequested = createAction('ads/creationRequested');
@@ -14,7 +14,8 @@ const loadAds = (orderBy, value) => async (dispatch) => {
   dispatch(requested());
   try {
     const { content } = await adsServices.get(orderBy, value);
-    dispatch(received(content));
+    const sortedContent = sortHelper(content);
+    dispatch(received(sortedContent));
   } catch (error) {
     dispatch(failed());
     dispatch(handleError(error));
@@ -38,9 +39,9 @@ const createAd = (data) => async (dispatch, getState) => {
   try {
     const id = nanoid();
     const adImages = await storageService.uploadAdImagesArray(data.adImages, id);
-    console.log('ad images: ', adImages);
+    console.log('ads images: ', adImages);
     const adImagesUrl = await Promise.all(adImages);
-    console.log('ad images url: ', adImagesUrl);
+    console.log('ads images url: ', adImagesUrl);
     const newData = {
       ...data,
       adImagesUrl,

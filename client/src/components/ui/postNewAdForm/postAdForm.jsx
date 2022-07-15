@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { Card, TextField, TextAreaField } from '../../common';
 import CategoriesDropdown from '../categories/categoriesDropdown';
-import ConfirmationModalContent from './confirmationModalContent/confirmationModalContent';
 import { useModal } from '../../../hooks';
-import { CategoryField, AdImagesField, PostSubmitBtn, PostBtnGroup } from './';
+import { CategoryField, AdImagesField, PostSubmitBtn } from './';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { createAd } from '../../../store/ads/ads.actions';
@@ -15,14 +14,13 @@ import { loadSubcategories } from '../../../store/subcategories/subcategories.ac
 import { customHistory } from '../../../utils/helpers';
 
 function PostAdForm() {
-  const { register, control, handleSubmit, resetField, getValues, watch } = useForm();
+  const { register, control, handleSubmit, getValues, watch } = useForm();
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'adImages',
   });
   const [selectedMainCategory, setSelectedMainCategory] = useState({});
   const [selectedSubCategory, setSelectedSubCategory] = useState({});
-  const [isSelling, setIsSelling] = useState(true);
   const dispatch = useDispatch();
   const categories = useSelector(getCategoriesList());
   const subcategories = useSelector(getSubcategoriesList());
@@ -50,7 +48,12 @@ function PostAdForm() {
       return toast.error('At least 3 images must be uploaded');
     }
 
-    confirmationModal(data);
+    customHistory.push('/result', { private: true });
+    const newData = {
+      ...data,
+      category: selectedSubCategory.id,
+    };
+    dispatch(createAd(newData));
   };
 
   const handleMainCategory = (mainCategory) => {
@@ -60,37 +63,6 @@ function PostAdForm() {
   const handleSubCategory = (subCategory) => {
     hideModal();
     setSelectedSubCategory(subCategory);
-  };
-
-  const handleIsSelling = (bool) => {
-    bool ? resetField('price') : resetField('desired-product');
-    setIsSelling(bool);
-  };
-
-  const confirmationModal = (data) =>
-    showModal({
-      closable: true,
-      content: <ConfirmationModalContent />,
-      footerButtons: [
-        {
-          text: 'Confirm',
-          handler: () => handleConfirmationModal(data),
-        },
-        {
-          text: 'Cancel',
-          handler: hideModal,
-        },
-      ],
-    });
-
-  const handleConfirmationModal = async (data) => {
-    hideModal();
-    customHistory.push('/result', { private: true });
-    const newData = {
-      ...data,
-      category: selectedSubCategory.id,
-    };
-    dispatch(createAd(newData));
   };
 
   const categoriesModal = () =>
@@ -140,30 +112,21 @@ function PostAdForm() {
           />
         </Card>
         <Card>
-          <PostBtnGroup isSelling={isSelling} handleIsSelling={handleIsSelling} />
-          {isSelling ? (
-            <div className="w-1/3">
-              <TextField
-                id="price"
-                register={register}
-                placeholder="Price..."
-                options={{
-                  required: true,
-                  pattern: {
-                    value: /^(\d){1,13}$/g,
-                    message: 'The price is entered incorrectly',
-                  },
-                }}
-              />
-            </div>
-          ) : (
-            <TextAreaField
+          <div className="w-1/3">
+            <TextField
+              id="price"
               register={register}
-              id="desired-product"
-              placeholder="Leave a description of the product you want..."
-              options={{ required: true }}
+              placeholder="Price..."
+              label="Price"
+              options={{
+                required: true,
+                pattern: {
+                  value: /^(\d){1,13}$/g,
+                  message: 'The price is entered incorrectly',
+                },
+              }}
             />
-          )}
+          </div>
         </Card>
         <div className="w-full flex justify-end">
           <PostSubmitBtn />

@@ -23,7 +23,7 @@ function PublishedAds() {
       {ads?.length ? (
         <AdsList items={ads} columns="4" />
       ) : (
-        <div className="w-full h-full flex flex-col justify-center items-center space-y-2">
+        <div className="w-full h-[80vh] flex flex-col justify-center items-center space-y-2">
           <EmptyPage title="You have not published any ad" btnTitle="Publish" path="/post-new-ad" />
         </div>
       )}

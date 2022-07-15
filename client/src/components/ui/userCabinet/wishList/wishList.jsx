@@ -7,7 +7,7 @@ function Wishlist() {
   const accountData = useSelector(getAccountData());
   if (!accountData.wishlist) {
     return (
-      <div className="flex flex-col w-full justify-center items-center space-y-2 h-full">
+      <div className="flex flex-col w-full justify-center items-center space-y-2 h-[80vh]">
         <EmptyPage title="Wish list is empty" btnTitle="Main page" path="/" />
       </div>
     );
