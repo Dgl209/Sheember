@@ -1,7 +1,6 @@
 import React from 'react';
-import { AdDetails } from '../components/ui';
 import { PrivateRoute } from '../hoc';
-import { Catalog, Main, MockData, NotFound, PostAd, ResultPage, UserCabinet } from '../pages';
+import { Catalog, Main, MockData, NotFound, PostAd, ResultPage, UserCabinet, AdDetails } from '../pages';
 import cabinetRoutes from './cabinet.routes';
 
 const appRoutes = [
@@ -18,7 +17,7 @@ const appRoutes = [
     element: <AdDetails />,
   },
   {
-    path: '/post-new-ad',
+    path: '/post-new-ads',
     element: (
       <PrivateRoute>
         <PostAd />

@@ -15,13 +15,13 @@ const getDateHelper = (data) => {
     if (+days < 1) {
       if (+hours < 1) {
         if (+minutes <= 1) {
-          return '1 минуту назад';
+          return '1 minute ago';
         } else if (+minutes <= 5) {
-          return '5 минут назад';
+          return '5 minutes ago';
         } else if (+minutes <= 10) {
-          return '10 минут назад';
+          return '10 minutes ago';
         } else if (+minutes <= 30) {
-          return '30 минут назад';
+          return '30 minutes ago';
         }
       } else {
         return `${date.getHours()}:${date.getMinutes()}`;

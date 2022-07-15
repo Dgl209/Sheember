@@ -5,6 +5,7 @@ import categoriesReducer from './categories/categories.reducer';
 import subcategoriesReducer from './subcategories/subcategories.reducer';
 import authReducer from './auth/auth.reducer';
 import accountReducer from './account/account.reducer';
+import commentsReducer from './comments/comments.reducer';
 
 const rootReducer = combineReducers({
   ads: adsReducer,
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   errors: errorsReducer,
   auth: authReducer,
   account: accountReducer,
+  comments: commentsReducer,
 });
 
 export default rootReducer;

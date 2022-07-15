@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Slider from './slider/slider';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadAdById } from '../../../../store/ads/ads.actions';
-import { getAds } from '../../../../store/ads/ads.selectors';
-import { AdsLoader } from '../../../../hoc';
-import { TextAreaField, Card } from '../../../common';
-import { getDateHelper } from '../../../../utils/helpers';
-import { userService } from '../../../../services';
-import { useForm } from 'react-hook-form';
-import { updateCart, updateWishlist } from '../../../../store/account/account.actions';
-import { getAccountData } from '../../../../store/account/account.selectors';
+import { loadAdById } from '../../store/ads/ads.actions';
+import { getAds } from '../../store/ads/ads.selectors';
+import { AdsLoader } from '../../hoc';
+import { Card, Slider, WishlistBtn, CartBtn } from '../../components/common';
+import { getDateHelper } from '../../utils/helpers';
+import { userService } from '../../services';
+import { updateCart, updateWishlist } from '../../store/account/account.actions';
+import { getAccountData } from '../../store/account/account.selectors';
 import { toast } from 'react-toastify';
-import CartBtn from '../cartBtn/cartBtn';
-import WishlistBtn from '../wishlistBtn/wishlistBtn';
-import { getLoggedInStatus } from '../../../../store/auth/auth.selectors';
+import { getLoggedInStatus } from '../../store/auth/auth.selectors';
+import Comments from '../../components/ui/comments/comments';
 
 function AdDetails() {
   const { adId } = useParams();
@@ -22,7 +19,6 @@ function AdDetails() {
   const ads = useSelector(getAds());
   const ad = ads?.find(() => true);
   const [user, setUser] = useState();
-  const { register, handleSubmit } = useForm();
   const accountData = useSelector(getAccountData());
   const isLoggedIn = useSelector(getLoggedInStatus());
   const [inWishlist, setInWishlist] = useState(accountData?.wishlist?.includes(adId));
@@ -48,10 +44,6 @@ function AdDetails() {
     } else {
       toast.error('Regiter or log in to use cart');
     }
-  }
-
-  function onSubmit(data) {
-    console.log('onSubmit: ', data);
   }
 
   useEffect(() => {
@@ -104,18 +96,7 @@ function AdDetails() {
           </Card>
           <Card>
             <h3 className="text-xl mb-4 font-semibold text-gray-900 dark:text-white">Comments</h3>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <TextAreaField register={register} id="comment" placeholder="Leave a comment" rows="3" />
-              <button
-                type="submit"
-                className="text-gray-900 bg-white border border-gray-300 focus:outline-none
-                hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg
-                text-bold text-sm px-4 py-2 mr-2 mb-2 mt-4 dark:bg-gray-800 dark:text-white dark:border-gray-600
-                dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
-              >
-                Send
-              </button>
-            </form>
+            <Comments parentId={adId} />
           </Card>
         </div>
       </div>
