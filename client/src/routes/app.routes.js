@@ -17,7 +17,7 @@ const appRoutes = [
     element: <AdDetails />,
   },
   {
-    path: '/post-new-ads',
+    path: '/post-new-ad',
     element: (
       <PrivateRoute>
         <PostAd />

@@ -17,14 +17,8 @@ const accountSlice = createSlice({
     failed: (state) => {
       state.loading = false;
     },
-    creationRequested: (state) => {
-      state.loading = true;
-    },
     created: (state, action) => {
       state.entity = action.payload;
-      state.loading = false;
-    },
-    creationFailed: (state) => {
       state.loading = false;
     },
     accountRemoved: (state) => {

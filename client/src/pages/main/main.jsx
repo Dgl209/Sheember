@@ -2,20 +2,25 @@ import React, { useEffect } from 'react';
 import { GroupList, SearchField, List } from '../../components/common';
 import { useForm } from 'react-hook-form';
 import { Ad } from '../../components/ui';
+import { AdsLoader } from '../../hoc';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategoriesList, getCategoriesLoadingStatus } from '../../store/categories/categories.selectors';
+import { getAds } from '../../store/ads/ads.selectors';
 import { loadCategories } from '../../store/categories/categories.actions';
+import { loadRecentlyAds } from '../../store/ads/ads.actions';
 import { customHistory } from '../../utils/helpers';
 
 function Main() {
   const { register, handleSubmit } = useForm();
-  const AdsList = List(Ad);
   const dispatch = useDispatch();
   const categories = useSelector(getCategoriesList());
   const categoriesLoading = useSelector(getCategoriesLoadingStatus());
+  const ads = useSelector(getAds());
+  const AdsList = List(Ad);
 
   useEffect(() => {
     dispatch(loadCategories());
+    dispatch(loadRecentlyAds());
   }, []);
 
   const onSubmit = (data) => console.log('search: ', data);
@@ -44,7 +49,10 @@ function Main() {
           </form>
         </div>
         <div className="px-2">
-          <AdsList items={[]} columns="4" />
+          <h5 className="my-6 px-8 text-4xl font-normal tracking-tight text-gray-900 dark:text-white">Latest ads</h5>
+          <AdsLoader>
+            <AdsList items={ads} columns="4" />
+          </AdsLoader>
         </div>
       </div>
     </div>

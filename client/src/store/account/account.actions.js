@@ -3,13 +3,12 @@ import { userService } from '../../services';
 import { handleError } from '../errors/errors.actions';
 import { createAction } from '@reduxjs/toolkit';
 
-const { requested, received, failed, created, updated, accountRemoved, creationRequested, creationFailed } =
-  accountSlice.actions;
+const { requested, received, failed, created, updated, accountRemoved } = accountSlice.actions;
 
-const updateWishlistRequested = createAction('account/updateWishlistRequested');
-const updateWishlistFailed = createAction('account/updateWishlistFailed');
-const updateCartRequested = createAction('account/updateCartRequested');
-const updateCartFailed = createAction('account/updateCartFailed');
+const creationRequested = createAction('account/creationRequested');
+const creationFailed = createAction('account/creationFailed');
+const updateRequested = createAction('account/updateRequested');
+const updateFailed = createAction('account/updateFailed');
 
 const createAccount = (payload) => async (dispatch) => {
   dispatch(creationRequested());
@@ -38,62 +37,63 @@ const removeAccountData = () => (dispatch) => {
 };
 
 const updateWishlist = (payload) => async (dispatch, getState) => {
-  dispatch(updateWishlistRequested());
+  dispatch(updateRequested());
   const accountData = getState().account.entity;
-  try {
-    let newData;
-    if (accountData.wishlist && accountData.wishlist.includes(payload)) {
-      const filteredWishlist = accountData.wishlist.filter((x) => x !== payload);
-      newData = {
-        ...accountData,
-        wishlist: filteredWishlist,
-      };
-    } else if (accountData.wishlist) {
-      newData = {
-        ...accountData,
-        wishlist: [...accountData.wishlist, payload],
-      };
-    } else {
-      newData = {
-        ...accountData,
-        wishlist: [payload],
-      };
-    }
 
+  let newData;
+  if (accountData.wishlist && accountData.wishlist.includes(payload)) {
+    const filteredWishlist = accountData.wishlist.filter((x) => x !== payload);
+    newData = {
+      ...accountData,
+      wishlist: filteredWishlist,
+    };
+  } else if (accountData.wishlist) {
+    newData = {
+      ...accountData,
+      wishlist: [...accountData.wishlist, payload],
+    };
+  } else {
+    newData = {
+      ...accountData,
+      wishlist: [payload],
+    };
+  }
+  try {
     const { content } = await userService.update(newData);
     dispatch(updated(content));
   } catch (error) {
-    dispatch(updateWishlistFailed());
+    dispatch(updateFailed());
     dispatch(handleError(error));
   }
 };
 
 const updateCart = (payload) => async (dispatch, getState) => {
-  dispatch(updateCartRequested());
+  dispatch(updateRequested());
   const accountData = getState().account.entity;
+
+  let newData;
+  if (accountData.cart && accountData.cart.includes(payload)) {
+    const filteredCart = accountData.cart.filter((x) => x !== payload);
+    newData = {
+      ...accountData,
+      cart: filteredCart,
+    };
+  } else if (accountData.cart) {
+    newData = {
+      ...accountData,
+      cart: [...accountData.cart, payload],
+    };
+  } else {
+    newData = {
+      ...accountData,
+      cart: [payload],
+    };
+  }
   try {
-    let newData;
-    if (accountData.cart && accountData.cart.includes(payload)) {
-      const filteredCart = accountData.cart.filter((x) => x !== payload);
-      newData = {
-        ...accountData,
-        cart: filteredCart,
-      };
-    } else if (accountData.cart) {
-      newData = {
-        ...accountData,
-        cart: [...accountData.cart, payload],
-      };
-    } else {
-      newData = {
-        ...accountData,
-        cart: [payload],
-      };
-    }
     const { content } = await userService.update(newData);
     dispatch(updated(content));
   } catch (error) {
-    dispatch(updateCartFailed());
+    dispatch(updateFailed());
     dispatch(handleError(error));
   }
 };
