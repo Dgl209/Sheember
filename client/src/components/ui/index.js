@@ -11,6 +11,7 @@ import Cart from './cart/cart';
 import HeaderNav from './headerNav/headerNav';
 import PostAdForm from './postNewAdForm/postAdForm';
 import Comments from './comments/comments';
+import AdDetailsLayout from './ads/adDetailsLayout';
 
 export {
   Ad,
@@ -26,4 +27,5 @@ export {
   HeaderNav,
   PostAdForm,
   Comments,
+  AdDetailsLayout,
 };

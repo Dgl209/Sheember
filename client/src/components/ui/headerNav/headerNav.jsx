@@ -27,7 +27,7 @@ function HeaderNav() {
     if (!isLoggedIn) {
       return showModal({ title: 'Sing in', closable: true, content: <Login /> });
     }
-    customHistory.push('cabinet/personal-data');
+    customHistory.push('/cabinet/personal-data');
   };
 
   return (

@@ -3,7 +3,7 @@ import { useForm, useFieldArray } from 'react-hook-form';
 import { Card, TextField, TextAreaField } from '../../common';
 import CategoriesDropdown from '../categories/categoriesDropdown';
 import { useModal } from '../../../hooks';
-import { CategoryField, AdImagesField, PostSubmitBtn } from './';
+import { CategoryField, AdImagesField, PostSubmitBtn, PreviewBtn } from './';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { createAd } from '../../../store/ads/ads.actions';
@@ -54,6 +54,17 @@ function PostAdForm() {
       category: selectedSubCategory.id,
     };
     dispatch(createAd(newData));
+  };
+
+  const handlePreview = async () => {
+    const ad = getValues();
+    console.log('ad: ', ad);
+
+    showModal({
+      title: 'Preview',
+      closable: true,
+      content: <h1 className="dark:text-white">Preview</h1>,
+    });
   };
 
   const handleMainCategory = (mainCategory) => {
@@ -128,7 +139,8 @@ function PostAdForm() {
             />
           </div>
         </Card>
-        <div className="w-full flex justify-end">
+        <div className="w-full flex justify-end px-4">
+          <PreviewBtn handleClick={handlePreview} />
           <PostSubmitBtn />
         </div>
       </form>
