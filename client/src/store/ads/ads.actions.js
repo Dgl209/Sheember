@@ -14,7 +14,7 @@ const loadAds = (orderBy, value) => async (dispatch) => {
   dispatch(requested());
   try {
     const { content } = await adsServices.get(orderBy, value);
-    const sortedContent = sortHelper(content);
+    const sortedContent = sortHelper(content || []);
     dispatch(received(sortedContent));
   } catch (error) {
     dispatch(failed());
@@ -33,15 +33,31 @@ const loadAdById = (id) => async (dispatch) => {
   }
 };
 
+const loadRecentlyAds = () => async (dispatch) => {
+  dispatch(requested());
+  try {
+    const { content } = await adsServices.getRecently();
+    const sortedContent = sortHelper(content || []);
+
+    if (sortedContent.length <= 10) {
+      dispatch(received(sortedContent));
+    } else {
+      const recently = sortedContent.slice(0, 12);
+      dispatch(received(recently));
+    }
+  } catch (error) {
+    dispatch(failed());
+    dispatch(handleError(error));
+  }
+};
+
 const createAd = (data) => async (dispatch, getState) => {
   dispatch(creationRequested());
   const currentUserId = getState().auth.accountId;
   try {
     const id = nanoid();
     const adImages = await storageService.uploadAdImagesArray(data.adImages, id);
-    console.log('ads images: ', adImages);
     const adImagesUrl = await Promise.all(adImages);
-    console.log('ads images url: ', adImagesUrl);
     const newData = {
       ...data,
       adImagesUrl,
@@ -60,4 +76,4 @@ const createAd = (data) => async (dispatch, getState) => {
   }
 };
 
-export { loadAds, loadAdById, createAd };
+export { loadAds, loadAdById, createAd, loadRecentlyAds };

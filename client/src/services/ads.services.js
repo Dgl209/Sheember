@@ -27,6 +27,10 @@ const adsService = {
     });
     return data;
   },
+  getRecently: async () => {
+    const { data } = await httpService.get(adsEndpoint);
+    return data;
+  },
   create: async (content) => {
     const { data } = await httpService.post(adsEndpoint, content);
     return data;

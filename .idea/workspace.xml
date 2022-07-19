@@ -6,31 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="0a58112a-324d-447e-83a9-81ce98415bab" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/common/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/ads/ad.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/ads/ad.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/ads/adDetails/adDetails.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/adDetails/adDetails.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/ads/adDetails/slider/slider.controls.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/slider/slider.controls.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/ads/adDetails/slider/slider.indicators.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/slider/slider.indicators.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/ads/adDetails/slider/slider.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/slider/slider.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/ads/cartBtn/cartBtn.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/buttons/cartBtn.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/ads/wishlistBtn/wishlistBtn.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/common/buttons/wishlistBtn.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/postNewAdForm/confirmationModalContent/confirmationModalContent.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/postNewAdForm/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/postNewAdForm/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/postNewAdForm/postAdForm.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/postNewAdForm/postAdForm.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/postNewAdForm/postBtnGroup/postBtnGroup.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/userCabinet/publishedAds/publishedAds.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/userCabinet/publishedAds/publishedAds.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/components/ui/userCabinet/wishList/wishList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/components/ui/userCabinet/wishList/wishList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/pages/userCabinet/userCabinet.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/userCabinet/userCabinet.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/pages/main/main.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/pages/main/main.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/routes/app.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/routes/app.routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/routes/cabinet.routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/routes/cabinet.routes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/services/ads.services.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/services/ads.services.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/services/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/services/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/store/account/account.actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/account/account.actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/store/account/account.slice.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/account/account.slice.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/src/store/ads/ads.actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/ads/ads.actions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/store/rootReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/store/rootReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/utils/helpers/getDate.helper.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/utils/helpers/getDate.helper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/src/utils/helpers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/utils/helpers/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +87,8 @@
       <workItem from="1656518208238" duration="12140000" />
       <workItem from="1656585833886" duration="9787000" />
       <workItem from="1656667166400" duration="25514000" />
-      <workItem from="1657911457052" duration="3783000" />
+      <workItem from="1657911457052" duration="4496000" />
+      <workItem from="1658175911660" duration="3936000" />
     </task>
     <servers />
   </component>
