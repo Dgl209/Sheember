@@ -1,6 +1,6 @@
 import React from 'react';
 import { PrivateRoute } from '../hoc';
-import { Catalog, Main, MockData, NotFound, PostAd, ResultPage, UserCabinet, AdDetails } from '../pages';
+import { Catalog, Main, MockData, NotFound, PostAd, EditAd, ResultPage, UserCabinet, AdDetails } from '../pages';
 import cabinetRoutes from './cabinet.routes';
 
 const appRoutes = [
@@ -21,6 +21,14 @@ const appRoutes = [
     element: (
       <PrivateRoute>
         <PostAd />
+      </PrivateRoute>
+    ),
+  },
+  {
+    path: '/:id/edit',
+    element: (
+      <PrivateRoute>
+        <EditAd />
       </PrivateRoute>
     ),
   },

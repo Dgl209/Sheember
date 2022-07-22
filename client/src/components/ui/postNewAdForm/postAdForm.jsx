@@ -1,20 +1,27 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { Card, TextField, TextAreaField } from '../../common';
 import CategoriesDropdown from '../categories/categoriesDropdown';
 import { useModal } from '../../../hooks';
-import { CategoryField, AdImagesField, PostSubmitBtn } from './';
+import { CategoryField, AdImagesField, PostSubmitBtn, PreviewBtn } from './';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { createAd } from '../../../store/ads/ads.actions';
-import { getCategoriesList } from '../../../store/categories/categories.selectors';
-import { getSubcategoriesList } from '../../../store/subcategories/subcategories.selectors';
+import { createAd, loadAdById } from '../../../store/ads/ads.actions';
+import { getCategoriesList, getCategoriesLoadingStatus } from '../../../store/categories/categories.selectors';
+import {
+  getSubcategoriesList,
+  getSubcategoriesLoadingStatus,
+} from '../../../store/subcategories/subcategories.selectors';
+import { getAds } from '../../../store/ads/ads.selectors';
+import { getAccountData } from '../../../store/account/account.selectors';
 import { loadCategories } from '../../../store/categories/categories.actions';
 import { loadSubcategories } from '../../../store/subcategories/subcategories.actions';
 import { customHistory } from '../../../utils/helpers';
+import { AdDetailsLayout } from '../';
 
 function PostAdForm() {
-  const { register, control, handleSubmit, getValues, watch } = useForm();
+  const { register, control, handleSubmit, getValues, setValue, watch } = useForm();
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'adImages',
@@ -23,8 +30,14 @@ function PostAdForm() {
   const [selectedSubCategory, setSelectedSubCategory] = useState({});
   const dispatch = useDispatch();
   const categories = useSelector(getCategoriesList());
+  const isCategoriesLoading = useSelector(getCategoriesLoadingStatus());
+  const isSubcategoriesLoading = useSelector(getSubcategoriesLoadingStatus());
   const subcategories = useSelector(getSubcategoriesList());
+  const ads = useSelector(getAds());
+  const ad = ads?.find(() => true);
   const { showModal, hideModal } = useModal();
+  const currentUser = useSelector(getAccountData());
+  const { id } = useParams();
 
   useEffect(() => {
     if (!categories.length) {
@@ -33,19 +46,36 @@ function PostAdForm() {
     if (!subcategories.length) {
       dispatch(loadSubcategories(selectedMainCategory.id));
     }
+    if (id) {
+      dispatch(loadAdById(id));
+    }
   }, []);
+
+  useEffect(() => {
+    if (ad && id) {
+      if (currentUser.id !== ad.publisher) {
+        return customHistory.push(`/${id}`);
+      }
+      if (!isCategoriesLoading && !isSubcategoriesLoading) {
+        const subcategory = subcategories?.find((x) => x.id === ad?.category);
+        const category = categories?.find((x) => x.id === subcategory.parent_id);
+        setSelectedSubCategory(subcategory);
+        setSelectedMainCategory(category);
+        setValue('name', ad?.name);
+        setValue('adImages', ad?.adImagesUrl);
+        setValue('description', ad?.description);
+        setValue('price', ad?.price);
+      }
+    }
+  }, [id, ad]);
 
   const onSubmit = async (data) => {
     if (!Object.keys(selectedSubCategory).length) {
       return toast.error('Choose category');
-    }
-
-    if (!Object.keys(data.adImages[0]).length) {
+    } else if (!Object.keys(data.adImages[0]).length) {
       return toast.error('Upload a photo');
-    }
-
-    if (data.adImages.length < 3) {
-      return toast.error('At least 3 images must be uploaded');
+    } else if (data.adImages.length < 2) {
+      return toast.error('At least 2 images must be uploaded');
     }
 
     customHistory.push('/result', { private: true });
@@ -54,6 +84,50 @@ function PostAdForm() {
       category: selectedSubCategory.id,
     };
     dispatch(createAd(newData));
+  };
+
+  const handlePreview = async () => {
+    const ad = getValues();
+    const adImagesUrl = [];
+    let validation = true;
+    Object.keys(ad).forEach((item) => {
+      if (!ad[item]) {
+        validation = false;
+      }
+    });
+    if (!Object.keys(selectedSubCategory).length) {
+      return toast.error('Choose category');
+    } else if (!Object.keys(ad.adImages[0]).length) {
+      return toast.error('Upload a photo');
+    } else if (ad.adImages.length < 2) {
+      return toast.error('At least 2 images must be uploaded');
+    } else if (!validation) {
+      return toast.error('First, fill all the fields');
+    }
+
+    if (typeof ad.adImages[0] === 'string') {
+      adDetailsModal({ ...ad, adImagesUrl: ad.adImages, category: selectedSubCategory.id });
+    } else {
+      ad.adImages.forEach((file, index, array) => {
+        const fileReader = new FileReader();
+        fileReader.readAsDataURL(file[0]);
+        fileReader.onload = () => {
+          adImagesUrl.push(fileReader.result);
+          if (index === array.length - 1) {
+            adDetailsModal({ ...ad, adImagesUrl, category: selectedSubCategory.id });
+          }
+        };
+      });
+    }
+  };
+
+  const adDetailsModal = (ad) => {
+    return showModal({
+      title: 'Preview',
+      closable: true,
+      content: <AdDetailsLayout ad={ad} user={currentUser} />,
+      width: '1300px',
+    });
   };
 
   const handleMainCategory = (mainCategory) => {
@@ -128,7 +202,8 @@ function PostAdForm() {
             />
           </div>
         </Card>
-        <div className="w-full flex justify-end">
+        <div className="w-full flex justify-end px-4">
+          <PreviewBtn handleClick={handlePreview} />
           <PostSubmitBtn />
         </div>
       </form>

@@ -13,6 +13,7 @@ function CommentsForm({ parentId }) {
   const currentUserId = useSelector(getAccountId());
 
   const onSubmit = (data) => {
+    if (!parentId) return;
     dispatch(createComment({ ...data, id: nanoid(), publisher: currentUserId, parentId, created_at: Date.now() }));
     reset();
   };

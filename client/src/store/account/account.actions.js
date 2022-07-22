@@ -2,6 +2,7 @@ import accountSlice from './account.slice';
 import { userService } from '../../services';
 import { handleError } from '../errors/errors.actions';
 import { createAction } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
 const { requested, received, failed, created, updated, accountRemoved } = accountSlice.actions;
 
@@ -61,6 +62,7 @@ const updateWishlist = (payload) => async (dispatch, getState) => {
   try {
     const { content } = await userService.update(newData);
     dispatch(updated(content));
+    toast.success('Wish list updated');
   } catch (error) {
     dispatch(updateFailed());
     dispatch(handleError(error));
@@ -92,6 +94,7 @@ const updateCart = (payload) => async (dispatch, getState) => {
   try {
     const { content } = await userService.update(newData);
     dispatch(updated(content));
+    toast.success('Cart updated');
   } catch (error) {
     dispatch(updateFailed());
     dispatch(handleError(error));

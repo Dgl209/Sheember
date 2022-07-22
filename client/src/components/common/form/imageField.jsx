@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { CameraIcon, TrashIcon } from '@heroicons/react/outline';
 
@@ -6,11 +6,19 @@ function ImageField({ register, id, index, remove, uploadedFile, inputRef, descr
   const [imageUrl, setImageUrl] = useState(null);
   const [removeVisible, setRemoveVisible] = useState(false);
 
-  if (uploadedFile && Object.keys(uploadedFile).length) {
-    const fileReader = new FileReader();
-    fileReader.readAsDataURL(uploadedFile[0]);
-    fileReader.onload = () => setImageUrl(() => fileReader.result);
-  }
+  useEffect(() => {
+    if (typeof uploadedFile === 'string') {
+      setImageUrl(uploadedFile);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (uploadedFile && typeof uploadedFile === 'object' && Object.keys(uploadedFile).length) {
+      const fileReader = new FileReader();
+      fileReader.readAsDataURL(uploadedFile[0]);
+      fileReader.onload = () => setImageUrl(() => fileReader.result);
+    }
+  }, [uploadedFile]);
 
   return (
     <div className="flex justify-center items-center w-full">
@@ -50,7 +58,7 @@ function ImageField({ register, id, index, remove, uploadedFile, inputRef, descr
 ImageField.propTypes = {
   register: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
-  uploadedFile: PropTypes.object,
+  uploadedFile: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   index: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   remove: PropTypes.func,
   inputRef: PropTypes.object,
