@@ -11,6 +11,7 @@ function Comments({ parentId }) {
   const comments = useSelector(getCommentsList());
 
   useEffect(() => {
+    if (!parentId) return;
     dispatch(loadComments(parentId));
   }, [parentId]);
 
@@ -21,7 +22,7 @@ function Comments({ parentId }) {
   return (
     <div className="space-y-4">
       <CommentsForm parentId={parentId} />
-      <CommentsList comments={comments} onRemove={handleRemove} />
+      <CommentsList comments={parentId ? comments : null} onRemove={handleRemove} />
     </div>
   );
 }
