@@ -6,8 +6,8 @@ const schema = new Schema({
   name: { type: String, required: true },
   surname: { type: String, required: true },
   id: { type: String },
-  wishlist: [{ type: String }],
-  cart: [{ type: String }]
+  wishlist: [{ type: Schema.Types.ObjectId, ref: 'Ad' }],
+  cart: [{ type: Schema.Types.ObjectId, ref: 'Ad' }]
 }, {
   timestamps: true
 })
