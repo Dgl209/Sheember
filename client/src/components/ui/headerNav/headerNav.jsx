@@ -51,7 +51,7 @@ function HeaderNav() {
           </li>
 
           <li>
-            <NavButton onClick={() => showModal({ title: 'Cart', closable: true, content: <Cart /> })}>
+            <NavButton onClick={() => showModal({ title: 'Cart', closable: true, content: <Cart />, width: '1000px' })}>
               <ShoppingCartIcon className="w-5 h-5" />
             </NavButton>
           </li>

@@ -8,11 +8,8 @@ import { CategoryField, AdImagesField, PostSubmitBtn, PreviewBtn } from './';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { createAd, loadAdById } from '../../../store/ads/ads.actions';
-import { getCategoriesList, getCategoriesLoadingStatus } from '../../../store/categories/categories.selectors';
-import {
-  getSubcategoriesList,
-  getSubcategoriesLoadingStatus,
-} from '../../../store/subcategories/subcategories.selectors';
+import { getCategoriesList } from '../../../store/categories/categories.selectors';
+import { getSubcategoriesList } from '../../../store/subcategories/subcategories.selectors';
 import { getAds } from '../../../store/ads/ads.selectors';
 import { getAccountData } from '../../../store/account/account.selectors';
 import { loadCategories } from '../../../store/categories/categories.actions';
@@ -30,8 +27,6 @@ function PostAdForm() {
   const [selectedSubCategory, setSelectedSubCategory] = useState({});
   const dispatch = useDispatch();
   const categories = useSelector(getCategoriesList());
-  const isCategoriesLoading = useSelector(getCategoriesLoadingStatus());
-  const isSubcategoriesLoading = useSelector(getSubcategoriesLoadingStatus());
   const subcategories = useSelector(getSubcategoriesList());
   const ads = useSelector(getAds());
   const ad = ads?.find(() => true);
@@ -56,7 +51,7 @@ function PostAdForm() {
       if (currentUser.id !== ad.publisher) {
         return customHistory.push(`/${id}`);
       }
-      if (!isCategoriesLoading && !isSubcategoriesLoading) {
+      if (subcategories.length && categories.length) {
         const subcategory = subcategories?.find((x) => x.id === ad?.category);
         const category = categories?.find((x) => x.id === subcategory.parent_id);
         setSelectedSubCategory(subcategory);
