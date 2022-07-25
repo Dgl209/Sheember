@@ -15,7 +15,7 @@ function UserCabinet() {
     customHistory.push(`/cabinet/${id}`);
   };
 
-  const cartModal = () => showModal({ title: 'Cart', closable: true, content: <Cart /> });
+  const cartModal = () => showModal({ title: 'Cart', closable: true, content: <Cart />, width: '1000px' });
 
   return (
     <div className="container mx-auto flex">
