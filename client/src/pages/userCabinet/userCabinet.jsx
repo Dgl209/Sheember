@@ -38,7 +38,7 @@ function UserCabinet() {
           </ul>
         </div>
       </div>
-      <div className="w-full flex justify-center pt-6">
+      <div className="w-full pt-6">
         <Outlet />
       </div>
     </div>

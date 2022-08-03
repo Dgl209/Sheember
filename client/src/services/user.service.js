@@ -13,7 +13,7 @@ const userService = {
     return data;
   },
   update: async (payload) => {
-    const { data } = await httpService.put(userEndpoint + payload.id, payload);
+    const { data } = await httpService.patch(userEndpoint + payload.id, payload);
     return data;
   },
   getCurrentUser: async () => {

@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { logOut } from '../../../../store/auth/auth.actions';
-import { getAccountData } from '../../../../store/account/account.selectors';
 import { TextField } from '../../../common';
+import { updateAccount } from '../../../../store/account/account.actions';
+import { getAccountData } from '../../../../store/account/account.selectors';
 
 function PersonalData() {
   const {
@@ -24,6 +25,7 @@ function PersonalData() {
   console.log('accountData: ', accountData);
 
   const onSubmit = (data) => {
+    dispatch(updateAccount({ ...data, id: accountData.id }));
     console.log(data);
   };
 

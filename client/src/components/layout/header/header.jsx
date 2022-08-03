@@ -5,7 +5,7 @@ import { HeaderNav } from '../../ui';
 function Header() {
   return (
     <div className="pb-[49px]">
-      <nav className="z-50 fixed right-0 left-0 bg-stone-50 border-b border-gray-200 px-2 sm:px-4 py-3 dark:bg-gray-800 dark:border-gray-600">
+      <nav className="z-[1000] fixed right-0 left-0 bg-stone-50 border-b border-gray-200 px-2 sm:px-4 py-3 dark:bg-gray-800 dark:border-gray-600">
         <div className="container flex flex-wrap justify-between items-center mx-auto">
           <Link to="/" className="flex items-center">
             <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Store</span>

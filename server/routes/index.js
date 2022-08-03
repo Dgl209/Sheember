@@ -1,9 +1,10 @@
 const express = require('express')
-const route = express.Router({ mergeParams: true })
+const router = express.Router({ mergeParams: true })
 
-route.use('/constants', require('./constants.routes'))
-route.use('/auth', require('./auth.routes'))
-route.use('/ads', require('./ads.routes'))
-route.use('/comments', require('./comments.routes'))
+router.use('/constants', require('./constants.routes'))
+router.use('/auth', require('./auth.routes'))
+router.use('/ads', require('./ads.routes'))
+router.use('/comments', require('./comments.routes'))
+router.use('/users', require('./users.routes'))
 
-module.exports = route
+module.exports = router

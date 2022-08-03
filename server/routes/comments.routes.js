@@ -30,7 +30,7 @@ router
 
 router.delete('/:commentId', auth, async (req, res) => {
   try {
-    const { commentId } = req.body
+    const { commentId } = req.params
     const comment = await Comment.findById(commentId)
 
     if(comment.publisher.toString() === req.user._id) {

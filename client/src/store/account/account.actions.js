@@ -33,6 +33,17 @@ const loadAccountById = (id) => async (dispatch) => {
   }
 };
 
+const updateAccount = (payload) => async (dispatch) => {
+  dispatch(updateRequested());
+  try {
+    const { content } = await userService.update(payload);
+    dispatch(updated(content));
+  } catch (error) {
+    dispatch(updateFailed());
+    dispatch(handleError(error));
+  }
+};
+
 const removeAccountData = () => (dispatch) => {
   dispatch(accountRemoved());
 };
@@ -101,4 +112,4 @@ const updateCart = (payload) => async (dispatch, getState) => {
   }
 };
 
-export { createAccount, loadAccountById, removeAccountData, updateWishlist, updateCart };
+export { createAccount, loadAccountById, removeAccountData, updateWishlist, updateCart, updateAccount };

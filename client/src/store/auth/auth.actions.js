@@ -1,7 +1,7 @@
 import authSlice from './auth.slice';
 import authService from '../../services/auth.service';
 import { setTokens, removeAuthData } from '../../services';
-import { createAccount, loadAccountById, removeAccountData } from '../account/account.actions';
+import { loadAccountById, removeAccountData } from '../account/account.actions';
 import { createAction } from '@reduxjs/toolkit';
 import { handleError } from '../errors/errors.actions';
 import { customHistory } from '../../utils/helpers';
@@ -15,10 +15,9 @@ const signUp =
   async (dispatch) => {
     dispatch(requested());
     try {
-      const data = await authService.register({ email, password });
+      const data = await authService.register({ email, password, ...rest });
       setTokens(data);
-      dispatch(succeed(data.localId));
-      dispatch(createAccount({ id: data.localId, email, ...rest }));
+      dispatch(succeed(data.userId));
       handleHideModal();
     } catch (error) {
       dispatch(failed());
@@ -33,8 +32,8 @@ const singIn =
     try {
       const data = await authService.login({ email, password });
       setTokens(data);
-      dispatch(succeed(data.localId));
-      dispatch(loadAccountById(data.localId));
+      dispatch(succeed(data.userId));
+      dispatch(loadAccountById(data.userId));
       handleHideModal();
     } catch (error) {
       dispatch(failed());

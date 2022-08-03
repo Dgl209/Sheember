@@ -37,7 +37,8 @@ const removeComment = (id) => async (dispatch) => {
   dispatch(removeRequested());
   try {
     const { content } = await commentsService.remove(id);
-    if (content === null) {
+    console.log('conetnt: ', content);
+    if (!content) {
       dispatch(removed(id));
     }
   } catch (error) {

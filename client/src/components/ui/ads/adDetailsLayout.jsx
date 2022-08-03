@@ -4,24 +4,46 @@ import { WishlistBtn, CartBtn, Card, Slider } from '../../common';
 import { Comments } from '../index';
 import { getDateHelper, customHistory } from '../../../utils/helpers';
 import { CogIcon, XIcon } from '@heroicons/react/outline';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { getAccountId } from '../../../store/auth/auth.selectors';
+import { removeAd } from '../../../store/ads/ads.actions';
+import { useModal } from '../../../hooks';
 
-function AdDetailsLayout({ ad, adId, user, inWishlist, handleWishlist, inCart, handleCart }) {
+function AdDetailsLayout({ ad, adId, inWishlist, handleWishlist, inCart, handleCart }) {
   const currentUserId = useSelector(getAccountId());
+  const dispatch = useDispatch();
+  const { showModal, hideModal } = useModal();
 
   const handleEdit = () => {
     customHistory.push(`/${adId}/edit`);
   };
 
-  const handleRemove = () => {
-    console.log('removed!');
+  const handleRemove = (id) => {
+    showModal({
+      title: 'Remove ad',
+      closable: true,
+      content: <h1 className="text-lg dark:text-white">Are you sure you want to remove ad?</h1>,
+      footerButtons: [
+        {
+          text: 'Confirm',
+          handler() {
+            dispatch(removeAd(id));
+            customHistory.push('/result', { private: true });
+            hideModal();
+          },
+        },
+        {
+          text: 'Cancel',
+          handler: hideModal,
+        },
+      ],
+    });
   };
 
   return (
     <div className="container mx-auto px-4 flex justify-center mt-6 mb-6">
       <div className="container relative space-y-6">
-        {currentUserId === ad?.publisher ? (
+        {currentUserId === ad?.publisher._id ? (
           <div className="absolute z-50 top-9 right-3 flex items-center">
             <button
               type="button"
@@ -32,7 +54,7 @@ function AdDetailsLayout({ ad, adId, user, inWishlist, handleWishlist, inCart, h
             </button>
             <button
               type="button"
-              onClick={handleRemove}
+              onClick={() => handleRemove(ad?.id)}
               className="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-2 py-1 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
             >
               <XIcon className="w-7 h-7" />
@@ -49,7 +71,7 @@ function AdDetailsLayout({ ad, adId, user, inWishlist, handleWishlist, inCart, h
           </div>
           <div className="space-y-0.5">
             <h5 className="text-base text-gray-500 dark:text-gray-400">
-              {user?.name} {user?.surname} {ad?.created_at ? getDateHelper(ad?.created_at) : '10:10'}
+              {ad?.publisher?.name} {ad?.publisher?.surname} {ad?.created_at ? getDateHelper(ad?.created_at) : '10:10'}
             </h5>
             <div className="flex w-full justify-between">
               <span className="text-3xl font-semibold text-gray-900 dark:text-white">{ad?.price} $</span>
