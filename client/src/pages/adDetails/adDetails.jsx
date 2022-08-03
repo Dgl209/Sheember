@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadAdById } from '../../store/ads/ads.actions';
 import { getAds } from '../../store/ads/ads.selectors';
 import { AdsLoader } from '../../hoc';
-import { userService } from '../../services';
 import { updateCart, updateWishlist } from '../../store/account/account.actions';
 import { getAccountData } from '../../store/account/account.selectors';
 import { toast } from 'react-toastify';
@@ -16,7 +15,6 @@ function AdDetails() {
   const dispatch = useDispatch();
   const ads = useSelector(getAds());
   const ad = ads?.find(() => true);
-  const [user, setUser] = useState();
   const accountData = useSelector(getAccountData());
   const isLoggedIn = useSelector(getLoggedInStatus());
   const [inWishlist, setInWishlist] = useState(accountData?.wishlist?.includes(adId));
@@ -44,24 +42,11 @@ function AdDetails() {
     }
   }
 
-  useEffect(() => {
-    async function loadUserById() {
-      try {
-        const { content } = await userService.getUserById(ad?.publisher);
-        setUser(content);
-      } catch (error) {
-        toast.error(error.message);
-      }
-    }
-    loadUserById();
-  }, []);
-
   return (
     <AdsLoader>
       <AdDetailsLayout
         ad={ad}
         adId={adId}
-        user={user}
         inWishlist={inWishlist}
         inCart={inCart}
         handleWishlist={handleWishlist}

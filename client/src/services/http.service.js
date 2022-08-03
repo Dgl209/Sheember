@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import configFile from '../config.json';
 import localStorageService from './localStorage.service';
 import authService from './auth.service';
+import { transformFirebaseData, transformMongodbData } from '../utils/helpers';
 
 const http = axios.create({
   baseURL: configFile.apiEndpoint,
@@ -10,14 +11,15 @@ const http = axios.create({
 
 http.interceptors.request.use(
   async function (config) {
+    const expiresData = localStorageService.getTokenExpiresDate();
+    const refreshToken = localStorageService.getRefreshToken();
+    const isExpired = refreshToken && expiresData < Date.now();
+
     if (configFile.isFireBase) {
       const containSlash = /\/$/gi.test(config.url);
       config.url = (containSlash ? config.url.slice(0, -1) : config.url) + '.json';
 
-      const expiresData = localStorageService.getTokenExpiresDate();
-      const refreshToken = localStorageService.getRefreshToken();
-
-      if (refreshToken && expiresData < Date.now()) {
+      if (isExpired) {
         const data = await authService.refresh();
 
         localStorageService.setTokens({
@@ -31,7 +33,18 @@ http.interceptors.request.use(
       if (accessToken) {
         config.params = { ...config.params, auth: accessToken };
       }
+    } else {
+      if (isExpired) {
+        const data = await authService.refresh();
+
+        localStorageService.setTokens(data);
+      }
+      const accessToken = localStorageService.getAccessToken();
+      if (accessToken) {
+        config.headers = { ...config.headers, Authorization: `Bearer ${accessToken}` };
+      }
     }
+
     return config;
   },
   function (error) {
@@ -39,14 +52,12 @@ http.interceptors.request.use(
   }
 );
 
-function transformData(data) {
-  return data && !data.id ? Object.keys(data).map((key) => ({ ...data[key] })) : data;
-}
-
 http.interceptors.response.use(
   (res) => {
     if (configFile.isFireBase) {
-      res.data = { content: transformData(res.data) };
+      res.data = { content: transformFirebaseData(res.data) };
+    } else {
+      res.data = { content: transformMongodbData(res.data) };
     }
     return res;
   },
@@ -64,6 +75,7 @@ const httpService = {
   get: http.get,
   post: http.post,
   put: http.put,
+  patch: http.patch,
   delete: http.delete,
 };
 

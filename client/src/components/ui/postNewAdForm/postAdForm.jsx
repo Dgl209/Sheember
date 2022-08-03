@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 import { useForm, useFieldArray } from 'react-hook-form';
 import { Card, TextField, TextAreaField } from '../../common';
@@ -7,7 +8,7 @@ import { useModal } from '../../../hooks';
 import { CategoryField, AdImagesField, PostSubmitBtn, PreviewBtn } from './';
 import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
-import { createAd, loadAdById } from '../../../store/ads/ads.actions';
+import { loadAdById } from '../../../store/ads/ads.actions';
 import { getCategoriesList } from '../../../store/categories/categories.selectors';
 import { getSubcategoriesList } from '../../../store/subcategories/subcategories.selectors';
 import { getAds } from '../../../store/ads/ads.selectors';
@@ -17,7 +18,7 @@ import { loadSubcategories } from '../../../store/subcategories/subcategories.ac
 import { customHistory } from '../../../utils/helpers';
 import { AdDetailsLayout } from '../';
 
-function PostAdForm() {
+function PostAdForm({ handleOnSubmit }) {
   const { register, control, handleSubmit, getValues, setValue, watch } = useForm();
   const { fields, append, remove } = useFieldArray({
     control,
@@ -48,7 +49,7 @@ function PostAdForm() {
 
   useEffect(() => {
     if (ad && id) {
-      if (currentUser.id !== ad.publisher) {
+      if (currentUser.id !== ad.publisher._id) {
         return customHistory.push(`/${id}`);
       }
       if (subcategories.length && categories.length) {
@@ -73,12 +74,18 @@ function PostAdForm() {
       return toast.error('At least 2 images must be uploaded');
     }
 
-    customHistory.push('/result', { private: true });
-    const newData = {
+    let newData = {
       ...data,
       category: selectedSubCategory.id,
     };
-    dispatch(createAd(newData));
+    if (id) {
+      newData = {
+        ...newData,
+        id: ad.id,
+      };
+    }
+
+    handleOnSubmit(newData);
   };
 
   const handlePreview = async () => {
@@ -205,5 +212,9 @@ function PostAdForm() {
     </>
   );
 }
+
+PostAdForm.propTypes = {
+  handleOnSubmit: PropTypes.func,
+};
 
 export default PostAdForm;

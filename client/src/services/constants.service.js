@@ -10,8 +10,8 @@ const constantsService = {
   getSubcategoriesByParentId: async (id) => {
     const { data } = await httpService.get(constantsEndpoint + 'subcategories', {
       params: {
-        orderBy: '"parent_id"',
-        equalTo: `"${id}"`,
+        orderBy: 'parent_id',
+        equalTo: `${id}`,
       },
     });
     return data;

@@ -14,10 +14,16 @@ router.get('/categories', async (req, res) => {
 
 router.get('/subcategories', async (req, res) => {
   try {
-    const list = await Subcategory.find()
+    const { orderBy, equalTo } = req.query
+    let list
+    if (orderBy && equalTo) {
+      list = await Subcategory.find({ [orderBy]: equalTo })
+    } else {
+      list = await Subcategory.find()
+    }
     res.status(200).send(list)
   } catch(error) {
-    res.status(500).json({ message: 'Server error' })
+    res.status(500).json({ message: `Server error: ${error}` })
   }
 })
 

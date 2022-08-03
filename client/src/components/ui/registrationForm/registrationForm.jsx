@@ -61,14 +61,14 @@ function RegistrationForm({ from }) {
         register={register}
         type="text"
         label="Email"
-       options={{
-        required: 'Email is required field',
-        pattern: {
-          value: /^\S+@\S+\.\S+$/g,
-          message: 'Email entered incorrectly',
-        },
-      }}
-      error={errors.email?.message} 
+        options={{
+          required: 'Email is required field',
+          pattern: {
+            value: /^\S+@\S+\.\S+$/g,
+            message: 'Email entered incorrectly',
+          },
+        }}
+        error={errors.email?.message}
       />
       <TextField
         id="password"
