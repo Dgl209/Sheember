@@ -5,7 +5,7 @@ const List = (Component) => {
   const wrapper = ({ items, columns }) => {
     return (
       <div
-        className="w-full h-full grid place-items-center"
+        className="w-full h-full grid px-6"
         style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
       >
         {items?.map((item) => {

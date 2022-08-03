@@ -11,6 +11,7 @@ import List from './list/list';
 import Slider from './slider/slider';
 import WishlistBtn from './buttons/wishlistBtn';
 import CartBtn from './buttons/cartBtn';
+import Breadcrumb from './breadcrumb/breadcrumb';
 
 export {
   Modal,
@@ -26,4 +27,5 @@ export {
   Slider,
   WishlistBtn,
   CartBtn,
+  Breadcrumb,
 };
