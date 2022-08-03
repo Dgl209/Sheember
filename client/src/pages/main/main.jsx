@@ -49,7 +49,7 @@ function Main() {
           </form>
         </div>
         <div className="px-2">
-          <h5 className="my-6 px-8 text-4xl font-normal tracking-tight text-gray-900 dark:text-white">Latest ads</h5>
+          <h5 className="mb-4 ml-8 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Latest ads</h5>
           <AdsLoader>
             <AdsList items={ads} columns="4" />
           </AdsLoader>
