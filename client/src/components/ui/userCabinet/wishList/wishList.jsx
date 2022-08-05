@@ -14,7 +14,11 @@ function Wishlist() {
   const ads = useSelector(getAds());
   const AdsList = List(Ad);
 
-  if (!accountData.wishlist) {
+  useEffect(() => {
+    dispatch(loadCollection(accountData.wishlist));
+  }, []);
+
+  if (!accountData.wishlist?.length) {
     return (
       <div className="flex flex-col w-full justify-center items-center space-y-2 h-[80vh]">
         <EmptyPage title="Wish list is empty" btnTitle="Main page" path="/" />
@@ -22,17 +26,7 @@ function Wishlist() {
     );
   }
 
-  useEffect(() => {
-    dispatch(loadCollection(accountData.wishlist));
-  }, []);
-
-  return (
-    <AdsLoader>
-      {ads?.length ? (
-          <AdsList items={ads} columns="4" />
-      ) : null}
-    </AdsLoader>
-  );
+  return <AdsLoader>{ads?.length ? <AdsList items={ads} columns="4" /> : null}</AdsLoader>;
 }
 
 export default Wishlist;

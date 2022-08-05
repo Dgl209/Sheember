@@ -14,11 +14,12 @@ function Ad({ item }) {
   const isLoggedIn = useSelector(getLoggedInStatus());
   const [inWishlist, setInWishlist] = useState(accountData?.wishlist?.includes(item.id));
   const [inCart, setInCart] = useState(accountData?.cart?.includes(item.id));
-  const dispatch = useDispatch(true);
+  const dispatch = useDispatch();
 
-  console.log('item: ', item);
-
-  const handleCart = () => {
+  const handleCart = (event) => {
+    if (item.buyer) {
+      return event.preventDefault();
+    }
     if (isLoggedIn) {
       dispatch(updateCart(item.id));
       setInCart((prev) => !prev);
@@ -27,7 +28,10 @@ function Ad({ item }) {
     }
   };
 
-  const handleWishList = () => {
+  const handleWishList = (event) => {
+    if (item.buyer) {
+      return event.preventDefault();
+    }
     if (isLoggedIn) {
       dispatch(updateWishlist(item.id));
       setInWishlist((prev) => !prev);
@@ -36,14 +40,23 @@ function Ad({ item }) {
     }
   };
 
+  const handleClick = (event) => {
+    if (item.buyer) {
+      event.preventDefault();
+    }
+  };
+
   return (
-    <div className="w-[240px] h-[316px] relative border border-gray-200 mb-4 dark:bg-gray-800 p-2 dark:border-gray-700">
+    <div
+      onClick={handleClick}
+      className="w-[240px] h-[316px] relative border border-gray-200 mb-4 dark:bg-gray-800 p-2 dark:border-gray-700"
+    >
       <div className="flex flex-col h-full">
-        <Link to={`/${item.id}`}>
+        <Link className={item?.buyer && 'pointer-events-none'} to={`/${item.id}`}>
           <img className="w-full h-48" src={item?.adImagesUrl[0]} alt="" />
         </Link>
         <div className="py-2 space-y-3">
-          <Link to={`/${item.id}`}>
+          <Link className={item?.buyer && 'pointer-events-none'} to={`/${item.id}`}>
             <h5 className="text-base mt-2 font-semibold tracking-tight text-gray-900 dark:text-white">{item.name}</h5>
           </Link>
           <div>

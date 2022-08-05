@@ -4,6 +4,7 @@ import { handleError } from '../errors/errors.actions';
 import { storageService } from '../../services';
 import { createAction } from '@reduxjs/toolkit';
 import { customHistory } from '../../utils/helpers';
+import { loadAccountById } from '../account/account.actions';
 
 const { requested, received, failed, created, removed, updated } = adsSlice.actions;
 const creationRequested = createAction('ads/creationRequested');
@@ -12,6 +13,10 @@ const editRequested = createAction('ads/editRequested');
 const editFailed = createAction('ads/editFailed');
 const removeRequested = createAction('ads/removeRequested');
 const removeFailed = createAction('ads/removeFailed');
+const sellRequested = createAction('ads/sellRequested');
+const sellFailed = createAction('ads/sellFailed');
+const cancelSellRequested = createAction('ads/cancelSellRequested');
+const cancelSellFailed = createAction('ads/cancelSellFailed');
 
 const loadAds = (orderBy, value) => async (dispatch) => {
   dispatch(requested());
@@ -50,6 +55,18 @@ const loadCollection = (array) => async (dispatch) => {
   dispatch(requested());
   try {
     const { content } = await adsServices.getCollection(array);
+    console.log('content: ', content);
+    dispatch(received(content));
+  } catch (error) {
+    dispatch(failed());
+    dispatch(handleError(error));
+  }
+};
+
+const loadOrders = () => async (dispatch) => {
+  dispatch(requested());
+  try {
+    const { content } = await adsServices.getOrders();
     dispatch(received(content));
   } catch (error) {
     dispatch(failed());
@@ -122,4 +139,50 @@ const removeAd = (id) => async (dispatch) => {
   }
 };
 
-export { loadAds, loadAdById, createAd, editAd, removeAd, loadRecentlyAds, loadCollection };
+const sellAds = (payload) => async (dispatch, getState) => {
+  dispatch(sellRequested());
+  const accountId = getState().auth.accountId;
+  console.log('accountId: ', accountId);
+  try {
+    await adsServices.sell(payload);
+    customHistory.push('/result/success', {
+      message: 'You bought this ads',
+      btnTitle: 'See my orders',
+      path: '/cabinet/orders',
+    });
+    dispatch(loadAccountById(accountId));
+  } catch (error) {
+    dispatch(sellFailed());
+    dispatch(handleError(error));
+    customHistory.push('/result/fail', { message: 'Something went wrong' });
+  }
+};
+
+const cancelSellAds = (payload) => async (dispatch) => {
+  dispatch(cancelSellRequested());
+  try {
+    await adsServices.cancelSell(payload);
+    customHistory.push('/result/success', {
+      message: 'Ads was removed',
+      btnTitle: 'Continue shopping',
+      path: '/',
+    });
+  } catch (error) {
+    dispatch(cancelSellFailed());
+    dispatch(handleError(error));
+    customHistory.push('/result/fail', { message: 'Something went wrong' });
+  }
+};
+
+export {
+  loadAds,
+  loadAdById,
+  createAd,
+  editAd,
+  removeAd,
+  loadRecentlyAds,
+  loadCollection,
+  loadOrders,
+  sellAds,
+  cancelSellAds,
+};

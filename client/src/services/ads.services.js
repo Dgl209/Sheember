@@ -29,6 +29,10 @@ const adsService = {
     const { data } = await httpService.post(adsEndpoint + 'collection', payload);
     return data;
   },
+  getOrders: async () => {
+    const { data } = await httpService.get(adsEndpoint + 'orders');
+    return data;
+  },
   create: async (content) => {
     const { data } = await httpService.post(adsEndpoint, content);
     return data;
@@ -39,6 +43,14 @@ const adsService = {
   },
   remove: async (id) => {
     const { data } = await httpService.delete(adsEndpoint + id);
+    return data;
+  },
+  sell: async (payload) => {
+    const { data } = await httpService.patch(adsEndpoint + 'sell', payload);
+    return data;
+  },
+  cancelSell: async (payload) => {
+    const { data } = await httpService.patch(adsEndpoint + 'cancelSell', payload);
     return data;
   },
 };
