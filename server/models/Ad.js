@@ -6,7 +6,8 @@ const schema = new Schema({
   adImagesUrl: [String],
   description: String,
   price: String,
-  publisher: { type: Schema.Types.ObjectId, ref: 'User' }
+  publisher: { type: Schema.Types.ObjectId, ref: 'User' },
+  buyer: { type: Schema.Types.ObjectId, ref: 'User' }
 }, {
   timestamps: true
 })

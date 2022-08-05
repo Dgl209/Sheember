@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { WishlistBtn, CartBtn, Card, Slider } from '../../common';
+import { WishlistBtn, CartBtn, Card, Slider, Breadcrumb } from '../../common';
 import { Comments } from '../index';
 import { getDateHelper, customHistory } from '../../../utils/helpers';
 import { CogIcon, XIcon } from '@heroicons/react/outline';
@@ -8,11 +8,27 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getAccountId } from '../../../store/auth/auth.selectors';
 import { removeAd } from '../../../store/ads/ads.actions';
 import { useModal } from '../../../hooks';
+import { getCategoriesList, getCategoriesLoadingStatus } from '../../../store/categories/categories.selectors';
+import {
+  getSubcategoriesList,
+  getSubcategoriesLoadingStatus,
+} from '../../../store/subcategories/subcategories.selectors';
+import { loadCategories } from '../../../store/categories/categories.actions';
+import { loadSubcategories } from '../../../store/subcategories/subcategories.actions';
 
 function AdDetailsLayout({ ad, adId, inWishlist, handleWishlist, inCart, handleCart }) {
   const currentUserId = useSelector(getAccountId());
+  const categories = useSelector(getCategoriesList());
+  const categoriesLoadingStatus = useSelector(getCategoriesLoadingStatus());
+  const subcategories = useSelector(getSubcategoriesList());
+  const subcategoriesLoadingStatus = useSelector(getSubcategoriesLoadingStatus());
   const dispatch = useDispatch();
   const { showModal, hideModal } = useModal();
+
+  useEffect(() => {
+    dispatch(loadCategories());
+    dispatch(loadSubcategories());
+  }, []);
 
   const handleEdit = () => {
     customHistory.push(`/${adId}/edit`);
@@ -40,8 +56,26 @@ function AdDetailsLayout({ ad, adId, inWishlist, handleWishlist, inCart, handleC
     });
   };
 
+  const getBreadcrumbItems = () => {
+    if (!categoriesLoadingStatus && !subcategoriesLoadingStatus) {
+      const selectedSubcategory = subcategories.find((item) => item.id === ad.category);
+      const selectedCategory = categories.find((item) => item.id === selectedSubcategory?.parent_id);
+      return [
+        {
+          ...selectedCategory,
+          path: selectedCategory?.id,
+        },
+        {
+          ...selectedSubcategory,
+          path: selectedSubcategory?.id,
+        },
+      ];
+    }
+  };
+
   return (
-    <div className="container mx-auto px-4 flex justify-center mt-6 mb-6">
+    <div className="container mx-auto px-4 flex flex-col justify-center mt-6 mb-6">
+      <Breadcrumb items={getBreadcrumbItems()} />
       <div className="container relative space-y-6">
         {currentUserId === ad?.publisher._id ? (
           <div className="absolute z-50 top-9 right-3 flex items-center">

@@ -1,21 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import CartItem from './cartItem/cartItem';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import EmptyPage from '../../../pages/empty/empty';
 import { getAccountData } from '../../../store/account/account.selectors';
+import { sellAds } from '../../../store/ads/ads.actions';
 import CartImage from '../../../assets/cart-image.png';
 import { useModal } from '../../../hooks';
 import { adsService } from '../../../services';
 import { Spinner } from '../../layout';
+import { customHistory } from '../../../utils/helpers';
 
 function Cart() {
   const accountData = useSelector(getAccountData());
   const [ads, setAds] = useState();
   const [loading, setLoading] = useState(true);
   const { hideModal } = useModal();
+  const dispatch = useDispatch();
 
   const handleOrder = () => {
     console.log('ordered all');
+    hideModal();
+    customHistory.push('/result', { private: true });
+    dispatch(sellAds(ads));
   };
 
   useEffect(() => {

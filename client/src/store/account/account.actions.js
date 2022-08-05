@@ -4,28 +4,16 @@ import { handleError } from '../errors/errors.actions';
 import { createAction } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-const { requested, received, failed, created, updated, accountRemoved } = accountSlice.actions;
+const { requested, received, failed, updated, accountRemoved } = accountSlice.actions;
 
-const creationRequested = createAction('account/creationRequested');
-const creationFailed = createAction('account/creationFailed');
 const updateRequested = createAction('account/updateRequested');
 const updateFailed = createAction('account/updateFailed');
-
-const createAccount = (payload) => async (dispatch) => {
-  dispatch(creationRequested());
-  try {
-    const { content } = await userService.create(payload);
-    dispatch(created(content));
-  } catch (error) {
-    dispatch(creationFailed());
-    dispatch(handleError(error));
-  }
-};
 
 const loadAccountById = (id) => async (dispatch) => {
   dispatch(requested());
   try {
     const { content } = await userService.getUserById(id);
+    console.log('content: ', content);
     dispatch(received(content));
   } catch (error) {
     dispatch(failed());
@@ -112,4 +100,4 @@ const updateCart = (payload) => async (dispatch, getState) => {
   }
 };
 
-export { createAccount, loadAccountById, removeAccountData, updateWishlist, updateCart, updateAccount };
+export { loadAccountById, removeAccountData, updateWishlist, updateCart, updateAccount };

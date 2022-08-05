@@ -16,7 +16,7 @@ function AccountUploader({ children }) {
     if (isLoggedIn && !accountData) {
       dispatch(loadAccountById(accountId));
     }
-  }, []);
+  }, [isLoggedIn, accountId]);
 
   if (isLoggedIn && !accountData) {
     return (
