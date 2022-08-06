@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { GroupList, SearchField, List } from '../../components/common';
 import { useForm } from 'react-hook-form';
 import { Ad } from '../../components/ui';
@@ -9,6 +10,7 @@ import { getAds } from '../../store/ads/ads.selectors';
 import { loadCategories } from '../../store/categories/categories.actions';
 import { loadRecentlyAds } from '../../store/ads/ads.actions';
 import { customHistory } from '../../utils/helpers';
+import { EmojiSadIcon } from '@heroicons/react/outline';
 
 function Main() {
   const { register, handleSubmit } = useForm();
@@ -49,9 +51,32 @@ function Main() {
           </form>
         </div>
         <div className="px-2">
-          <h5 className="mb-4 ml-8 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">Latest ads</h5>
           <AdsLoader>
-            <AdsList items={ads} columns="4" />
+            {ads?.length ? (
+              <>
+                <h5 className="mb-4 ml-8 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                  Latest ads
+                </h5>
+                <AdsList items={ads} columns="4" />
+              </>
+            ) : (
+              <div className="w-full h-96 flex flex-col justify-center items-center">
+                <EmojiSadIcon className="w-56 h-56 mb-5 text-gray-700 dark:text-gray-300" />
+                <h5 className="mb-4 ml-8 text-3xl font-semibold tracking-tight text-gray-900 dark:text-white">
+                  There are no published ads yet
+                </h5>
+
+                <Link to="/post-new-ad">
+                  <span
+                    className="block py-2 pr-4 pl-3 text-2xl text-gray-700 border-b border-gray-100 hover:bg-gray-50
+          md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400
+          md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >
+                    Publish
+                  </span>
+                </Link>
+              </div>
+            )}
           </AdsLoader>
         </div>
       </div>

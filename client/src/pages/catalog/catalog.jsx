@@ -68,7 +68,7 @@ function Catalog() {
             {ads?.length ? (
               <AdsList items={ads} columns="5" />
             ) : (
-              <div className="w-full h-[80vh] flex flex-col items-center justify-center space-y-2">
+              <div className="w-full h-[60vh] flex flex-col items-center justify-center space-y-2">
                 <EmptyPage title="There are no ads in this category" btnTitle="Main page" path="/" />
               </div>
             )}

@@ -45,8 +45,8 @@ function Orders() {
           <AdsList items={ads} columns="4" />
         </>
       ) : (
-        <div className="w-full h-[80vh] flex flex-col justify-center items-center space-y-2">
-          <EmptyPage title="Empty" btnTitle="Main page" path="/" />
+        <div className="w-full h-64 flex flex-col justify-center items-center space-y-2">
+          <EmptyPage title="You haven't ordered anything yet" btnTitle='Order' path="/" />
         </div>
       )}
     </AdsLoader>

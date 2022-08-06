@@ -49,7 +49,7 @@ function PostAdForm({ handleOnSubmit }) {
 
   useEffect(() => {
     if (ad && id) {
-      if (currentUser.id !== ad.publisher._id) {
+      if (currentUser.id !== ad.publisher._id && currentUser.role !== 'admin') {
         return customHistory.push(`/${id}`);
       }
       if (subcategories.length && categories.length) {

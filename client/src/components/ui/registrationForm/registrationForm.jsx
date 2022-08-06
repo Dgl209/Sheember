@@ -24,7 +24,7 @@ function RegistrationForm({ from }) {
   };
 
   const onSubmit = async (data) => {
-    dispatch(signUp({ ...data, handleHideModal }));
+    dispatch(signUp({ ...data, role: 'user', handleHideModal }));
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

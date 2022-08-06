@@ -5,7 +5,7 @@ import { Comments } from '../index';
 import { getDateHelper, customHistory } from '../../../utils/helpers';
 import { CogIcon, XIcon } from '@heroicons/react/outline';
 import { useSelector, useDispatch } from 'react-redux';
-import { getAccountId } from '../../../store/auth/auth.selectors';
+import { getAccountData } from '../../../store/account/account.selectors';
 import { removeAd } from '../../../store/ads/ads.actions';
 import { useModal } from '../../../hooks';
 import { getCategoriesList, getCategoriesLoadingStatus } from '../../../store/categories/categories.selectors';
@@ -17,7 +17,7 @@ import { loadCategories } from '../../../store/categories/categories.actions';
 import { loadSubcategories } from '../../../store/subcategories/subcategories.actions';
 
 function AdDetailsLayout({ ad, adId, inWishlist, handleWishlist, inCart, handleCart }) {
-  const currentUserId = useSelector(getAccountId());
+  const accountData = useSelector(getAccountData());
   const categories = useSelector(getCategoriesList());
   const categoriesLoadingStatus = useSelector(getCategoriesLoadingStatus());
   const subcategories = useSelector(getSubcategoriesList());
@@ -75,9 +75,11 @@ function AdDetailsLayout({ ad, adId, inWishlist, handleWishlist, inCart, handleC
 
   return (
     <div className="container mx-auto px-4 flex flex-col justify-center mt-6 mb-6">
-      <Breadcrumb items={getBreadcrumbItems()} />
+      <div className="mb-4">
+        <Breadcrumb items={getBreadcrumbItems()} />
+      </div>
       <div className="container relative space-y-6">
-        {currentUserId === ad?.publisher._id ? (
+        {accountData.id === ad?.publisher._id || accountData.role === 'admin' ? (
           <div className="absolute z-50 top-9 right-3 flex items-center">
             <button
               type="button"

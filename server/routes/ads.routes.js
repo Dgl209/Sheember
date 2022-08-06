@@ -129,11 +129,12 @@ router
     try {
       const { _id } = req.params;
       const ad = await Ad.findOne({ _id });
+      const user = await User.findById(req.user._id);
 
-      if (ad.publisher.toString() === req.user._id) {
+      if (ad.publisher.toString() === req.user._id || user.role === "admin") {
         const updatedAd = await Ad.findByIdAndUpdate(
           _id,
-          { ...req.body, publisher: req.user._id },
+          { ...req.body, publisher: ad.publisher },
           { new: true }
         );
         res.status(200).send(updatedAd);
@@ -148,12 +149,13 @@ router
     try {
       const { _id } = req.params;
       const ad = await Ad.findOne({ _id });
+      const user = await User.findById(req.user._id);
 
       if (!ad) {
         return res.status(404).json({ message: "NOT_FOUND" });
       }
 
-      if (ad.publisher.toString() !== req.user._id) {
+      if (ad.publisher.toString() !== req.user._id && user.role !== "admin") {
         return res.status(401).json({ message: "Unauthorized" });
       }
 
