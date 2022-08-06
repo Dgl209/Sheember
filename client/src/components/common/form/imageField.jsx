@@ -21,7 +21,7 @@ function ImageField({ register, id, index, remove, uploadedFile, inputRef, descr
   }, [uploadedFile]);
 
   return (
-    <div className="flex justify-center items-center w-full">
+    <div className="flex justify-center items-center w-full max-w-[200px]">
       <label htmlFor={id} className="w-full mr-2 mb-2" ref={inputRef}>
         {!imageUrl ? (
           <div
@@ -34,10 +34,10 @@ function ImageField({ register, id, index, remove, uploadedFile, inputRef, descr
             {description && <p className="dark:text-white">{description}</p>}
           </div>
         ) : (
-          <div className="w-full h-32 cursor-pointer">
+          <div className="relative w-full h-32 cursor-pointer">
             {removeVisible && (
-              <div className="absolute w-40 h-32  flex items-center">
-                <TrashIcon className="w-10 h-10 text-gray-600 dark:text-gray-400 ml-[60px]" />
+              <div className="absolute w-full h-32  flex items-center justify-center">
+                <TrashIcon className="w-10 h-10 text-gray-600 dark:text-gray-400" />
               </div>
             )}
             <img

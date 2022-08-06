@@ -6,8 +6,8 @@ const commentsService = {
   get: async (id) => {
     const { data } = await httpService.get(commentsEndpoint, {
       params: {
-        orderBy: '"parentId"',
-        equalTo: `"${id}"`,
+        orderBy: 'parentId',
+        equalTo: `${id}`,
       },
     });
     return data;

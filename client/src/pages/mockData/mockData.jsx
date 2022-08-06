@@ -1,23 +1,32 @@
 import React, { useEffect, useState } from 'react';
-import { useMockData } from '../../utils/helpers';
+import { useMockData, customHistory } from '../../utils/helpers';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategoriesList, getCategoriesLoadingStatus } from '../../store/categories/categories.selectors';
 import { GroupList, ImageField } from '../../components/common';
 import { loadCategories } from '../../store/categories/categories.actions';
 import { getSubcategoriesList } from '../../store/subcategories/subcategories.selectors';
-import { loadSubcategories } from '../../store/subcategories/subcategories.actions';
-import { useForm } from 'react-hook-form';
+import { getAccountData } from '../../store/account/account.selectors';
+import { loadSubcategoriesByParentId } from '../../store/subcategories/subcategories.actions';
+import { useForm, useFieldArray } from 'react-hook-form';
 
 function MockData() {
-  const { register, handleSubmit, getValues, watch, resetField } = useForm();
+  const { register, control, handleSubmit, getValues, watch, resetField } = useForm();
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: 'subcategoriesImages',
+  });
   const { error, initialize, uploadSubcategoriesImages, progress, status } = useMockData();
   const dispatch = useDispatch();
   const categories = useSelector(getCategoriesList());
   const categoriesLoading = useSelector(getCategoriesLoadingStatus());
   const subcategories = useSelector(getSubcategoriesList());
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const currentUser = useSelector(getAccountData());
 
   useEffect(() => {
+    if (currentUser.role !== 'admin') {
+      return customHistory.push('/');
+    }
     dispatch(loadCategories());
   }, []);
 
@@ -25,7 +34,7 @@ function MockData() {
 
   useEffect(() => {
     if (selectedCategory) {
-      dispatch(loadSubcategories(selectedCategory.id));
+      dispatch(loadSubcategoriesByParentId(selectedCategory.id));
     }
   }, [selectedCategory]);
 
@@ -80,7 +89,7 @@ function MockData() {
           <div className="w-full">
             {subcategories.length ? (
               <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="w-full grid grid-cols-4">
+                <div className="w-full grid grid-cols-6 p-4">
                   {subcategories.map((item) => (
                     <ImageField
                       key={item.id}
