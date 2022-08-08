@@ -42,11 +42,11 @@ const uploadSubcategoriesImages = async (files) => {
       const errorMessage = 'Failed to load image, please try again later';
       throw errorMessage;
     }
-    return Object.keys(files).map(async (file) => {
-      const fileRef = ref(firebaseStorage, `/subcategories/${file}`);
-      await uploadBytes(fileRef, files[file][0]);
+    return files.map(async (item, index) => {
+      const fileRef = ref(firebaseStorage, `/subcategories/${item.id}`);
+      await uploadBytes(fileRef, item.file[0]);
       const url = await getDownloadURL(fileRef);
-      return { name: file, url };
+      return { id: item.id, image: url };
     });
   } catch (error) {
     toast.error(error);

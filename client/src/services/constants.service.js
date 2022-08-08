@@ -20,6 +20,10 @@ const constantsService = {
     const { data } = await httpService.get(constantsEndpoint + 'subcategories');
     return data;
   },
+  updateSubcategory: async (payload) => {
+    const { data } = await httpService.patch(constantsEndpoint + 'subcategories/' + payload.id, payload);
+    return data;
+  },
 };
 
 export default constantsService;

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import categoriesJSON from '../../mockData/mainCategories.json';
 import subcategoriesJSON from '../../mockData/subCategories.json';
 import httpService from '../../services/http.service';
-import { storageService } from '../../services';
+import { storageService, constantsService } from '../../services';
 
 const useMockData = () => {
   const statusConsts = {
@@ -52,16 +52,12 @@ const useMockData = () => {
     }
   }
 
-  async function uploadSubcategoriesImages(data, subcategories) {
+  async function uploadSubcategoriesImages(data) {
     try {
       const imagesResponse = await storageService.uploadSubcategoriesImages(data);
       const imagesData = await Promise.all(imagesResponse);
       for (const imageData of imagesData) {
-        const currentCategory = subcategories.find((x) => x.id === imageData.name);
-        await httpService.put('constants/subcategories/' + imageData.name, {
-          ...currentCategory,
-          image: imageData.url,
-        });
+        await constantsService.updateSubcategory(imageData);
       }
     } catch (error) {
       setError(error);

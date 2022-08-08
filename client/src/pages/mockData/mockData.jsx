@@ -10,10 +10,10 @@ import { loadSubcategoriesByParentId } from '../../store/subcategories/subcatego
 import { useForm, useFieldArray } from 'react-hook-form';
 
 function MockData() {
-  const { register, control, handleSubmit, getValues, watch, resetField } = useForm();
+  const { register, control, handleSubmit, getValues, watch } = useForm();
   const { fields, append, remove } = useFieldArray({
     control,
-    name: 'subcategoriesImages',
+    name: 'subcategories',
   });
   const { error, initialize, uploadSubcategoriesImages, progress, status } = useMockData();
   const dispatch = useDispatch();
@@ -21,7 +21,10 @@ function MockData() {
   const categoriesLoading = useSelector(getCategoriesLoadingStatus());
   const subcategories = useSelector(getSubcategoriesList());
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [subcategoriesState, setSubcategoriesState] = useState([]);
   const currentUser = useSelector(getAccountData());
+  const uploadedImagesArray = getValues('subcategories');
+  const watchSubcategories = watch('subcategories');
 
   useEffect(() => {
     if (currentUser.role !== 'admin') {
@@ -30,7 +33,7 @@ function MockData() {
     dispatch(loadCategories());
   }, []);
 
-  useEffect(() => {}, [watch()]);
+  useEffect(() => {}, [watchSubcategories]);
 
   useEffect(() => {
     if (selectedCategory) {
@@ -47,17 +50,35 @@ function MockData() {
   };
 
   const onSubmit = (data) => {
-    const newData = {};
-    Object.keys(data).forEach((item) => {
-      if (data[item].length) {
-        newData[item] = data[item];
+    const newData = data.subcategories.map((item, index) => {
+      if (!item?.image) {
+        return {
+          file: item,
+          id: subcategoriesState[index]._id,
+        };
       }
+      return item;
     });
-    uploadSubcategoriesImages(newData, subcategories);
+    const filteredData = newData.filter((item) => !item.image);
+    uploadSubcategoriesImages(filteredData);
   };
 
-  const handleRemove = (id) => {
-    resetField(id);
+  useEffect(() => {
+    if (subcategories.length && fields.length < subcategories.length) {
+      subcategories.forEach((item) => {
+        append({ name: item.name, image: item.image });
+      });
+      setSubcategoriesState(subcategories);
+    }
+  }, [subcategories]);
+
+  const handleRemove = (index) => {
+    remove(index);
+    const removedItem = subcategoriesState.find((_, i) => i === index);
+    const newState = subcategoriesState.filter((_, i) => i !== index);
+    newState.push(removedItem);
+    setSubcategoriesState(newState);
+    append({ name: removedItem.name });
   };
 
   return (
@@ -90,15 +111,14 @@ function MockData() {
             {subcategories.length ? (
               <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="w-full grid grid-cols-6 p-4">
-                  {subcategories.map((item) => (
+                  {fields.map((item, index) => (
                     <ImageField
                       key={item.id}
-                      id={item.id}
+                      id={`subcategories.${index}`}
                       register={register}
-                      uploadedFile={getValues(item.id)}
-                      description={item.name}
+                      uploadedFile={uploadedImagesArray[index]}
                       remove={handleRemove}
-                      index={item.id}
+                      index={index}
                     />
                   ))}
                 </div>
