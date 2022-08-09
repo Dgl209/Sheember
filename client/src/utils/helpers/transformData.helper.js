@@ -14,15 +14,12 @@ export function transformMongodbData(data) {
     }
   } else {
     return Object.keys(data).map((item) => {
-      if (data[item].publisher) {
-        const newItem = {
-          ...data[item],
-          id: data[item]._id,
-        };
-        delete newItem._id;
-        return newItem;
-      }
-      return data[item];
+      const newItem = {
+        ...data[item],
+        id: data[item]._id,
+      };
+      delete newItem._id;
+      return newItem;
     });
   }
   return data;
