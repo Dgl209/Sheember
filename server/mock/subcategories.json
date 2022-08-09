@@ -76,5 +76,29 @@
     "image": "https://firebasestorage.googleapis.com/v0/b/store-ddd1a.appspot.com/o/subcategories%2Fspeaker-system?alt=media&token=bb49499a-a753-4595-a7db-d1452466346f",
     "name": "Speaker system",
     "parent_id": "laptops-computers"
+  },
+  {
+    "id": "legal-services",
+    "image": "",
+    "name": "Legal services",
+    "parent_id": "business-and-services"
+  },
+  {
+    "id": "business-sale",
+    "image": "",
+    "name": "Sale of business",
+    "parent_id": "business-and-services"
+  },
+  {
+    "id": "materials-raw",
+    "image": "",
+    "name": "Materials, raw materials",
+    "parent_id": "business-and-services"
+  },
+  {
+    "id": "marketing",
+    "image": "",
+    "name": "Marketing",
+    "parent_id": "business-and-services"
   }
 ]

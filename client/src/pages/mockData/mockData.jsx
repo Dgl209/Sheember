@@ -50,6 +50,7 @@ function MockData() {
   };
 
   const onSubmit = (data) => {
+    customHistory.push('/result', { private: true });
     const newData = data.subcategories.map((item, index) => {
       if (!item?.image) {
         return {
