@@ -39,6 +39,7 @@ function MockData() {
     if (selectedCategory) {
       dispatch(loadSubcategoriesByParentId(selectedCategory.id));
     }
+    fields.map((item) => remove(item.id));
   }, [selectedCategory]);
 
   const handleClick = () => {
@@ -50,11 +51,12 @@ function MockData() {
   };
 
   const onSubmit = (data) => {
+    customHistory.push('/result', { private: true });
     const newData = data.subcategories.map((item, index) => {
       if (!item?.image) {
         return {
           file: item,
-          id: subcategoriesState[index]._id,
+          id: subcategoriesState[index].id,
         };
       }
       return item;
@@ -70,6 +72,7 @@ function MockData() {
       });
       setSubcategoriesState(subcategories);
     }
+    console.log('fields: ', fields);
   }, [subcategories]);
 
   const handleRemove = (index) => {

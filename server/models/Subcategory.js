@@ -1,12 +1,14 @@
-const { Schema, model } = require('mongoose')
+const { Schema, model } = require("mongoose");
 
-const schema = new Schema({
-  id: {type: String, required: true},
-  image: { type: String, required: true },
-  name: {type: String, required: true},
-  parent_id: { type: String, required: true }
-}, {
-  timestamps: true
-})
+const schema = new Schema(
+  {
+    image: { type: String },
+    name: { type: String, required: true },
+    parent_id: { type: Schema.Types.ObjectId, ref: "Category" },
+  },
+  {
+    timestamps: true,
+  }
+);
 
-module.exports = model('Subcategory', schema)
+module.exports = model("Subcategory", schema);

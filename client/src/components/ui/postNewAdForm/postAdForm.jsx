@@ -36,12 +36,8 @@ function PostAdForm({ handleOnSubmit }) {
   const { id } = useParams();
 
   useEffect(() => {
-    if (!categories.length) {
-      dispatch(loadCategories());
-    }
-    if (!subcategories.length) {
-      dispatch(loadSubcategories(selectedMainCategory.id));
-    }
+    dispatch(loadCategories());
+    dispatch(loadSubcategories(selectedMainCategory.id));
     if (id) {
       dispatch(loadAdById(id));
     }

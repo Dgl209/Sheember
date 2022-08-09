@@ -3,6 +3,7 @@ import categoriesJSON from '../../mockData/mainCategories.json';
 import subcategoriesJSON from '../../mockData/subCategories.json';
 import httpService from '../../services/http.service';
 import { storageService, constantsService } from '../../services';
+import { customHistory } from './';
 
 const useMockData = () => {
   const statusConsts = {
@@ -59,7 +60,13 @@ const useMockData = () => {
       for (const imageData of imagesData) {
         await constantsService.updateSubcategory(imageData);
       }
+      customHistory.push('/result/success', {
+        message: 'Sub categories updated',
+        btnTitle: 'Came back to admin panel',
+        path: '/mockdata',
+      });
     } catch (error) {
+      customHistory.push('/result/fail', { message: 'Something went wrong' });
       setError(error);
     }
   }

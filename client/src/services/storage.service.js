@@ -37,6 +37,7 @@ const uploadAdImagesArray = async (fileArray) => {
 };
 
 const uploadSubcategoriesImages = async (files) => {
+  console.log('files: ', files);
   try {
     if (!files) {
       const errorMessage = 'Failed to load image, please try again later';
