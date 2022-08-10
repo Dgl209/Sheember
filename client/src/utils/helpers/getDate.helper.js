@@ -1,39 +1,29 @@
 const getDateHelper = (data) => {
-  const date = new Date(parseInt(data));
+  const date = new Date(data);
+  const dateNow = new Date();
+  const yearDif = dateNow.getFullYear() - date.getFullYear();
+  if (yearDif === 0) {
+    const dayDif = dateNow.getDay() - date.getDay();
+    if (dayDif === 0) {
+      const hourDif = dateNow.getHours() - date.getHours();
+      if (hourDif === 0) {
+        const minutesDif = dateNow.getMinutes() - date.getMinutes();
 
-  const millisec = Date.now() - data;
-
-  const minutes = (millisec / (1000 * 60)).toFixed(0);
-
-  const hours = (millisec / (1000 * 60 * 60)).toFixed(0);
-
-  const days = (millisec / (1000 * 60 * 60 * 24)).toFixed(0);
-
-  const year = millisec / (1000 * 60 * 60 * 24 * 30 * 12);
-
-  if (+year < 1) {
-    if (+days < 1) {
-      if (+hours < 1) {
-        if (+minutes <= 1) {
-          return '1 minute ago';
-        } else if (+minutes <= 5) {
-          return '5 minutes ago';
-        } else if (+minutes <= 10) {
+        if (minutesDif >= 0 && minutesDif < 5) return '1 minute ago';
+        if (minutesDif >= 5 && minutesDif < 10) return '5 мinutes ago';
+        if (minutesDif >= 10 && minutesDif < 30) {
           return '10 minutes ago';
-        } else if (+minutes <= 30) {
-          return '30 minutes ago';
         }
-      } else {
-        return `${date.getHours()}:${date.getMinutes()}`;
+        return '30 minutes ago';
       }
-    } else {
-      return `${date.getDay()} ${date.toLocaleDateString('default', {
-        month: 'long',
-      })}`;
+      return `${date.getHours()}:${date.getMinutes()}`;
     }
-  } else {
-    return date.getFullYear() + '.' + (date.getMonth() + 1) + '_' + date.getDate();
+
+    return `${date.getDay()} ${date.toLocaleString('default', {
+      month: 'long',
+    })}`;
   }
+  return date.getFullYear() + '.' + (date.getMonth() + 1) + '_' + date.getDate();
 };
 
 export default getDateHelper;

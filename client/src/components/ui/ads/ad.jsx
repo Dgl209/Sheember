@@ -61,11 +61,11 @@ function Ad({ item }) {
           </Link>
           <div>
             <h5 className="text-sm text-gray-500 dark:text-gray-400">
-              {item?.publisher?.name} {item?.publisher?.surname} - {getDateHelper(item.created_at)}
+              {item?.publisher?.name} {item?.publisher?.surname} - {getDateHelper(item.createdAt)}
             </h5>
             <div className="flex justify-between items-center">
               <span className="text-base font-semibold text-gray-900 dark:text-white">
-                {item.price ? '$' + item.price : 'Exchange'}{' '}
+                {item.price ? '$' + item.price : 'Exchange'}
               </span>
               <div className="flex items-center">
                 <WishlistBtn

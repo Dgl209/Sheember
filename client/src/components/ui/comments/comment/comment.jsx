@@ -27,7 +27,7 @@ function Comment({ comment, onRemove }) {
     <div className="flex flex-col px-6 py-4 mb-3 space-y-3 bg-gray-200 dark:bg-gray-700">
       <div className="flex items-center justify-between">
         <h5 className="text-base font-bold tracking-tight text-gray-900 dark:text-white">
-          {user?.name} {user?.surname} - {getDateHelper(comment?.created_at)}
+          {user?.name} {user?.surname} - {getDateHelper(comment?.createdAt)}
         </h5>
         {currentUser.id === comment.publisher ||
           (currentUser.role === 'admin' && (

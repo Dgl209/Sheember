@@ -1,6 +1,7 @@
 const express = require("express");
 const Ad = require("../models/Ad");
 const User = require("../models/User");
+const Comment = require("../models/Comment");
 const auth = require("../middleware/auth.middleware");
 const router = express.Router({ mergeParams: true });
 const modifyAds = require("../utils/modifyAds.helper");
@@ -160,6 +161,12 @@ router
       }
 
       await ad.remove();
+
+      const comments = await Comment.find({ parentId: _id });
+      console.log("comments: ", comments);
+      if (comments.length) {
+        comments.forEach((item) => item.remove());
+      }
       return res.send(null);
     } catch (error) {
       res.status(500).json({ message: `Server error: ${error}` });
