@@ -107,7 +107,7 @@ function AdDetailsLayout({ ad, adId, inWishlist, handleWishlist, inCart, handleC
           </div>
           <div className="space-y-0.5">
             <h5 className="text-base text-gray-500 dark:text-gray-400">
-              {ad?.publisher?.name} {ad?.publisher?.surname} {ad?.created_at ? getDateHelper(ad?.created_at) : '10:10'}
+              {ad?.publisher?.name} {ad?.publisher?.surname} {ad?.createdAt ? getDateHelper(ad?.createdAt) : '10:10'}
             </h5>
             <div className="flex w-full justify-between">
               <span className="text-3xl font-semibold text-gray-900 dark:text-white">{ad?.price} $</span>
