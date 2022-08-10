@@ -13,7 +13,6 @@ const loadAccountById = (id) => async (dispatch) => {
   dispatch(requested());
   try {
     const { content } = await userService.getUserById(id);
-    console.log('content: ', content);
     dispatch(received(content));
   } catch (error) {
     dispatch(failed());

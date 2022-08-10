@@ -12,6 +12,7 @@ import HeaderNav from './headerNav/headerNav';
 import PostAdForm from './postNewAdForm/postAdForm';
 import Comments from './comments/comments';
 import AdDetailsLayout from './ads/adDetailsLayout';
+import SearchForm from './searchForm/searchForm';
 
 export {
   Ad,
@@ -28,4 +29,5 @@ export {
   PostAdForm,
   Comments,
   AdDetailsLayout,
+  SearchForm,
 };

@@ -1,19 +1,18 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { GroupList, SearchField, List } from '../../components/common';
-import { useForm } from 'react-hook-form';
-import { Ad } from '../../components/ui';
+import { GroupList, List } from '../../components/common';
+import { Ad, SearchForm } from '../../components/ui';
 import { AdsLoader } from '../../hoc';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCategoriesList, getCategoriesLoadingStatus } from '../../store/categories/categories.selectors';
 import { getAds } from '../../store/ads/ads.selectors';
 import { loadCategories } from '../../store/categories/categories.actions';
+import { loadSubcategories } from '../../store/subcategories/subcategories.actions';
 import { loadRecentlyAds } from '../../store/ads/ads.actions';
 import { customHistory } from '../../utils/helpers';
 import { EmojiSadIcon } from '@heroicons/react/outline';
 
 function Main() {
-  const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
   const categories = useSelector(getCategoriesList());
   const categoriesLoading = useSelector(getCategoriesLoadingStatus());
@@ -22,10 +21,9 @@ function Main() {
 
   useEffect(() => {
     dispatch(loadCategories());
+    dispatch(loadSubcategories());
     dispatch(loadRecentlyAds());
   }, []);
-
-  const onSubmit = (data) => console.log('search: ', data);
 
   const handleMainCategoriesList = ({ id }) => {
     customHistory.push(`/catalog/${id}`);
@@ -40,15 +38,7 @@ function Main() {
       </div>
       <div className="w-full pt-6">
         <div className="w-full max-w-2xl mx-auto mb-6">
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <SearchField
-              register={register}
-              type="search"
-              id="search"
-              placeholder="I search..."
-              options={{ required: true }}
-            />
-          </form>
+          <SearchForm />
         </div>
         <div className="px-2">
           <AdsLoader>

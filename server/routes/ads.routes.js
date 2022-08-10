@@ -163,7 +163,6 @@ router
       await ad.remove();
 
       const comments = await Comment.find({ parentId: _id });
-      console.log("comments: ", comments);
       if (comments.length) {
         comments.forEach((item) => item.remove());
       }
