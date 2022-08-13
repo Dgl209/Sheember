@@ -66,8 +66,6 @@ function PostAdForm({ handleOnSubmit }) {
       return toast.error('Choose category');
     } else if (!Object.keys(data.adImages[0]).length) {
       return toast.error('Upload a photo');
-    } else if (data.adImages.length < 2) {
-      return toast.error('At least 2 images must be uploaded');
     }
 
     let newData = {
