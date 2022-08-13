@@ -75,12 +75,10 @@ function AdDetailsLayout({ ad, adId, inWishlist, handleWishlist, inCart, handleC
 
   return (
     <div className="container mx-auto px-4 flex flex-col justify-center mt-6 mb-6">
-      <div className="mb-4">
+      <div className="mb-4 flex items-center justify-between">
         <Breadcrumb items={getBreadcrumbItems()} />
-      </div>
-      <div className="container relative space-y-6">
         {accountData.id === ad?.publisher._id || accountData.role === 'admin' ? (
-          <div className="absolute z-50 top-9 right-3 flex items-center">
+          <div className="flex items-center">
             <button
               type="button"
               onClick={handleEdit}
@@ -97,7 +95,16 @@ function AdDetailsLayout({ ad, adId, inWishlist, handleWishlist, inCart, handleC
             </button>
           </div>
         ) : null}
-        <Slider items={ad?.adImagesUrl} />
+      </div>
+      <div className="container relative space-y-6">
+        {ad?.adImagesUrl?.length === 1 ? (
+          <img
+            src={ad?.adImagesUrl[0]}
+            className="w-full h-[40rem] 2xl:h-[35rem] xl:h-[30rem] lg:h-[25rem] md:h-[20rem] sm:h-[20rem]"
+          />
+        ) : (
+          <Slider items={ad?.adImagesUrl} />
+        )}
 
         <Card className="w-full space-y-4">
           <h5 className="text-xl font-semibold text-gray-900 dark:text-white">{ad?.name}</h5>

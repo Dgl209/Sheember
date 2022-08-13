@@ -5,6 +5,7 @@ import customHistory from './history';
 import getDateHelper from './getDate.helper';
 import sortHelper from './sort.helper';
 import { transformFirebaseData, transformMongodbData } from './transformData.helper';
+import { checkCartHelper, checkWishlistHelper } from './checkAccount.helper';
 
 export {
   ThemeToggle,
@@ -15,4 +16,6 @@ export {
   sortHelper,
   transformFirebaseData,
   transformMongodbData,
+  checkCartHelper,
+  checkWishlistHelper,
 };
