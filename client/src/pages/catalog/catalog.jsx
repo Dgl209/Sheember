@@ -58,7 +58,13 @@ function Catalog() {
         <Breadcrumb items={getBreadcrumbItems()} />
       </div>
       {!subCategory ? (
-        !subcategoriesLoading && <SubCategoriesList items={subcategories} columns="5" />
+        !subcategoriesLoading && subcategories.length ? (
+          <SubCategoriesList items={subcategories} columns="5" />
+        ) : (
+          <div className="w-full h-[60vh] flex flex-col items-center justify-center space-y-2">
+            <EmptyPage title="There are no subcategories yet" btnTitle="Main page" path="/" />
+          </div>
+        )
       ) : (
         <>
           <h5 className="mb-4 ml-8 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
