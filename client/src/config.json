@@ -1,4 +1,4 @@
 {
-  "apiEndpoint": "https://store-jfd.herokuapp.com/api/",
+  "apiEndpoint": "https://store-fs.herokuapp.com/api/",
   "isFireBase": false 
 }
