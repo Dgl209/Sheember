@@ -45,7 +45,7 @@ function Main() {
             {ads?.length ? (
               <>
                 <h5 className="mb-4 ml-8 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                  Latest ads.
+                  Latest ads
                 </h5>
                 <AdsList items={ads} columns="4" />
               </>
