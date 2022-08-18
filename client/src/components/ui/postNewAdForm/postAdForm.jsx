@@ -95,8 +95,6 @@ function PostAdForm({ handleOnSubmit }) {
       return toast.error('Choose category');
     } else if (!Object.keys(ad.adImages[0]).length) {
       return toast.error('Upload a photo');
-    } else if (ad.adImages.length < 2) {
-      return toast.error('At least 2 images must be uploaded');
     } else if (!validation) {
       return toast.error('First, fill all the fields');
     }

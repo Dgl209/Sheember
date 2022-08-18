@@ -77,7 +77,7 @@ function AdDetailsLayout({ ad, adId, inWishlist, handleWishlist, inCart, handleC
     <div className="container mx-auto px-4 flex flex-col justify-center mt-6 mb-6">
       <div className="mb-4 flex items-center justify-between">
         <Breadcrumb items={getBreadcrumbItems()} />
-        {accountData.id === ad?.publisher._id || accountData.role === 'admin' ? (
+        {accountData?.id === ad?.publisher?._id || accountData?.role === 'admin' ? (
           <div className="flex items-center">
             <button
               type="button"
